@@ -12,6 +12,6 @@ class Laser extends Projectiles {
   
 }
 
-class Rocker extends Projectiles {
+class Rocket extends Projectiles {
   
 }

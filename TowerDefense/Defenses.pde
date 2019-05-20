@@ -3,6 +3,10 @@ abstract class Defenses {
   public boolean attack(){
     return true;
   }
+  private boolean shoot(Ships target) {
+    
+  }
+  
   public boolean upgrade(){
     return true;
   }
