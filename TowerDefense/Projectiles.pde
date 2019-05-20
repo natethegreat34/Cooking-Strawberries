@@ -3,7 +3,8 @@ abstract class Projectiles {
   private double speed;
   
 }
-
+PImage img;
+img = loadImage("rocket-146104_640.png");
 class CannonBall extends Projectiles {
   public void cdisplay(){
     circle(x,y, 50);
