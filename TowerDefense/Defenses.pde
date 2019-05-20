@@ -1,4 +1,4 @@
-public abstract class Defenses {
+abstract class Defenses {
   private int level;
   public boolean attack(){
     return true;

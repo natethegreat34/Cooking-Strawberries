@@ -1,4 +1,4 @@
-public abstract class Ships {
+abstract class Ships {
   private double speed;
   private int health;
 }
