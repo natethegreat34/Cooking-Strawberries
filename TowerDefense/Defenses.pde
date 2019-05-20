@@ -1,3 +1,3 @@
-public interface Defenses {
+public abstract class Defenses {
   
 }
