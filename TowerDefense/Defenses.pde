@@ -7,3 +7,19 @@ abstract class Defenses {
     return true;
   }
 }
+
+class Cannon extends Defenses {
+  
+}
+
+class LaserShooter extends Defenses {
+  
+}
+
+class RockerLauncher extends Defenses {
+  
+}
+
+class ForceFieldGen extends Defenses {
+  
+}
