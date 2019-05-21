@@ -4,17 +4,32 @@ abstract class Defenses {
   public boolean attack(){
     return true;
   }
+  
   private boolean shoot(Ships target) {
     
   }
   
-  public boolean upgrade(){
+  abstract boolean upgrade();
+  
+  public boolean setLevel(int inputLevel) {
+    level = inputLevel;
+    return true;
+  }
+  
+  public int getLevel() {
+    return level;
+  }
+  
+  public boolean setRange(int inputRange) {
+    range = inputRange;
     return true;
   }
 }
 
 class Cannon extends Defenses {
-  
+  public Cannon()  {
+    
+  }
 }
 
 class LaserShooter extends Defenses {
