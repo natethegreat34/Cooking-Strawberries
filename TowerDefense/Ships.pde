@@ -2,6 +2,7 @@ class Ships {
   private double speed;
   private int health;
   private int damage;
+  
 }
 
 class Normal extends Ships{
