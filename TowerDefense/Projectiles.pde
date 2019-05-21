@@ -2,23 +2,42 @@ abstract class Projectiles {
   private int damage;
   private double speed;
   
-}
-PImage img;
-img = loadImage("rocket-146104_640.png");
-class CannonBall extends Projectiles {
-  public void cdisplay(){
-    circle(x,y, 50);
+  public int getdamage(){
+    return damage;
+  }
+  public double getspeed(){
+    return speed;
   }
 }
 
+
+//CannonBall
+PImage cball;
+cball = loadImage("cannonBall.png");
+class CannonBall extends Projectiles {
+  private int x;
+  private int y;
+   public void cdisplay(){
+       image (cball,x,y);
+  }
+}
+
+
+//Laser
 class Laser extends Projectiles {
    public void ldisplay(){
     line (x,y, a,b);
   }
 }
 
+
+//Rocket
+PImage rocket;
+rocket = loadImage("rocket-146104_640.png");
 class Rocket extends Projectiles {
-   public void cdisplay(){
-    circle(x,y, 50);
+  private int x;
+  private int y;
+   public void rdisplay(){
+       image (rocket,x,y);
   }
 }
