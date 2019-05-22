@@ -20,22 +20,21 @@ class CannonBall extends Projectiles {
   private int y;
   private int damage;
   public boolean alive = true;
-    public int getX() {
-      return x;
-    }
-    public int getY() {
-      return y;
-    }
-    public int getdamage() {
-      return damage;
-    }
-    public void cdisplay() {
-      image (cball, x, y);
-    }
-    public void death(Ships s){
-      ;
-    }
-  
+  public int getX() {
+    return x;
+  }
+  public int getY() {
+    return y;
+  }
+  public int getdamage() {
+    return damage;
+  }
+  public void cdisplay() {
+    image (cball, x, y);
+  }
+  public void death(Ships s) {
+    ;
+  }
 }
 
 

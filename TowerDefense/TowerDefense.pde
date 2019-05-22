@@ -1,4 +1,12 @@
 class Game {
-  int[][] shipCoordinates;
-  int [] ships;
+  public int[][] shipCoordinates;
+  public Ships [] ships;
+  public int CoinTotal;
+  
+}
+
+void setup(){ 
+}
+
+void draw() {
 }
