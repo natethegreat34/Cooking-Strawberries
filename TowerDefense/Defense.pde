@@ -3,10 +3,14 @@ abstract class Defense {
   private int level;
 
   abstract boolean attack();
-
+/*
   public Ship findNearest(int x, int y) {
+    int lowestDistance = 100000;
+    for (int a = 0; a < Game.shipCoordinates.length; a ++) {
+      
+    }
   }
-
+*/
   public boolean upgrade() {
     level += 1;
     return true;
@@ -41,10 +45,16 @@ class Cannon extends Defense {
 
 //Laser Shooter
 class LaserShooter extends Defense {
+  public boolean attack() {
+    return true;
+  }
 }
 
 //Rocket Launcher
 class RockerLauncher extends Defense {
+  public boolean attack() {
+    return true;
+  }
 }
 
 //Force Field Generator, creates seperate item force field

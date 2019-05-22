@@ -12,10 +12,9 @@ abstract class Projectiles {
 
 
 //CannonBall
-PImage cball;
-cball = loadImage("cannonBall.png");
-
 class CannonBall extends Projectiles {
+  PImage cball;
+  cball = loadImage("cannonBall.png");
   private int x;
   private int y;
   private int damage;
@@ -47,8 +46,7 @@ class Laser extends Projectiles {
 
 
 //Rocket
-PImage rocket;
-rocket = loadImage("rocket-146104_640.png");
+
 class Rocket extends Projectiles {
   private int x;
   private int y;
