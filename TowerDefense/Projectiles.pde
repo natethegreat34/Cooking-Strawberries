@@ -13,8 +13,6 @@ abstract class Projectiles {
 
 //CannonBall
 class CannonBall extends Projectiles {
-  PImage cball;
-  cball = loadImage("cannonBall.png");
   private int x;
   private int y;
   private int damage;
@@ -28,10 +26,7 @@ class CannonBall extends Projectiles {
   public int getdamage() {
     return damage;
   }
-  public void cdisplay() {
-    image (cball, x, y);
-  }
-  public void death(Ships s) {
+  public void death(Ship s) {
     ;
   }
 }
@@ -39,18 +34,12 @@ class CannonBall extends Projectiles {
 
 //Laser
 class Laser extends Projectiles {
-  public void ldisplay() {
-    line (x, y, a, b);
-  }
+  
 }
 
 
 //Rocket
-
 class Rocket extends Projectiles {
   private int x;
   private int y;
-  public void rdisplay() {
-    image (rocket, x, y);
-  }
 }
