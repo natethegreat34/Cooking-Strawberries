@@ -1,4 +1,4 @@
-abstract class Defenses {
+abstract class Defense {
   private int range;
   private int level;
 
@@ -27,7 +27,8 @@ abstract class Defenses {
   }
 }
 
-class Cannon extends Defenses {
+//Cannon
+class Cannon extends Defense {
   public Cannon() {
     setRange(-1000000000);
     setLevel(1);
@@ -38,11 +39,14 @@ class Cannon extends Defenses {
   }
 }
 
-class LaserShooter extends Defenses {
+//Laser Shooter
+class LaserShooter extends Defense {
 }
 
-class RockerLauncher extends Defenses {
+//Rocket Launcher
+class RockerLauncher extends Defense {
 }
 
-class ForceFieldGen extends Defenses {
+//Force Field Generator, creates seperate item force field
+class ForceFieldGen extends Defense {
 }
