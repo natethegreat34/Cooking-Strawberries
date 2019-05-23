@@ -17,7 +17,7 @@ abstract class Defense {
         index = a;
       }
     }
-    return ships[index];
+    return s.get(index);
   }
 
   public boolean upgrade() {
@@ -68,4 +68,7 @@ class RockerLauncher extends Defense {
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
+    public boolean attack() {
+    return true;
+  }
 }

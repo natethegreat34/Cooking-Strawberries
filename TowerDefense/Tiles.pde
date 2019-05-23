@@ -4,12 +4,14 @@ class Tile{
   private int right;
   private int bottom;
   private boolean green;
+  private double slowDown;
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;
     right = r;
     bottom = b;
     green = g;
+    slowDown = 0;
   }
   public void settop(int y){
     top = y;
@@ -39,7 +41,7 @@ class Tile{
     public int getbottom(){
     return bottom;
   }
-  public boolean getcolor(){
+  public boolean getColor(){
     return green;
   }
 }

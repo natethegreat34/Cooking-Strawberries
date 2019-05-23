@@ -6,6 +6,7 @@ PImage rocket;
 PImage img;
 int f;
 boolean ended;
+Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
 void setup() {
   size(576, 400);
@@ -14,8 +15,8 @@ void setup() {
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
-  f = (int)(Math.random() * 9) * 36;
-  //tilemaker(0, f);
+  f = (int)(Math.random()  * 9);
+  tilemaker(0, f);
 }
 void remaker() {
   for (int i = 0; i< width; i = i +36) {
@@ -25,6 +26,7 @@ void remaker() {
       fill(0, 100);
       stroke(0);
       rect(i, y, 36, 36);
+      board[y / 36][i / 36] = new Tile(y, i, i + 36, y + 36, true);
       //Tile constructor here to set boolean and top, bottom, left and right
     }
   }
@@ -35,43 +37,45 @@ void remaker() {
   rect(0, f, 36, 36);
   Tile a = new Tile (0, f, 36, f + 36, false);
   path.add(a);
-  for (int i = 1; i < path.size(); i ++) {
-    int x = path.get(i).getleft();
-    int y = path.get(i).gettop();
-    dirt.resize(36, 36);
-    image(dirt, x, y);
-    fill(0, 100);
-    stroke(255);
-    rect(x, y, 36, 36);
-  }
+  //for (int i = 1; i < path.size(); i ++) {
+  //  int x = path.get(i).getleft();
+  //  int y = path.get(i).gettop();
+  //  dirt.resize(36, 36);
+  //  image(dirt, x, y);
+  //  fill(0, 100);
+  //  stroke(255);
+  //  rect(x, y, 36, 36);
+  //}
 }
-void tilemaker(int x, int y) {
+void tilemaker(int row, int col) {
   boolean done = false;
   while (!done) {
-    if (x >= width - 36) {
+
+    if (col * 36 >= width - 36) {
       done = true;
     }
-    int l = (int) Math.random() *3;
-    if (l == 0 && y < 324) {
-      y = y + 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
-      path.add(a);
+    int l = (int) (Math.random() * 3);
+        //print ("l = " + l);
+    if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
+      row = row + 1;
+      board[row - 1][col].setcolor(false);
+      path.add( board[row - 1][col]);
     }
-    if (l == 1 && y > 0) {
-      y = y - 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
-      path.add(a);
+    if (l == 1 && row > 0 && row < board.length && board[row + 1][col].getColor()) {
+      row = row + 1;
+      board[row +1][col].setcolor(false);
+      path.add( board[row + 1][col]);
     } 
-     if (l == 2){
-      x = x + 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
-      path.add(a);
+     if (l == 2 && col > 0 && col + 1 < board[0].length && board[row][col + 1].getColor()){
+      col = col + 1;
+      board[row][col + 1].setcolor(false);
+      path.add(board[row][col + 1]);
     }
   }
 }
 void draw() {
   //image(img, 0, 0);
   remaker();
-  rect(0, 324, 5760, 76);
+  rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
 }
