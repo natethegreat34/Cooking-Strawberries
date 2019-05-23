@@ -6,6 +6,7 @@ PImage rocket;
 PImage img;
 int f;
 boolean ended;
+ArrayList <Ship> s = new ArrayList();
 void setup() {
   size(576, 400);
   rocket = loadImage("rocket-146104_640.png");

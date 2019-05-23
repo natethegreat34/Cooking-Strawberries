@@ -9,8 +9,8 @@ abstract class Defense {
   public Ship findNearest(int x, int y) {
     double lowestDistance = 100000;
     int index = -1;
-    for (int a = 0; a < TowerDefense.ships.length; a ++) {
-      double[] coords = ships[a].getCoords();
+    for (int a = 0; a < s.size(); a ++) {
+      double[] coords = s.get(a).getCoords();
       double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
       if (distance < lowestDistance) {
         lowestDistance = distance;
