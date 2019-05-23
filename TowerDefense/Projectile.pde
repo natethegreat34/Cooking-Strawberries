@@ -1,4 +1,4 @@
-abstract class Projectiles {
+abstract class Projectile {
   private int damage;
   private double speed;
 

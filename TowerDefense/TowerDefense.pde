@@ -50,26 +50,26 @@ void remaker() {
 void tilemaker(int row, int col) {
   boolean done = false;
   while (!done) {
-
-    if (col * 36 >= width - 36) {
+    int l = (int) (Math.random() * 3);
+        print (row);
+    if (col >= 16) {
       done = true;
     }
-    int l = (int) (Math.random() * 3);
-        //print ("l = " + l);
-    if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
-      row = row + 1;
-      board[row - 1][col].setcolor(false);
-      path.add( board[row - 1][col]);
+
+    else if (l == 0 && row >= 0 && row < board.length && board[row - 1][col].getColor()) {
+      row = row - 1;
+      board[row][col].setcolor(false);
+      path.add( board[row][col]);
     }
-    if (l == 1 && row > 0 && row < board.length && board[row + 1][col].getColor()) {
+    else if (l == 1 && row >= 0 && row + 1 < board.length && board[row + 1][col].getColor()) {
       row = row + 1;
-      board[row +1][col].setcolor(false);
-      path.add( board[row + 1][col]);
+      board[row][col].setcolor(false);
+      path.add( board[row][col]);
     } 
-     if (l == 2 && col > 0 && col + 1 < board[0].length && board[row][col + 1].getColor()){
+    else if (l == 2 && col >= 0 && col + 1 < board[0].length && board[row][col + 1].getColor()){
       col = col + 1;
-      board[row][col + 1].setcolor(false);
-      path.add(board[row][col + 1]);
+      board[row][col].setcolor(false);
+      path.add(board[row][col]);
     }
   }
 }
