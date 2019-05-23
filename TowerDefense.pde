@@ -22,6 +22,8 @@ void remaker() {
       fill(0, 100);
       stroke(0);
       rect(i, y, 36, 36);
+      new Tile (y,i,i + 36, y + 36, true);
+      //Tile constructor here to set boolean and top, bottom, left and right
     }
   }
   dirt.resize(36, 36);
@@ -29,42 +31,43 @@ void remaker() {
   fill(0, 100);
   stroke(255);
   rect(0, f, 36, 36);
+  new Tile (0,f,36, f + 36, false);
 }
-//void tilemaker(int x, int y) {
-//  color a = get(x, y + 36);
-//  color b = get(x, y - 36);
-//  color c = get(x + 36, y);
-//  if (x == width){
-//    ended = true;
-//  }
-//  while (!ended) {
-//    int l = (int) Math.random() *3;
-//    if (l == 0 && y < height && a ) {
-//      dirt.resize(36, 36);
-//      image(dirt, x, y);
-//      fill(0, 100);
-//      stroke(255);
-//      rect(x, y + 36, 36, 36);
-//      tilemaker(x, y + 36);
-//    }
-//    if (l == 1 && y > 0) {
-//      dirt.resize(36, 36);
-//      image(dirt, x, y);
-//      fill(0, 100);
-//      stroke(255);
-//      rect(x, y - 36, 36, 36);
-//      tilemaker(x, y - 36);
-//    }
-//    if (l == 2  && x < width) {
-//      dirt.resize(36, 36);
-//      image(dirt, x, y);
-//      fill(0, 100);
-//      stroke(255);
-//      rect(x + 36, y, 36, 36);
-//      tilemaker(x + 36, y);
-//    }
-//  }
-//}
+void tilemaker(int x, int y) {
+  color a = get(x, y + 36);
+  color b = get(x, y - 36);
+  color c = get(x + 36, y);
+  if (x == width){
+    ended = true;
+  }
+  while (!ended) {
+    int l = (int) Math.random() *3;
+    if (l == 0 && y < height && a ) {
+      dirt.resize(36, 36);
+      image(dirt, x, y);
+      fill(0, 100);
+      stroke(255);
+      rect(x, y + 36, 36, 36);
+      tilemaker(x, y + 36);
+    }
+    if (l == 1 && y > 0) {
+      dirt.resize(36, 36);
+      image(dirt, x, y);
+      fill(0, 100);
+      stroke(255);
+      rect(x, y - 36, 36, 36);
+      tilemaker(x, y - 36);
+    }
+    if (l == 2  && x < width) {
+      dirt.resize(36, 36);
+      image(dirt, x, y);
+      fill(0, 100);
+      stroke(255);
+      rect(x + 36, y, 36, 36);
+      tilemaker(x + 36, y);
+    }
+  }
+}
   void draw() {
     //image(img, 0, 0);
     remaker();
