@@ -14,7 +14,7 @@ void setup() {
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
   f = (int)(Math.random() * 9) * 36;
-  //tilemaker(0, f);
+  tilemaker(0, f);
 }
 void remaker() {
   for (int i = 0; i< width; i = i +36) {
@@ -34,7 +34,7 @@ void remaker() {
   rect(0, f, 36, 36);
   Tile a = new Tile (0, f, 36, f + 36, false);
   path.add(a);
-  for (int i = 1; i < path.size(); i ++) {
+  for (int i = 0; i < path.size(); i ++) {
     int x = path.get(i).getleft();
     int y = path.get(i).gettop();
     dirt.resize(36, 36);
@@ -51,19 +51,19 @@ void tilemaker(int x, int y) {
       done = true;
     }
     int l = (int) Math.random() *3;
-    if (l == 0 && y < 324) {
+    if (l == 0 && y < height) {
       y = y + 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
       path.add(a);
     }
     if (l == 1 && y > 0) {
       y = y - 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
       path.add(a);
     } 
      if (l == 2){
       x = x + 36;
-      Tile a = new Tile (x, y, y + 36, x + 36, false);
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
       path.add(a);
     }
   }
@@ -72,5 +72,5 @@ void draw() {
   //image(img, 0, 0);
   remaker();
   rect(0, 324, 5760, 76);
-  text("Y-Cord:" + mouseY, 10, 60);
+  text(mouseY, 10, 60);
 }
