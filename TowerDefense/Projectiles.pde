@@ -26,10 +26,7 @@
 //  public int getdamage() {
 //    return damage;
 //  }
-//  public void cdisplay() {
-//    image (cball, x, y);
-//  }
-//  public void death(Ships s) {
+//  public void death(Ship s) {
 //    ;
 //  }
 //}
@@ -37,9 +34,7 @@
 
 ////Laser
 //class Laser extends Projectiles {
-//  public void ldisplay() {
-//    line (x, y, a, b);
-//  }
+  
 //}
 
 
@@ -47,7 +42,4 @@
 //class Rocket extends Projectiles {
 //  private int x;
 //  private int y;
-//  public void rdisplay() {
-//    image (rocket, x, y);
-//  }
 //}

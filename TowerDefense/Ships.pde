@@ -1,18 +1,23 @@
-//class Ships {
+//class Ship {
+//  private double x;
+//  private double y;
 //  private double speed;
 //  private int health;
 //  private int damage;
+  
+//  public double[] getCoords() {
+//    double[] output = new double[2];
+//    output[0] = x;
+//    output[1] = y;
+//    return output;
+//  }
 //}
 
-//class Normal extends Ships {
-//  ;
+//class Normal extends Ship {
 //}
-//class Quick extends Ships {
-//  ;
+//class Quick extends Ship {
 //}
-//class Heavy extends Ships {
-//  ;
+//class Heavy extends Ship {
 //}
-//class Boss extends Ships {
-//  ;
+//class Boss extends Ship {
 //}
