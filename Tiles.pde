@@ -1,9 +1,9 @@
 class Tile{
-  int top;
-  int left;
-  int right;
-  int bottom;
-  boolean green;
+  private int top;
+  private int left;
+  private int right;
+  private int bottom;
+  private boolean green;
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;
@@ -25,5 +25,21 @@ class Tile{
   }
   public void setcolor(boolean k){
     green = k;
+  }
+  
+    public int gettop(){
+    return top;
+  }
+    public int getleft(){
+    return left;
+  }
+    public int getright(){
+    return right;
+  }
+    public int getbottom(){
+    return bottom;
+  }
+  public boolean getcolor(){
+    return green;
   }
 }

@@ -1,3 +1,4 @@
+ArrayList <Tile> path = new ArrayList();
 PImage grass;
 PImage dirt;
 PImage cball;
@@ -13,6 +14,7 @@ void setup() {
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
   f = (int)(Math.random() * 9) * 36;
+  tilemaker(0, f);
 }
 void remaker() {
   for (int i = 0; i< width; i = i +36) {
@@ -22,7 +24,6 @@ void remaker() {
       fill(0, 100);
       stroke(0);
       rect(i, y, 36, 36);
-      new Tile (y,i,i + 36, y + 36, true);
       //Tile constructor here to set boolean and top, bottom, left and right
     }
   }
@@ -31,46 +32,45 @@ void remaker() {
   fill(0, 100);
   stroke(255);
   rect(0, f, 36, 36);
-  new Tile (0,f,36, f + 36, false);
+  Tile a = new Tile (0, f, 36, f + 36, false);
+  path.add(a);
+  for (int i = 0; i < path.size(); i ++) {
+    int x = path.get(i).getleft();
+    int y = path.get(i).gettop();
+    dirt.resize(36, 36);
+    image(dirt, x, y);
+    fill(0, 100);
+    stroke(255);
+    rect(x, y, 36, 36);
+  }
 }
 void tilemaker(int x, int y) {
-  color a = get(x, y + 36);
-  color b = get(x, y - 36);
-  color c = get(x + 36, y);
-  if (x == width){
-    ended = true;
-  }
-  while (!ended) {
+  boolean done = false;
+  while (!done) {
+    if (x >= width - 36) {
+      done = true;
+    }
     int l = (int) Math.random() *3;
-    if (l == 0 && y < height && a ) {
-      dirt.resize(36, 36);
-      image(dirt, x, y);
-      fill(0, 100);
-      stroke(255);
-      rect(x, y + 36, 36, 36);
-      tilemaker(x, y + 36);
+    if (l == 0 && y < height) {
+      y = y + 36;
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
+      path.add(a);
     }
     if (l == 1 && y > 0) {
-      dirt.resize(36, 36);
-      image(dirt, x, y);
-      fill(0, 100);
-      stroke(255);
-      rect(x, y - 36, 36, 36);
-      tilemaker(x, y - 36);
-    }
-    if (l == 2  && x < width) {
-      dirt.resize(36, 36);
-      image(dirt, x, y);
-      fill(0, 100);
-      stroke(255);
-      rect(x + 36, y, 36, 36);
-      tilemaker(x + 36, y);
+      y = y - 36;
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
+      path.add(a);
+    } 
+     if (l == 2){
+      x = x + 36;
+      Tile a = new Tile (x, y, x + 36, y + 36, false);
+      path.add(a);
     }
   }
 }
-  void draw() {
-    //image(img, 0, 0);
-    remaker();
-    rect(0, 324, 5760, 76);
-    text(mouseY, 10, 60);
-  }
+void draw() {
+  //image(img, 0, 0);
+  remaker();
+  rect(0, 324, 5760, 76);
+  text(mouseY, 10, 60);
+}
