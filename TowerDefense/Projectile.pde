@@ -13,9 +13,15 @@ abstract class Projectile {
 
 
 //CannonBall
+<<<<<<< HEAD
 class CannonBall extends Projectiles {
   private double x;
   private double y;
+=======
+class CannonBall extends Projectile {
+  private int x;
+  private int y;
+>>>>>>> 6e6d143c68bab622bffa30224610150023dc147a
   private int damage;
   public boolean alive = true;
   
@@ -42,13 +48,13 @@ class CannonBall extends Projectiles {
 
 
 //Laser
-class Laser extends Projectiles {
+class Laser extends Projectile {
   
 }
 
 
 //Rocket
-class Rocket extends Projectiles {
+class Rocket extends Projectile {
   private int x;
   private int y;
 }
