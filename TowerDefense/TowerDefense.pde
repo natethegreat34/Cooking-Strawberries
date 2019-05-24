@@ -41,15 +41,6 @@ void remaker() {
   Tile a = new Tile (0, f*36, 36, f + 36, false);
   board[0][f] = a;
   path.add(a);
-  //for (int i = 1; i < path.size(); i ++) {
-  //  int x = path.get(i).getleft();
-  //  int y = path.get(i).gettop();
-  //  dirt.resize(36, 36);
-  //  image(dirt, x, y);
-  //  fill(0, 100);
-  //  stroke(255);
-  //  rect(x, y, 36, 36);
-  //}
 }
 void tilemaker(int row, int col) {
   boolean done = false;
@@ -73,19 +64,19 @@ void tilemaker(int row, int col) {
       path.add(board[row][col]);
     }
   }
-  for (int i = 0; i < board.length; i ++) { 
-    for (int y = 0; y < board[0].length; y ++) {
-      if (board[i][y].getColor() == false) {
-        dirt.resize(36, 36);
-        image(dirt, i * 36, y*36);
-        fill(0, 100);
-        stroke(255);
-        rect(i * 36, y*36, 36, 36);
-      }
-    }
-  }
 }
 void draw() {
+  //  for (int i = 0; i < board.length; i ++) { 
+  //  for (int y = 0; y < board[0].length; y ++) {
+  //    if (board[i][y].getColor() == false) {
+  //      dirt.resize(36, 36);
+  //      image(dirt, i * 36, y*36);
+  //      fill(0, 100);
+  //      stroke(255);
+  //      rect(i * 36, y*36, 36, 36);
+  //    }
+  //  }
+  //}
   //image(img, 0, 0);
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
