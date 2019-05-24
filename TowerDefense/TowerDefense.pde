@@ -7,8 +7,8 @@ PImage img;
 int f;
 boolean ended;
 Tile[][] board = new Tile[9][16];
-ArrayList <Ship> s = new ArrayList();
-ArrayList<Projectile> p = new ArrayList();
+//ArrayList <Ship> s = new ArrayList();
+//ArrayList<Projectile> p = new ArrayList();
 void setup() {
   size(576, 400);
   rocket = loadImage("rocket-146104_640.png");
@@ -19,14 +19,6 @@ void setup() {
   f = (int)(Math.random()  * 9);
 
   remaker();
-    String q = "";
-  for (int i = 0; i < board.length; i ++){
-    for (int y = 0; y < board[0].length; y ++){
-        q = q + " " + board[i][y];
-    }
-  }
-  print(q);
-  
   tilemaker(0, f);
 }
 void remaker() {
@@ -65,27 +57,36 @@ void tilemaker(int row, int col) {
     int l = (int) (Math.random() * 3);
     if (col >= 15) {
       done = true;
-    }
-    else if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
+    } else if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
       row = row - 1;
+      //print("slide up");
       board[row][col].setcolor(false);
       path.add( board[row][col]);
-    }
-    else if (l == 1 && row >= 0 && row + 1 < board.length && board[row + 1][col].getColor()) {
+    } else if (l == 1 && row >= 0 && row + 1 < board.length && board[row + 1][col].getColor()) {
       row = row + 1;
+      //print("slide down");
       board[row][col].setcolor(false);
       path.add( board[row][col]);
-    } 
-    else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()){
-      col = col + 1;
+    } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+      //print("slide to the right");
       board[row][col].setcolor(false);
       path.add(board[row][col]);
+    }
+  }
+  for (int i = 0; i < board.length; i ++) { 
+    for (int y = 0; y < board[0].length; y ++) {
+      if (board[i][y].getColor() == false) {
+        dirt.resize(36, 36);
+        image(dirt, i * 36, y*36);
+        fill(0, 100);
+        stroke(255);
+        rect(i * 36, y*36, 36, 36);
+      }
     }
   }
 }
 void draw() {
   //image(img, 0, 0);
-  remaker();
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
 }
