@@ -8,6 +8,7 @@ int f;
 boolean ended;
 Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
+ArrayList<Projectile> p = new ArrayList();
 void setup() {
   size(576, 400);
   rocket = loadImage("rocket-146104_640.png");

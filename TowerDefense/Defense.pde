@@ -6,7 +6,7 @@ abstract class Defense {
 
   abstract boolean attack();
 
-  public Ship findNearest(int x, int y) {
+  public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
     for (int a = 0; a < s.size(); a ++) {
@@ -42,7 +42,7 @@ abstract class Defense {
   public double[] getCoords() {
     double[] coords = new double[2];
     coords[0] = x;
-    coords[y] = y;
+    coords[1] = y;
     return coords;
   }
 }
@@ -56,7 +56,9 @@ class Cannon extends Defense {
   }
 
   public boolean attack() {
-    Ship target = 
+    double coords[] = getCoords();
+    Ship target = findNearest(coords[0], coords[1]);
+    
   }
 }
 

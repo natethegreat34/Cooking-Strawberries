@@ -1,4 +1,5 @@
 abstract class Projectile {
+  public Ship target;
   private int damage;
   private double speed;
 
@@ -13,14 +14,22 @@ abstract class Projectile {
 
 //CannonBall
 class CannonBall extends Projectiles {
-  private int x;
-  private int y;
+  private double x;
+  private double y;
   private int damage;
   public boolean alive = true;
-  public int getX() {
+  
+  public CannonBall(Ship inputTarget, double inX, double inY) {
+    x = inX;
+    y = inY;
+    target = inputTarget();
+    double[] targetCoords = target.getCoords();
+    
+  }
+  public double getX() {
     return x;
   }
-  public int getY() {
+  public double getY() {
     return y;
   }
   public int getdamage() {
