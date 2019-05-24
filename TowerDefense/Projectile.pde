@@ -12,7 +12,7 @@ abstract class Projectile {
 
 
 //CannonBall
-class CannonBall extends Projectiles {
+class CannonBall extends Projectile {
   private int x;
   private int y;
   private int damage;
@@ -33,13 +33,13 @@ class CannonBall extends Projectiles {
 
 
 //Laser
-class Laser extends Projectiles {
+class Laser extends Projectile {
   
 }
 
 
 //Rocket
-class Rocket extends Projectiles {
+class Rocket extends Projectile {
   private int x;
   private int y;
 }
