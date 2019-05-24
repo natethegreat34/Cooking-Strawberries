@@ -6,18 +6,18 @@ abstract class Defense {
 
   abstract boolean attack();
 
-  public Ship findNearest(int x, int y) {
+  public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
-    for (int a = 0; a < s.size(); a ++) {
-      double[] coords = s.get(a).getCoords();
+    for (int a = 0; a < TowerDefense.ships.length; a ++) {
+      double[] coords = ships[a].getCoords();
       double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
       if (distance < lowestDistance) {
         lowestDistance = distance;
         index = a;
       }
     }
-    return s.get(index);
+    return ships[index];
   }
 
   public boolean upgrade() {
@@ -39,14 +39,8 @@ abstract class Defense {
     return true;
   }
   
-  public double[] getCoords() {
-    double[] coords = new double[2];
-    coords[0] = x;
-    coords[y] = y;
-    return coords;
-  }
+  public double
 }
-
 
 //Cannon
 class Cannon extends Defense {
@@ -56,7 +50,8 @@ class Cannon extends Defense {
   }
 
   public boolean attack() {
-    Ship target = 
+    findNearest(x, y);
+    
   }
 }
 
@@ -76,7 +71,4 @@ class RockerLauncher extends Defense {
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-    public boolean attack() {
-    return true;
-  }
 }
