@@ -22,9 +22,9 @@ class CannonBall extends Projectile {
   public CannonBall(Ship inputTarget, double inX, double inY) {
     x = inX;
     y = inY;
-    target = inputTarget();
+    target = inputTarget;
     double[] targetCoords = target.getCoords();
-    
+    p.add(this);
   }
   public double getX() {
     return x;
