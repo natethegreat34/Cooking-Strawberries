@@ -58,7 +58,7 @@ class Cannon extends Defense {
   public boolean attack() {
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
-    
+    return true;
   }
 }
 
