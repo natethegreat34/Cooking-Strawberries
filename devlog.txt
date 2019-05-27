@@ -19,3 +19,5 @@ May 23rd:
 May 24th:
 	-Timothy: Caught our Development Log up to date, while also continuing my work on defense/		projectile from yesterday. Also helped Nathan debug his code.
 	-Nathan: Still trying to debug my path creation algorithm. 
+May 24-26th (side note on why no commits):
+	- Nathan had a soccer tournament
