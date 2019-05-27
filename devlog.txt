@@ -26,3 +26,4 @@ May 24-26th (side note on why no commits):
 	- Nathan had a soccer tournament
 May 27th:
 	- Nathan: finished debugging the randomly generated path and it works.  Also made it so no squares of tiles appeared, making it more visually appealing and easier to see the path.
+	-Timothy: Helped Nathan look over his code. Mostly worked on writing the move algorithm for the ships, which is now finished. It took a lot of sketching things out and talking them over with myself.
