@@ -21,10 +21,23 @@ void setup() {
 
   remaker();
   tilemaker(0, f);
+      for (int i = 0; i < 9; i ++) { 
+    for (int y = 0; y < 16; y ++) {
+            print(i + "   mm " + y + "||||");
+      if (board[i][y].getColor() == false) {
+        dirt.resize(36, 36);
+  
+        image(dirt, i * 36, y*36);
+        fill(0, 100);
+        stroke(255);
+        rect(i * 36, y*36, 36, 36);
+      }
+    }
+  }
 }
 void remaker() {
-  for (int i = 0; i< width; i = i +36) {
-    for (int y = 0; y< 324; y = y +36) {
+  for (int i = 0; i<= 546; i = i +36) {
+    for (int y = 0; y<= 288; y = y +36) {
       grass.resize(36, 36);
       image(grass, i, y);
       fill(0, 100);
@@ -39,7 +52,7 @@ void remaker() {
   fill(0, 100);
   stroke(255);
   rect(0, f*36, 36, 36);
-  Tile a = new Tile (0, f*36, 36, f + 36, false);
+  Tile a = new Tile (0, f*36, 36, f*36 + 36, false);
   board[0][f] = a;
   path.add(a);
 }
@@ -49,7 +62,8 @@ void tilemaker(int row, int col) {
     int l = (int) (Math.random() * 3);
     if (col >= 15) {
       done = true;
-    } else if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
+    } 
+    else if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
       row = row - 1;
       //print("slide up");
       board[row][col].setcolor(false);
@@ -59,7 +73,9 @@ void tilemaker(int row, int col) {
       //print("slide down");
       board[row][col].setcolor(false);
       path.add( board[row][col]);
-    } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+    } 
+    else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+      col = col + 1;
       //print("slide to the right");
       board[row][col].setcolor(false);
       path.add(board[row][col]);
@@ -67,17 +83,6 @@ void tilemaker(int row, int col) {
   }
 }
 void draw() {
-  //  for (int i = 0; i < board.length; i ++) { 
-  //  for (int y = 0; y < board[0].length; y ++) {
-  //    if (board[i][y].getColor() == false) {
-  //      dirt.resize(36, 36);
-  //      image(dirt, i * 36, y*36);
-  //      fill(0, 100);
-  //      stroke(255);
-  //      rect(i * 36, y*36, 36, 36);
-  //    }
-  //  }
-  //}
   //image(img, 0, 0);
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
