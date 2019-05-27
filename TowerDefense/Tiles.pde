@@ -29,16 +29,16 @@ class Tile{
     green = k;
   }
   
-    public int gettop(){
+  public int gettop(){
     return top;
   }
-    public int getleft(){
+  public int getleft(){
     return left;
   }
-    public int getright(){
+  public int getright(){
     return right;
   }
-    public int getbottom(){
+  public int getbottom(){
     return bottom;
   }
   public boolean getColor(){
