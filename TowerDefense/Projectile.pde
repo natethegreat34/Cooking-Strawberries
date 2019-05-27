@@ -4,6 +4,11 @@ abstract class Projectile {
   private double y;
   private int damage;
   private double speed;
+  
+  public Projectile(double inX, double inY) {
+    x = inX;
+    y = inY;
+  }
 
   public int getdamage() {
     return damage;
@@ -18,13 +23,11 @@ abstract class Projectile {
   public double getY() {
     return y;
   }
-  public int getdamage() {
-    return damage;
-  }
   
   public boolean checkExploded() {
     double[] coords = target.getCoords();
     double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
+    return true; //Dummy
   }
 }
 
@@ -35,8 +38,7 @@ class CannonBall extends Projectile {
   public boolean alive = true;
   
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    x = inX;
-    y = inY;
+    super(inX, inY);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
@@ -49,12 +51,22 @@ class CannonBall extends Projectile {
 
 //Laser
 class Laser extends Projectile {
+  public Laser(Ship inputTarget, double inX, double inY) {
+    super(inX, inY);
+    target = inputTarget;
+    double[] targetCoords = target.getCoords();
+    p.add(this);
+  }
   
 }
 
 
 //Rocket
 class Rocket extends Projectile {
-  private int x;
-  private int y;
+  public Rocket(Ship inputTarget, double inX, double inY) {
+    super(inX, inY);
+    target = inputTarget;
+    double[] targetCoords = target.getCoords();
+    p.add(this);
+  }
 }
