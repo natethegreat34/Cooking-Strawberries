@@ -42,7 +42,7 @@ void remaker() {
   rect(0, f*36, 36, 36);
   Tile a = new Tile (f*36,0, 36, f*36 + 36, false);
   board[f][0] = a;
-  print (f + "cdbbdsjfbhdsjhb");
+  //print (f + "cdbbdsjfbhdsjhb");
   path.add(a);
 }
 void tilemaker(int row, int col) {
@@ -76,7 +76,7 @@ void draw() {
   stroke(255);
   for (int i = 0; i < 9; i ++) { 
     for (int y = 0; y < 16; y ++) {
-      print(i + "   mm " + y + "||||");
+      //print(i + "   mm " + y + "||||");
       if (board[i][y].getColor() == false) {
         image(dirt, y * 36, i*36);
         rect(y * 36, i*36, 36, 36);
