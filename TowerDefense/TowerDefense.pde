@@ -17,11 +17,10 @@ void setup() {
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
-  f = (int)(Math.random()  * 9);
+  f = (int)(Math.random()  * 7 + 1);
 
   remaker();
   tilemaker(f, 0);
-
 }
 void remaker() {
   for (int i = 0; i<= 288; i = i +36) {
@@ -40,7 +39,7 @@ void remaker() {
   fill(0, 100);
   stroke(255);
   rect(0, f*36, 36, 36);
-  Tile a = new Tile (f*36,0, 36, f*36 + 36, false);
+  Tile a = new Tile (f*36, 0, 36, f*36 + 36, false);
   board[f][0] = a;
   //print (f + "cdbbdsjfbhdsjhb");
   path.add(a);
@@ -51,27 +50,37 @@ void tilemaker(int row, int col) {
     int l = (int) (Math.random() * 3);
     if (col >= 15) {
       done = true;
-    } else if (l == 0 && row > 0 && row < board.length && board[row - 1][col].getColor()) {
+    } else if (l == 0 && row > 1 && row < board.length - 1 && board[row - 1][col].getColor()) {
       row = row - 1;
       //print("slide up");
-      board[row][col].setcolor(false);
-      path.add( board[row][col]);
-    } else if (l == 1 && row >= 0 && row + 1 < board.length && board[row + 1][col].getColor()) {
+      if (col > 0 && (board[row][col-1].getColor() || board[row + 1][col].getColor() || board[row + 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row + 1][col].getColor() || board[row + 1][col+1].getColor())) {
+        board[row][col].setcolor(false);
+        path.add( board[row][col]);
+      } else {
+        row = row + 1;
+      }
+    } else if (l == 1 && row >= 1 && row + 1 < board.length - 1 && board[row + 1][col].getColor()) {
       row = row + 1;
       //print("slide down");
-      board[row][col].setcolor(false);
-      path.add( board[row][col]);
-    } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
-      col = col + 1;
-      //print("slide to the right");
-      board[row][col].setcolor(false);
-      path.add(board[row][col]);
+      if (col > 0 && (board[row][col-1].getColor() || board[row - 1][col].getColor() || board[row - 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row - 1][col].getColor() || board[row - 1][col+1].getColor())) {
+
+        board[row][col].setcolor(false);
+        path.add( board[row][col]);
+      }
+     else {
+      row = row - 1;
     }
+  } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+  col = col + 1;
+  //print("slide to the right");
+  board[row][col].setcolor(false);
+  path.add(board[row][col]);
+}
   }
 }
 void draw() {
   //image(img, 0, 0);
-    dirt.resize(36, 36);
+  dirt.resize(36, 36);
   fill(0, 100);
   stroke(255);
   for (int i = 0; i < 9; i ++) { 
