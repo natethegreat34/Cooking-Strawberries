@@ -15,9 +15,14 @@ May 22nd:
 	-Nathan: Worked with visuals and essentially got our starting visuals working.
 May 23rd:
 	-Timothy: Wasn't in class because of an AP Exam, but Nathan and I went to the Dojo 	after school 	spent the time debugging the board generation, on his computer. Also 	finished findNearest. 	Worked on the relationship between defense and projectile at home.
-	-Nathan: Worked on the display path in class, then went after school with Timothy to the Dojo 	where we worked on debugging the path.
+	-Nathan: Worked on the display path in class, then went after school with Timothy to the Dojo 	where we worked on debugging the path. 
 May 24th:
+<<<<<<< HEAD
+	-Timothy: Caught our Development Log up to date, while also continuing my work on defense/		projectile from yesterday. Also helped Nathan debug his code. 
+	-Nathan: Still trying to debug my path creation algorithm. 
+=======
 	-Timothy: Caught our Development Log up to date, while also continuing my work on defense/		projectile from yesterday. Also helped Nathan debug his code.
 	-Nathan: Still trying to debug my path creation algorithm. 
 May 24-26th (side note on why no commits):
 	- Nathan had a soccer tournament
+>>>>>>> 02bfbe796b1c64fdacfa5d84a6fb39206e5b4e28
