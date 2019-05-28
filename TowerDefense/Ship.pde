@@ -6,8 +6,15 @@ class Ship {
   private int damage;
   private Tile nextTile;
   private int pathIndex;
-  private int direction; //0, 1, or 2 (N, E, or S)
+  public int direction; //0, 1, or 2 (N, E, or S)
   
+  public Ship() {
+    pathIndex = 0;
+    nextTile = path.get(0);
+    direction = 1;
+    x = nextTile.getleft();
+    y = nextTile.gettop() + 18;
+  }
   
   public double[] getCoords() {
     double[] output = new double[2];
@@ -37,13 +44,36 @@ class Ship {
     if (old.gettop() == nextTile.gettop()) direction = 1;
     if (old.getleft() == nextTile.getleft() && old.gettop() < nextTile.gettop()) direction = 2; 
   }
+  
+  public void setSpeed(double inputSpeed) {
+    speed = inputSpeed;
+  }
+  
+  public void setHealth(int inputHealth) {
+    health = inputHealth;
+  }
 }
 
 class Normal extends Ship {
+  public Normal() {
+    super();
+    setSpeed(3);
+    setHealth(100);
+  }
 }
 class Quick extends Ship {
+  public Quick() {
+    super();
+    setSpeed(6);
+    setHealth(50);
+  }
 }
 class Heavy extends Ship {
+  public Heavy() {
+    super();
+    setSpeed(1);
+    setHealth(200);
+  }
 }
 class Boss extends Ship {
 }
