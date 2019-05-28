@@ -23,6 +23,12 @@ void setup() {
 
   remaker();
   tilemaker(f, 0);
+  enemy.resize(24, 24);
+//rotate(PI/2.0);
+  //image (enemy,6, f * 36 + 6);
+  Ship q = new Normal();
+  s.add(q);
+
 }
 void remaker() {
   for (int i = 0; i<= 288; i = i +36) {
@@ -93,6 +99,10 @@ void draw() {
       }
     }
   }
+for (int x = 0; x < s.size(); x++){
+  s.get(x).move();
+   image (enemy, (float) s.get(x).getCoords()[0], (float) s.get(x).getCoords()[1] );
+}
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
 }
