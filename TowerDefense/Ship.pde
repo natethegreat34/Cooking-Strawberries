@@ -24,7 +24,7 @@ class Ship {
   }
   
   public void move() {
-    if (x >= nextTile.getleft() + 18 && y >= nextTile.gettop() + 18) {
+    if (x >= nextTile.getleft() + 18 && ((y >= nextTile.gettop() + 18 && direction != 0) || (y <= nextTile.gettop() + 18 && direction == 0))) {
       x = nextTile.getleft() + 18;
       y = nextTile.gettop() + 18;
       findNextTile(); //Checking if at/past center, then sets the next target
@@ -57,7 +57,7 @@ class Ship {
 class Normal extends Ship {
   public Normal() {
     super();
-    setSpeed(3);
+    setSpeed(1);
     setHealth(100);
   }
 }
