@@ -4,6 +4,7 @@ PImage dirt;
 PImage cball;
 PImage rocket;
 PImage img;
+PImage enemy;
 int f;
 boolean ended;
 Tile[][] board = new Tile[9][16];
@@ -17,6 +18,7 @@ void setup() {
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
+  enemy= loadImage("roundysh.png");
   f = (int)(Math.random()  * 7 + 1);
 
   remaker();
@@ -66,16 +68,15 @@ void tilemaker(int row, int col) {
 
         board[row][col].setcolor(false);
         path.add( board[row][col]);
+      } else {
+        row = row - 1;
       }
-     else {
-      row = row - 1;
+    } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+      col = col + 1;
+      //print("slide to the right");
+      board[row][col].setcolor(false);
+      path.add(board[row][col]);
     }
-  } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
-  col = col + 1;
-  //print("slide to the right");
-  board[row][col].setcolor(false);
-  path.add(board[row][col]);
-}
   }
 }
 void draw() {
