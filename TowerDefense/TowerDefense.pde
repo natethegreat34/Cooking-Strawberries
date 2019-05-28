@@ -101,7 +101,7 @@ void draw() {
   }
 for (int x = 0; x < s.size(); x++){
   s.get(x).move();
-   image (enemy, (float) s.get(x).getCoords()[0], (float) s.get(x).getCoords()[1] );
+   image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
 }
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
