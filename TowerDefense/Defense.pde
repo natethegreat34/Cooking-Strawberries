@@ -71,7 +71,7 @@ class LaserShooter extends Defense {
 }
 
 //Rocket Launcher
-class RockerLauncher extends Defense {
+class RocketLauncher extends Defense {
   public boolean attack() {
     return true;
   }
