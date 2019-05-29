@@ -5,6 +5,8 @@ PImage cball;
 PImage rocket;
 PImage img;
 PImage enemy;
+PImage k;
+PImage v;
 int f;
 int counter;
 boolean ended;
@@ -20,11 +22,15 @@ void setup() {
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
   enemy= loadImage("roundysh.png");
+  k = loadImage("Right.png");
+  v = loadImage("Down.png");
   f = (int)(Math.random()  * 7 + 1);
 
   remaker();
   tilemaker(f, 0);
   enemy.resize(24, 24);
+  k.resize(24,24);
+  v.resize(24,24);
 //rotate(PI/2.0);
   //image (enemy,6, f * 36 + 6);
   Ship q = new Normal();
@@ -107,8 +113,17 @@ void draw() {
   }
 for (int x = 0; x < s.size(); x++){
   s.get(x).move();
+  if (s.get(x).direction == 0){
    image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
 }
+  if (s.get(x).direction == 1){
+   image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+}
+  if (s.get(x).direction == 2){
+   image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+}
+}
+
   rect(0, 324, 575, 74);
   text("Y-Cord:" + mouseY, 10, 60);
 }
