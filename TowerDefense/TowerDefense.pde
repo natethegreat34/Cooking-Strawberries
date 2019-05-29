@@ -6,6 +6,7 @@ PImage rocket;
 PImage img;
 PImage enemy;
 int f;
+int counter;
 boolean ended;
 Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
@@ -86,6 +87,7 @@ void tilemaker(int row, int col) {
   }
 }
 void draw() {
+  counter ++;
   //image(img, 0, 0);
   dirt.resize(36, 36);
   fill(0, 100);
@@ -98,6 +100,10 @@ void draw() {
         rect(y * 36, i*36, 36, 36);
       }
     }
+  }
+  if (counter % 36 == 0){
+    Ship k = new Normal();
+    s.add(k);
   }
 for (int x = 0; x < s.size(); x++){
   s.get(x).move();
