@@ -13,6 +13,7 @@ boolean ended;
 Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
+int castleHealth;
 
 void setup() {
   size(576, 400);

@@ -38,11 +38,17 @@ class Ship {
   
   private void findNextTile() {
     pathIndex += 1;
-    nextTile = path.get(pathIndex);
-    Tile old = path.get(pathIndex - 1);
-    if (old.getleft() == nextTile.getleft() && old.gettop() > nextTile.gettop()) direction = 0; 
-    if (old.gettop() == nextTile.gettop()) direction = 1;
-    if (old.getleft() == nextTile.getleft() && old.gettop() < nextTile.gettop()) direction = 2; 
+    if (pathIndex == path.size()) {
+      s.remove(this);
+      castleHealth -= damage;
+    }
+    else {
+      nextTile = path.get(pathIndex);
+      Tile old = path.get(pathIndex - 1);
+      if (old.getleft() == nextTile.getleft() && old.gettop() > nextTile.gettop()) direction = 0; 
+      if (old.gettop() == nextTile.gettop()) direction = 1;
+      if (old.getleft() == nextTile.getleft() && old.gettop() < nextTile.gettop()) direction = 2; 
+    }
   }
   
   public void setSpeed(double inputSpeed) {
