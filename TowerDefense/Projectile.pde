@@ -61,9 +61,6 @@ class CannonBall extends Projectile {
     double[] targetCoords = target.getCoords();
     p.add(this);
   }
-  public void death(Ship s) {
-    ;
-  }
 }
 
 
