@@ -19,6 +19,7 @@ boolean ended;
 Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
+ArrayList <Defense> t = new ArrayList();
 int castleHealth;
 
 void setup() {
@@ -121,6 +122,18 @@ void draw() {
     }
   }
   }
+  for (int x = 0; x < s.size(); x++){
+  //s.get(x).move();
+  if (s.get(x).direction == 0){
+   image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+}
+  if (s.get(x).direction == 1){
+   image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+}
+  if (s.get(x).direction == 2){
+   image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+}
+}
     rect(0, 324, 575, 74);
   fill(255,0,0);
   //rocket
@@ -141,7 +154,7 @@ void draw() {
   counter ++;
   //image(img, 0, 0);
   dirt.resize(36, 36);
-
+  
   for (int i = 0; i < 9; i ++) { 
     for (int y = 0; y < 16; y ++) {
       //print(i + "   mm " + y + "||||");
@@ -158,6 +171,9 @@ void draw() {
                 rect(y * 36, i*36, 36, 36);
     }
   }
+  }
+  for (int i = 0; i < t.size(); i ++) {
+    image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
   }
   if (counter % 36 == 0){
     Ship k = new Normal();
@@ -178,11 +194,9 @@ for (int x = 0; x < s.size(); x++){
 
 
 }
-if (place){
-  image(las, mx, my);
-}
+
 if (holdup){
-  image(las, mouseX, mouseY);
+  image(las, mouseX - 18, mouseY - 18);
 }
 if(castleHealth <= 0){
   noLoop();
@@ -199,7 +213,7 @@ void mousePressed() {
 }
 void mouseReleased() {
   holdup = false;
-  place = true;
-  mx = mouseX;
-  my = mouseY;
-}
+  Defense q = new Defense(mouseX - 18, mouseY -18);
+  t.add(q);
+  }
+  

@@ -5,7 +5,11 @@ abstract class Defense {
   private int level;
 
   abstract boolean attack();
-
+  public Defense(double u, double v){
+    x = u;
+    y = v;
+  }
+    
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -38,7 +42,7 @@ abstract class Defense {
     range = inputRange;
     return true;
   }
-  
+
   public double[] getCoords() {
     double[] coords = new double[2];
     coords[0] = x;
