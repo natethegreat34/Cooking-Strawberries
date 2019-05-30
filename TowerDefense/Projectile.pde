@@ -19,13 +19,10 @@ abstract class Projectile {
     double[] targetCoords = target.getCoords();
     double changeX = targetCoords[0] - x;
     double changeY = targetCoords[1] - y;
-<<<<<<< HEAD
-    double angle = Java.lang.Math;
-=======
     double angle = Math.atan(changeY / changeX);
     x += speed * Math.cos(angle);
     y += speed * Math.sin(angle);
->>>>>>> af11ec8c04ed5acdddcf4fcec08a8d9391c498e5
+
   }
 
   public int getdamage() {

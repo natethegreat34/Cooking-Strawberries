@@ -1,14 +1,7 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 import java.util.*;
 Tile[][] board = new Tile[9][16];
-=======
-\import java.util.*;
-=======
-import java.util.*;
->>>>>>> cceabf4d7f7b43ddc30cc33b2ddbb16152ad02e0
 
->>>>>>> af11ec8c04ed5acdddcf4fcec08a8d9391c498e5
 ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
@@ -219,6 +212,6 @@ void mousePressed() {
 void mouseReleased() {
   holdup = false;
   //maybe need to have the things that i want appear on screen appear later in the code
-  //l = new Defense((double) (mouseX - 18), (double) (mouseY -18));
-  //t.add(l);
+  l = new LaserShooter ((double) (mouseX - 18), (double) (mouseY -18));
+  t.add(l);
 }

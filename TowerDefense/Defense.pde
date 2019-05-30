@@ -1,6 +1,6 @@
 abstract class Defense {
-  private double x;
-  private double y;
+  public double x;
+  public double y;
   private int range;
   private int level;
   private int timer;
@@ -11,7 +11,7 @@ abstract class Defense {
   }
   
   public boolean canShoot() {
-    
+    return true;
   }
   
   
@@ -75,6 +75,10 @@ class Cannon extends Defense {
 
 //Laser Shooter
 class LaserShooter extends Defense {
+  public LaserShooter(double u, double v){
+    x = u;
+    y = v;
+  }
   public boolean attack() {
     return true;
   }
