@@ -12,10 +12,16 @@ abstract class Projectile {
   }
   
   public void move() {
+    if (checkExplode()) {
+      target.lowerHealth(damage);
+      p.remove(this);
+    }
     double[] targetCoords = target.getCoords();
     double changeX = targetCoords[0] - x;
     double changeY = targetCoords[1] - y;
-    double angle = Java.lang.Math.
+    double angle = Math.atan(changeY / changeX);
+    x += speed * Math.cos(angle);
+    y += speed * Math.sin(angle);
   }
 
   public int getdamage() {
