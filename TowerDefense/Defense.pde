@@ -5,11 +5,10 @@ abstract class Defense {
   private int level;
 
   abstract boolean attack();
-  public Defense(double u, double v){
-    x = u;
-    y = v;
+
+  public Defense() {
   }
-    
+
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -63,7 +62,7 @@ class Cannon extends Defense {
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-    return true; 
+    return true;
   }
 }
 
@@ -83,7 +82,7 @@ class RocketLauncher extends Defense {
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-    public boolean attack() {
+  public boolean attack() {
     return true;
   }
 }
