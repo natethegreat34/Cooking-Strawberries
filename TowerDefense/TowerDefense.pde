@@ -1,3 +1,5 @@
+import java.util.*;
+
 ArrayList <Tile> path = new ArrayList();
 PImage grass;
 PImage dirt;
