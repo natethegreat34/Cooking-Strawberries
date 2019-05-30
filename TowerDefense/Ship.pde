@@ -3,7 +3,7 @@ class Ship {
   private double y;
   private double speed;
   private int health;
-  private int damage;
+  public int damage;
   private Tile nextTile;
   private int pathIndex;
   public int direction; //0, 1, or 2 (N, E, or S)
@@ -65,6 +65,7 @@ class Normal extends Ship {
     super();
     setSpeed(1);
     setHealth(100);
+    damage = 5;
   }
 }
 class Quick extends Ship {
