@@ -21,7 +21,9 @@ boolean ended;
 Tile[][] board = new Tile[9][16];
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
+ArrayList <Defense> t = new ArrayList();
 int castleHealth;
+Defense l;
 
 void setup() {
   size(576, 400);
@@ -40,14 +42,13 @@ void setup() {
   remaker();
   tilemaker(f, 0);
   enemy.resize(24, 24);
-  k.resize(24,24);
-  v.resize(24,24);
-  las.resize(36,36);
-//rotate(PI/2.0);
+  k.resize(24, 24);
+  v.resize(24, 24);
+  las.resize(36, 36);
+  //rotate(PI/2.0);
   //image (enemy,6, f * 36 + 6);
   Ship q = new Normal();
   s.add(q);
-
 }
 void remaker() {
   for (int i = 0; i<= 288; i = i +36) {
@@ -105,94 +106,102 @@ void tilemaker(int row, int col) {
   }
 }
 void draw() {
-  if (castleHealth > 0 ){
-      for (int i = 0; i < 9; i ++) { 
-    for (int y = 0; y < 16; y ++) {
-      //print(i + "   mm " + y + "||||");
-      if (board[i][y].getColor() == false) {
+  if (castleHealth > 0 ) {
+    for (int i = 0; i < 9; i ++) { 
+      for (int y = 0; y < 16; y ++) {
+        //print(i + "   mm " + y + "||||");
+        if (board[i][y].getColor() == false) {
           fill(0, 100);
-        stroke(255);
-        image(dirt, y * 36, i*36);
-        rect(y * 36, i*36, 36, 36);
+          stroke(255);
+          image(dirt, y * 36, i*36);
+          rect(y * 36, i*36, 36, 36);
+        } else {
+          fill(0, 100);
+          stroke(0);
+          image(grass, y * 36, i *36);
+          rect(y * 36, i*36, 36, 36);
+        }
       }
-      else{
-          fill(0, 100);
-        stroke(0);
-        image(grass,y * 36, i *36);
-                rect(y * 36, i*36, 36, 36);
     }
-  }
-  }
+    for (int x = 0; x < s.size(); x++) {
+      //s.get(x).move();
+      if (s.get(x).direction == 0) {
+        image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+      }
+      if (s.get(x).direction == 1) {
+        image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+      }
+      if (s.get(x).direction == 2) {
+        image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+      }
+    }
     rect(0, 324, 575, 74);
-  fill(255,0,0);
-  //rocket
-  rect(81,324,168,74);
-  fill(0,255,0);
-  //laser
-  rect(249,324,168,74);
-  fill(0,0,255);
-  //cannon
-  rect(417,324,168,74);
-  fill(255);
-  text("Health:" + castleHealth, 10, 345);
-  fill(0);
-  text("Rocket Upgrade:", 116, 345);
-  text("Laser Upgrade:", 289, 345);
-  text("Cannon Upgrade:", 447, 345);
-    if (holdup == false){
-  counter ++;
-  //image(img, 0, 0);
-  dirt.resize(36, 36);
+    fill(255, 0, 0);
+    //rocket
+    rect(81, 324, 168, 74);
+    fill(0, 255, 0);
+    //laser
+    rect(249, 324, 168, 74);
+    fill(0, 0, 255);
+    //cannon
+    rect(417, 324, 168, 74);
+    fill(255);
+    text("Health:" + castleHealth, 10, 345);
+    fill(0);
+    text("Rocket Upgrade:", 116, 345);
+    text("Laser Upgrade:", 289, 345);
+    text("Cannon Upgrade:", 447, 345);
+    if (holdup == false) {
+      counter ++;
+      //image(img, 0, 0);
+      dirt.resize(36, 36);
 
-  for (int i = 0; i < 9; i ++) { 
-    for (int y = 0; y < 16; y ++) {
-      //print(i + "   mm " + y + "||||");
-      if (board[i][y].getColor() == false) {
-          fill(0, 100);
-        stroke(255);
-        image(dirt, y * 36, i*36);
-        rect(y * 36, i*36, 36, 36);
+      for (int i = 0; i < 9; i ++) { 
+        for (int y = 0; y < 16; y ++) {
+          //print(i + "   mm " + y + "||||");
+          if (board[i][y].getColor() == false) {
+            fill(0, 100);
+            stroke(255);
+            image(dirt, y * 36, i*36);
+            rect(y * 36, i*36, 36, 36);
+          } else {
+            fill(0, 100);
+            stroke(0);
+            image(grass, y * 36, i *36);
+            rect(y * 36, i*36, 36, 36);
+          }
+        }
       }
-      else{
-          fill(0, 100);
-        stroke(0);
-        image(grass,y * 36, i *36);
-                rect(y * 36, i*36, 36, 36);
+      for (int i = 0; i < t.size(); i ++) {
+        image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
+      if (counter % 36 == 0) {
+        Ship k = new Normal();
+        s.add(k);
+      }
+      for (int x = 0; x < s.size(); x++) {
+        s.get(x).move();
+        if (s.get(x).direction == 0) {
+          image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        }
+        if (s.get(x).direction == 1) {
+          image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        }
+        if (s.get(x).direction == 2) {
+          image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        }
+      }
     }
-  }
-  }
-  if (counter % 36 == 0){
-    Ship k = new Normal();
-    s.add(k);
-  }
-for (int x = 0; x < s.size(); x++){
-  s.get(x).move();
-  if (s.get(x).direction == 0){
-   image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
-}
-  if (s.get(x).direction == 1){
-   image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
-}
-  if (s.get(x).direction == 2){
-   image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
-}
-}
 
-
-}
-if (place){
-  image(las, mx, my);
-}
-if (holdup){
-  image(las, mouseX, mouseY);
-}
-if(castleHealth <= 0){
-  noLoop();
+    if (holdup) {
+      image(las, mouseX - 18, mouseY - 18);
+    }
+    if (castleHealth <= 0) {
+      noLoop();
       end.resize(width, height);
       image(end, 0, 0);
-  
-}
-}
+    }
+  }
 }
 void mousePressed() {
   if (mouseX > 249 && mouseX < 417 && mouseY > 324) {
@@ -201,7 +210,6 @@ void mousePressed() {
 }
 void mouseReleased() {
   holdup = false;
-  place = true;
-  mx = mouseX;
-  my = mouseY;
+  //l = new Defense((double) (mouseX - 18), (double) (mouseY -18));
+  //t.add(l);
 }
