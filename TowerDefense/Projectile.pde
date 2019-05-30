@@ -8,6 +8,14 @@ abstract class Projectile {
   public Projectile(double inX, double inY) {
     x = inX;
     y = inY;
+    p.add(this);
+  }
+  
+  public void move() {
+    double[] targetCoords = target.getCoords();
+    double changeX = targetCoords[0] - x;
+    double changeY = targetCoords[1] - y;
+    double angle = Java.lang.Math.
   }
 
   public int getdamage() {
@@ -24,10 +32,13 @@ abstract class Projectile {
     return y;
   }
   
-  public boolean checkExploded() {
+  public boolean checkExplode() {
     double[] coords = target.getCoords();
     double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
-    return true; //Dummy
+    if (distance < 5) {
+      return true;
+    }
+    return false; 
   }
 }
 
