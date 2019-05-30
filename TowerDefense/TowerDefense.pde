@@ -70,6 +70,7 @@ void remaker() {
   rect(0, f*36, 36, 36);
   Tile a = new Tile (f*36, 0, 36, f*36 + 36, false);
   board[f][0] = a;
+  board[f][0].placer(false);
   //print (f + "cdbbdsjfbhdsjhb");
   path.add(a);
 }
@@ -84,6 +85,7 @@ void tilemaker(int row, int col) {
       //print("slide up");
       if (col > 0 && (board[row][col-1].getColor() || board[row + 1][col].getColor() || board[row + 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row + 1][col].getColor() || board[row + 1][col+1].getColor())) {
         board[row][col].setcolor(false);
+        board[row][col].placer(false);
         path.add( board[row][col]);
       } else {
         row = row + 1;
@@ -94,6 +96,7 @@ void tilemaker(int row, int col) {
       if (col > 0 && (board[row][col-1].getColor() || board[row - 1][col].getColor() || board[row - 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row - 1][col].getColor() || board[row - 1][col+1].getColor())) {
 
         board[row][col].setcolor(false);
+        board[row][col].placer(false);
         path.add( board[row][col]);
       } else {
         row = row - 1;
@@ -102,6 +105,7 @@ void tilemaker(int row, int col) {
       col = col + 1;
       //print("slide to the right");
       board[row][col].setcolor(false);
+      board[row][col].placer(false);
       path.add(board[row][col]);
     }
   }
@@ -152,6 +156,9 @@ void draw() {
     text("Rocket Upgrade:", 116, 345);
     text("Laser Upgrade:", 289, 345);
     text("Cannon Upgrade:", 447, 345);
+    for (int i = 0; i < t.size(); i ++) {
+      image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+    }
     if (holdup == false) {
       counter ++;
       //image(img, 0, 0);
@@ -210,8 +217,15 @@ void mousePressed() {
   }
 }
 void mouseReleased() {
-  holdup = false;
-  //maybe need to have the things that i want appear on screen appear later in the code
-  l = new LaserShooter ((double) (mouseX - 18), (double) (mouseY -18));
-  t.add(l);
+  if (mouseX > 0 && mouseX < 576 && mouseY < 324) {
+    int y = mouseY/36;
+    int x = mouseX/36;
+      if (board[y] [x].op()){        
+      holdup = false;
+      //maybe need to have the things that i want appear on screen appear later in the code
+      l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
+      board[y] [x].placer(false);
+      t.add(l);
+    }
+  }
 }
