@@ -3,11 +3,18 @@ abstract class Defense {
   private double y;
   private int range;
   private int level;
+  private int timer;
 
   abstract boolean attack();
 
   public Defense() {
   }
+  
+  public boolean canShoot() {
+    
+  }
+  
+  
 
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;

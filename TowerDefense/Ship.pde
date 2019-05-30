@@ -61,6 +61,10 @@ class Ship {
   public void lowerHealth(int damage) {
     health -= damage;
   }
+  
+  public void setHealth(int inputHealth) {
+    health = inputHealth;
+  }
 }
 
 class Normal extends Ship {
