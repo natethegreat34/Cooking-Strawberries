@@ -5,6 +5,7 @@ class Tile{
   private int bottom;
   private boolean green;
   private double slowDown;
+  public boolean open = true;
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;
@@ -28,7 +29,12 @@ class Tile{
   public void setcolor(boolean k){
     green = k;
   }
-  
+  public void placer(boolean t){
+    open = t;
+  }
+  public boolean op(){
+    return open;
+  }
   public int gettop(){
     return top;
   }
