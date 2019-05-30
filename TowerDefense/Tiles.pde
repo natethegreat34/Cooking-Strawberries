@@ -4,12 +4,8 @@ class Tile{
   private int right;
   private int bottom;
   private boolean green;
-<<<<<<< HEAD
-  private double slowDown;
   public boolean open = true;
-=======
   private double slowDown; //slows down the ships by said percentage
->>>>>>> 23c316f14daf27649f7d2ea3ecb09adc8ee7e10c
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;

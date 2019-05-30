@@ -21,6 +21,7 @@ int mx;
 int my;
 int counter;
 int castleHealth;
+int MOney;
 boolean holdup;
 boolean place;
 boolean ended;
@@ -29,6 +30,7 @@ Defense l;
 void setup() {
   size(576, 400);
   castleHealth = 100;
+  MOney = 150;
   rocket = loadImage("rocket-146104_640.png");
   cball = loadImage("cannonBall.png");
   grass = loadImage("grass14.png");
@@ -143,19 +145,20 @@ void draw() {
     rect(0, 324, 575, 74);
     fill(255, 0, 0);
     //rocket
-    rect(81, 324, 168, 74);
+    rect(144, 324, 144, 74);
     fill(0, 255, 0);
     //laser
-    rect(249, 324, 168, 74);
+    rect(288, 324, 144, 74);
     fill(0, 0, 255);
     //cannon
-    rect(417, 324, 168, 74);
+    rect(432, 324, 144, 74);
     fill(255);
     text("Health:" + castleHealth, 10, 345);
+    text("Money ($):" + MOney, 10, 375);
     fill(0);
-    text("Rocket Upgrade:", 116, 345);
-    text("Laser Upgrade:", 289, 345);
-    text("Cannon Upgrade:", 447, 345);
+    text("Rocket Upgrade:", 144 + 18, 345);
+    text("Laser Upgrade ($10):", 288 + 18, 345);
+    text("Cannon Upgrade:", 432 + 18, 345);
     for (int i = 0; i < t.size(); i ++) {
       image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
     }
@@ -212,16 +215,17 @@ void draw() {
   }
 }
 void mousePressed() {
-  if (mouseX > 249 && mouseX < 417 && mouseY > 324) {
+  if (mouseX > 249 && mouseX < 417 && mouseY > 324 && MOney > 10) {
     holdup = true;
   }
 }
 void mouseReleased() {
-  if (mouseX > 0 && mouseX < 576 && mouseY < 324) {
+  if (mouseX > 0 && mouseX < 576 && mouseY < 324 && MOney >= 10) {
     int y = mouseY/36;
     int x = mouseX/36;
       if (board[y] [x].op()){        
       holdup = false;
+      MOney -= 10;
       //maybe need to have the things that i want appear on screen appear later in the code
       l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
       board[y] [x].placer(false);
