@@ -26,4 +26,13 @@ May 24-26th (side note on why no commits):
 	- Nathan had a soccer tournament
 May 27th:
 	- Nathan: finished debugging the randomly generated path and it works.  Also made it so no squares of tiles appeared, making it more visually appealing and easier to see the path.
-	-Timothy: Helped Nathan look over his code. Mostly worked on writing the move algorithm for the ships, which is now finished. It took a lot of sketching things out and talking them over with myself.
+	-Timothy: Helped Nathan look over his code. Mostly worked on writing the move algorithm for the ships, which is now finished. It took a lot of sketching things out and talking them over with myself. 
+May 28th: 
+	-Nathan:
+	-Timothy: Added a constructor for ships, which allowed us to test the move function. Fixed bugs in the move function, and added modifications so that the ships disappear and take damage away from the castle once they reach the end of the path.
+May 29th:
+	-Nathan:
+	-Timothy: Worked on finding images for all the towers in class, and was unable to work at home due to a math test.
+May 30th:
+	-Nathan:
+	-Timothy:
