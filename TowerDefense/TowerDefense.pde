@@ -7,6 +7,7 @@ PImage img;
 PImage enemy;
 PImage k;
 PImage v;
+PImage end;
 int f;
 int counter;
 boolean ended;
@@ -27,6 +28,7 @@ void setup() {
   k = loadImage("Right.png");
   v = loadImage("Down.png");
   f = (int)(Math.random()  * 7 + 1);
+  end = loadImage("gallery_9873_7_17106.png");
 
   remaker();
   tilemaker(f, 0);
@@ -95,6 +97,7 @@ void tilemaker(int row, int col) {
   }
 }
 void draw() {
+  if (castleHealth > 0){
   counter ++;
   //image(img, 0, 0);
   dirt.resize(36, 36);
@@ -129,4 +132,11 @@ for (int x = 0; x < s.size(); x++){
   rect(0, 324, 575, 74);
   fill(255);
   text("Health:" + castleHealth, 10, 345);
+}
+else{
+  noLoop();
+      end.resize(width, height);
+      image(end, 0, 0);
+  
+}
 }
