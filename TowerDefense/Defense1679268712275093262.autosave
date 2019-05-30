@@ -1,6 +1,6 @@
 abstract class Defense {
-  public double x;
-  public double y;
+  private double x;
+  private double y;
   private int range;
   private int level;
   private int timer;
@@ -67,7 +67,7 @@ class Cannon extends Defense {
   }
 
   public boolean attack() {
-    if (! canShoot()) return  false;
+    if (! canShoot()) return false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new CannonBall(target, coords[0], coords[1]); 
@@ -77,10 +77,6 @@ class Cannon extends Defense {
 
 //Laser Shooter
 class LaserShooter extends Defense {
-  public LaserShooter(double u, double v){
-    x = u;
-    y = v;
-  }
   public boolean attack() {
     return true;
   }
