@@ -24,6 +24,9 @@ class Ship {
   }
   
   public void move() {
+    if (health <= 0) {
+      s.remove(this);
+    }
     if (x >= nextTile.getleft() + 18 && ((y >= nextTile.gettop() + 18 && direction != 0) || (y <= nextTile.gettop() + 18 && direction == 0))) {
       x = nextTile.getleft() + 18;
       y = nextTile.gettop() + 18;
@@ -53,6 +56,10 @@ class Ship {
   
   public void setSpeed(double inputSpeed) {
     speed = inputSpeed;
+  }
+  
+  public void lowerHealth(int damage) {
+    health -= damage;
   }
   
   public void setHealth(int inputHealth) {
