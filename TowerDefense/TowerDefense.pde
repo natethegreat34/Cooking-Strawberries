@@ -33,8 +33,13 @@ boolean press;
 
 void setup() {
   size(576, 400);
+  
+  //starting amounts
   castleHealth = 100;
   MOney = 150;
+  f = (int)(Math.random()  * 7 + 1);
+  
+  //load images
   rocket = loadImage("rocket-146104_640.png");
   cball = loadImage("cannonBall.png");
   grass = loadImage("grass14.png");
@@ -43,30 +48,32 @@ void setup() {
   enemy= loadImage("roundysh.png");
   k = loadImage("Right.png");
   v = loadImage("Down.png");
-  f = (int)(Math.random()  * 7 + 1);
   end = loadImage("gallery_9873_7_17106.png");
-  // rocket launcher
   roc = loadImage("rocketShooter.png");
-  //laser shooter
   las = loadImage("laserShooter.png");
-  //cannon
   can = loadImage("cannon.png");
-  remaker();
-  tilemaker(f, 0);
+  
+  //resizing
   enemy.resize(24, 24);
   k.resize(24, 24);
   v.resize(24, 24);
   roc.resize (36, 36);
   las.resize(36, 36);
   can.resize(36, 36);
+  grass.resize(36, 36);
+  dirt.resize(36, 36);
+  
+  //setting up methods
+  remaker();
+  tilemaker(f, 0);
 
+  //for testing
   Ship q = new Normal();
   s.add(q);
 }
 void remaker() {
   for (int i = 0; i<= 288; i = i +36) {
     for (int y = 0; y<= 540; y = y +36) {
-      grass.resize(36, 36);
       image(grass, y, i);
       fill(0, 100);
       stroke(0);
@@ -74,7 +81,6 @@ void remaker() {
       board[i / 36][y / 36] = new Tile(i, y, y + 36, i + 36, true);
     }
   }
-  dirt.resize(36, 36);
   image(dirt, 0, f*36);
   fill(0, 100);
   stroke(255);
@@ -119,18 +125,18 @@ void tilemaker(int row, int col) {
 }
 void draw() {
   if (castleHealth > 0 ) {
-    for (int o = 0; o < 9; o ++) { 
+    for (int e = 0; e < 9; e ++) { 
       for (int y = 0; y < 16; y ++) {
-        if (board[o][y].getColor() == false) {
+        if (board[e][y].getColor() == false) {
           fill(0, 100);
           stroke(255);
-          image(dirt, y * 36, o*36);
-          rect(y * 36, o*36, 36, 36);
+          image(dirt, y * 36, e*36);
+          rect(y * 36, e*36, 36, 36);
         } else {
           fill(0, 100);
           stroke(0);
-          image(grass, y * 36, o *36);
-          rect(y * 36, o*36, 36, 36);
+          image(grass, y * 36, e *36);
+          rect(y * 36, e*36, 36, 36);
         }
       }
       for (int i = 0; i < t.size(); i ++) {
@@ -158,21 +164,25 @@ void draw() {
     }
     rect(0, 324, 575, 74);
     fill(255, 0, 0);
+    
     //rocket
     rect(144, 324, 144, 74);
     fill(0, 255, 0);
+    
     //laser
     rect(288, 324, 144, 74);
     fill(0, 0, 255);
+    
     //cannon
     rect(432, 324, 144, 74);
     fill(255);
+    
     text("Health:" + castleHealth, 10, 345);
     text("Money ($):" + MOney, 10, 375);
     fill(0);
-    text("Rocket Upgrade:", 144 + 18, 345);
-    text("Laser Upgrade ($10):", 288 + 18, 345);
-    text("Cannon Upgrade:", 432 + 18, 345);
+    text("Rocket Launcher ($50):", 144 + 6, 345);
+    text("Laser Shooter ($10):", 288 + 12, 345);
+    text("Cannon ($20):", 432 + 22, 345);
     for (int i = 0; i < t.size(); i ++) {
       if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 0) {
         image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
