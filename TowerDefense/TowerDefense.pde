@@ -1,4 +1,4 @@
-\import java.util.*;
+import java.util.*;
 
 ArrayList <Tile> path = new ArrayList();
 PImage grass;
