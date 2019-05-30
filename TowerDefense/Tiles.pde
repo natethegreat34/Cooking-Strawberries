@@ -6,10 +6,7 @@ class Tile{
   private boolean green;
   public boolean open = true;
   private double slowDown; //slows down the ships by said percentage
-<<<<<<< HEAD
-=======
 
->>>>>>> bddd5145156956bb66dc33bf4f6b0106e60368d1
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;

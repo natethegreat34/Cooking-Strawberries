@@ -26,6 +26,7 @@ boolean holdup;
 boolean place;
 boolean ended;
 Defense l;
+boolean press;
 
 void setup() {
   size(576, 400);
@@ -215,12 +216,15 @@ void draw() {
   }
 }
 void mousePressed() {
-  if (mouseX > 249 && mouseX < 417 && mouseY > 324 && MOney > 10) {
+  // laser:     rect(288, 324, 144, 74);
+  if (mouseX > 288 && mouseX < 288 + 144 && mouseY > 324 && MOney >= 10) {
+    press = true;
     holdup = true;
   }
 }
 void mouseReleased() {
-  if (mouseX > 0 && mouseX < 576 && mouseY < 324 && MOney >= 10) {
+  
+  if (press && mouseX > 0 && mouseX < 576 && mouseY < 324 && MOney >= 10) {
     int y = mouseY/36;
     int x = mouseX/36;
       if (board[y] [x].op()){        
@@ -229,6 +233,7 @@ void mouseReleased() {
       //maybe need to have the things that i want appear on screen appear later in the code
       l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
       board[y] [x].placer(false);
+      press = false;
       t.add(l);
     }
   }
