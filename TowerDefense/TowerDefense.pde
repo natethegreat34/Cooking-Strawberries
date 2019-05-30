@@ -17,6 +17,7 @@ int castleHealth;
 
 void setup() {
   size(576, 400);
+  castleHealth = 100;
   rocket = loadImage("rocket-146104_640.png");
   cball = loadImage("cannonBall.png");
   grass = loadImage("grass14.png");
@@ -126,5 +127,6 @@ for (int x = 0; x < s.size(); x++){
 }
 
   rect(0, 324, 575, 74);
-  text("Y-Cord:" + mouseY, 10, 60);
+  fill(255);
+  text("Health:" + castleHealth, 10, 345);
 }
