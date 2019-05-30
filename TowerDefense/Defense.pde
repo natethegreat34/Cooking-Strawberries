@@ -95,6 +95,10 @@ class LaserShooter extends Defense {
 
 //Rocket Launcher
 class RocketLauncher extends Defense {
+  public RocketLauncher(double inX, double inY){
+    super(inX, inY);
+  }
+  
   public boolean attack() {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
