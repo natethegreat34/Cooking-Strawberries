@@ -1,6 +1,6 @@
 # Cooking-Strawberries
-# DEVELOPMENT LOG
-# TIMOTHY STANSBERRY and NATHAN COOK
+## DEVELOPMENT LOG
+## TIMOTHY STANSBERRY and NATHAN COOK
 
 ###### May 17th:
 	-Timothy: Created the file, studied up on how to play tower defense.
