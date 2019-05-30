@@ -210,6 +210,7 @@ void mousePressed() {
 }
 void mouseReleased() {
   holdup = false;
+  //maybe need to have the things that i want appear on screen appear later in the code
   //l = new Defense((double) (mouseX - 18), (double) (mouseY -18));
   //t.add(l);
 }
