@@ -42,5 +42,5 @@
 
 ###### May 30th:
 	-Nathan:
-	-Timothy:
+	-Timothy: Added a feature that limits the amount of times a defense can shoot by using a buffer. Also coded forcefield, which interacts with the tiles to slow ships down by a certain percent. Went to Dojo after school with Nathan.
 
