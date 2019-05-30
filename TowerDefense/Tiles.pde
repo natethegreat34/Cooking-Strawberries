@@ -4,7 +4,7 @@ class Tile{
   private int right;
   private int bottom;
   private boolean green;
-  private double slowDown;
+  private double slowDown; //slows down the ships by said percentage
   public Tile (int t, int l, int r, int b, boolean g){
     top = t;
     left = l;
@@ -43,5 +43,8 @@ class Tile{
   }
   public boolean getColor(){
     return green;
+  }
+  public void increaseSlow(double slow) {
+    slowDown += slow;
   }
 }

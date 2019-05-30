@@ -7,7 +7,10 @@ abstract class Defense {
 
   abstract boolean attack();
 
-  public Defense() {
+  public Defense(double inX, double inY) {
+    x = inX;
+    y = inY;
+    t.add(this);
   }
   
   public boolean canShoot() {
@@ -61,7 +64,8 @@ abstract class Defense {
 
 //Cannon
 class Cannon extends Defense {
-  public Cannon() {
+  public Cannon(double inX, double inY) {
+    super(inX, inY);
     setRange(-1000000000);
     setLevel(1);
   }
@@ -77,11 +81,14 @@ class Cannon extends Defense {
 
 //Laser Shooter
 class LaserShooter extends Defense {
-  public LaserShooter(double u, double v){
-    x = u;
-    y = v;
+  public LaserShooter(double inX, double inY){
+    super(inX, inY);
   }
   public boolean attack() {
+    if (! canShoot()) return  false;
+    double coords[] = getCoords();
+    Ship target = findNearest(coords[0], coords[1]);
+    Projectile shot = new Laser(target, coords[0], coords[1]); 
     return true;
   }
 }
@@ -89,13 +96,27 @@ class LaserShooter extends Defense {
 //Rocket Launcher
 class RocketLauncher extends Defense {
   public boolean attack() {
+    if (! canShoot()) return  false;
+    double coords[] = getCoords();
+    Ship target = findNearest(coords[0], coords[1]);
+    Projectile shot = new Rocket(target, coords[0], coords[1]); 
     return true;
   }
 }
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-  public boolean attack() {
-    return true;
-  }
+    public ForceFieldGen(double inX, double inY) {
+      super(inX, inY);
+      for (int x = -2; x < 3; x ++) {
+        for (int y = -2; y < 3; y ++) {
+          board[(int) inX / 36 + x][(int) inY / 36 + y].increaseSlow(0.25);
+        }
+      }
+    }
+    
+    public boolean attack() {
+      return true;
+      //Doesn't need to attack anything
+    }
 }
