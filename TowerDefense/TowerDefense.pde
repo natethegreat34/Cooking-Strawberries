@@ -130,8 +130,18 @@ for (int x = 0; x < s.size(); x++){
 }
 
   rect(0, 324, 575, 74);
+  fill(255,0,0);
+  rect(81,324,168,74);
+  fill(0,255,0);
+  rect(249,324,168,74);
+  fill(0,0,255);
+  rect(417,324,168,74);
   fill(255);
   text("Health:" + castleHealth, 10, 345);
+  fill(0);
+  text("Rocket Upgrade:", 116, 345);
+  text("Laser Upgrade:", 289, 345);
+  text("Cannon Upgrade:", 447, 345);
 }
 else{
   noLoop();
