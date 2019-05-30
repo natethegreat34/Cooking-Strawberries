@@ -1,6 +1,9 @@
 import java.util.*;
-
+Tile[][] board = new Tile[9][16];
 ArrayList <Tile> path = new ArrayList();
+ArrayList <Ship> s = new ArrayList();
+ArrayList<Projectile> p = new ArrayList();
+ArrayList <Defense> t = new ArrayList();
 PImage grass;
 PImage dirt;
 PImage cball;
@@ -12,17 +15,13 @@ PImage v;
 PImage end;
 PImage las;
 int f;
-boolean holdup;
-boolean place;
 int mx;
 int my;
 int counter;
-boolean ended;
-Tile[][] board = new Tile[9][16];
-ArrayList <Ship> s = new ArrayList();
-ArrayList<Projectile> p = new ArrayList();
-ArrayList <Defense> t = new ArrayList();
 int castleHealth;
+boolean holdup;
+boolean place;
+boolean ended;
 Defense l;
 
 void setup() {
