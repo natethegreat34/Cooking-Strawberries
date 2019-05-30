@@ -5,6 +5,7 @@ class Tile{
   private int bottom;
   private boolean green;
   public boolean open = true;
+  public int type;
   private double slowDown; //slows down the ships by said percentage
 
   public Tile (int t, int l, int r, int b, boolean g){
@@ -32,6 +33,9 @@ class Tile{
   }
   public void placer(boolean t){
     open = t;
+  }
+    public void typer(int y){
+    type = y;
   }
   public boolean op(){
     return open;

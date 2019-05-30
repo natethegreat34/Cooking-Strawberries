@@ -15,13 +15,16 @@ PImage enemy;
 PImage k;
 PImage v;
 PImage end;
+PImage roc;
 PImage las;
+PImage can;
 int f;
 int mx;
 int my;
 int counter;
 int castleHealth;
 int MOney;
+int type;
 boolean holdup;
 boolean place;
 boolean ended;
@@ -42,15 +45,21 @@ void setup() {
   v = loadImage("Down.png");
   f = (int)(Math.random()  * 7 + 1);
   end = loadImage("gallery_9873_7_17106.png");
-  las = loadImage("61395302_2427378434161077_1037502762562093056_n.png");
+  // rocket launcher
+  roc = loadImage("rocketShooter.png");
+  //laser shooter
+  las = loadImage("laserShooter.png");
+  //cannon
+  can = loadImage("cannon.png");
   remaker();
   tilemaker(f, 0);
   enemy.resize(24, 24);
   k.resize(24, 24);
   v.resize(24, 24);
+  roc.resize (36, 36);
   las.resize(36, 36);
-  //rotate(PI/2.0);
-  //image (enemy,6, f * 36 + 6);
+  can.resize(36, 36);
+
   Ship q = new Normal();
   s.add(q);
 }
@@ -63,7 +72,6 @@ void remaker() {
       stroke(0);
       rect(y, i, 36, 36);
       board[i / 36][y / 36] = new Tile(i, y, y + 36, i + 36, true);
-      //Tile constructor here to set boolean and top, bottom, left and right
     }
   }
   dirt.resize(36, 36);
@@ -74,7 +82,6 @@ void remaker() {
   Tile a = new Tile (f*36, 0, 36, f*36 + 36, false);
   board[f][0] = a;
   board[f][0].placer(false);
-  //print (f + "cdbbdsjfbhdsjhb");
   path.add(a);
 }
 void tilemaker(int row, int col) {
@@ -85,7 +92,6 @@ void tilemaker(int row, int col) {
       done = true;
     } else if (l == 0 && row > 1 && row < board.length - 1 && board[row - 1][col].getColor()) {
       row = row - 1;
-      //print("slide up");
       if (col > 0 && (board[row][col-1].getColor() || board[row + 1][col].getColor() || board[row + 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row + 1][col].getColor() || board[row + 1][col+1].getColor())) {
         board[row][col].setcolor(false);
         board[row][col].placer(false);
@@ -95,7 +101,6 @@ void tilemaker(int row, int col) {
       }
     } else if (l == 1 && row >= 1 && row + 1 < board.length - 1 && board[row + 1][col].getColor()) {
       row = row + 1;
-      //print("slide down");
       if (col > 0 && (board[row][col-1].getColor() || board[row - 1][col].getColor() || board[row - 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row - 1][col].getColor() || board[row - 1][col+1].getColor())) {
 
         board[row][col].setcolor(false);
@@ -106,7 +111,6 @@ void tilemaker(int row, int col) {
       }
     } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
       col = col + 1;
-      //print("slide to the right");
       board[row][col].setcolor(false);
       board[row][col].placer(false);
       path.add(board[row][col]);
@@ -115,24 +119,33 @@ void tilemaker(int row, int col) {
 }
 void draw() {
   if (castleHealth > 0 ) {
-    for (int i = 0; i < 9; i ++) { 
+    for (int o = 0; o < 9; o ++) { 
       for (int y = 0; y < 16; y ++) {
-        //print(i + "   mm " + y + "||||");
-        if (board[i][y].getColor() == false) {
+        if (board[o][y].getColor() == false) {
           fill(0, 100);
           stroke(255);
-          image(dirt, y * 36, i*36);
-          rect(y * 36, i*36, 36, 36);
+          image(dirt, y * 36, o*36);
+          rect(y * 36, o*36, 36, 36);
         } else {
           fill(0, 100);
           stroke(0);
-          image(grass, y * 36, i *36);
-          rect(y * 36, i*36, 36, 36);
+          image(grass, y * 36, o *36);
+          rect(y * 36, o*36, 36, 36);
+        }
+      }
+      for (int i = 0; i < t.size(); i ++) {
+        if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 0) {
+          image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int) t.get(i).getCoords()[1]/36] [(int) t.get(i).getCoords()[0]/36].type == 1) {
+          image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 2) {
+          image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
     }
     for (int x = 0; x < s.size(); x++) {
-      //s.get(x).move();
       if (s.get(x).direction == 0) {
         image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
       }
@@ -161,16 +174,22 @@ void draw() {
     text("Laser Upgrade ($10):", 288 + 18, 345);
     text("Cannon Upgrade:", 432 + 18, 345);
     for (int i = 0; i < t.size(); i ++) {
-      image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 0) {
+        image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
+      if (board [(int) t.get(i).getCoords()[1]/36] [(int) t.get(i).getCoords()[0]/36].type == 1) {
+        image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
+      if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 2) {
+        image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
     }
     if (holdup == false) {
       counter ++;
-      //image(img, 0, 0);
       dirt.resize(36, 36);
 
       for (int i = 0; i < 9; i ++) { 
         for (int y = 0; y < 16; y ++) {
-          //print(i + "   mm " + y + "||||");
           if (board[i][y].getColor() == false) {
             fill(0, 100);
             stroke(255);
@@ -185,7 +204,15 @@ void draw() {
         }
       }
       for (int i = 0; i < t.size(); i ++) {
-        image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 0) {
+          image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int) t.get(i).getCoords()[1]/36] [(int) t.get(i).getCoords()[0]/36].type == 1) {
+          image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int)t.get(i).getCoords()[1]/36] [(int)t.get(i).getCoords()[0]/36].type == 2) {
+          image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
       }
       if (counter % 36 == 0) {
         Ship k = new Normal();
@@ -206,7 +233,15 @@ void draw() {
     }
 
     if (holdup) {
-      image(las, mouseX - 18, mouseY - 18);
+      if (type == 0) {
+        image(roc, mouseX - 18, mouseY - 18);
+      }
+      if (type == 1) {
+        image(las, mouseX - 18, mouseY - 18);
+      }
+      if (type == 2) {
+        image(can, mouseX - 18, mouseY - 18);
+      }
     }
     if (castleHealth <= 0) {
       noLoop();
@@ -215,23 +250,49 @@ void draw() {
     }
   }
 }
+
 void mousePressed() {
+  //rocket     rect(144, 324, 144, 74);
+  if (mouseX > 144 && mouseX < 144 + 144 && mouseY > 324 && MOney >= 50) {
+    press = true;
+    holdup = true;
+    type = 0;
+  }
   // laser:     rect(288, 324, 144, 74);
   if (mouseX > 288 && mouseX < 288 + 144 && mouseY > 324 && MOney >= 10) {
     press = true;
     holdup = true;
+    type = 1;
+  }
+  //cannon     rect(432, 324, 144, 74);
+  if (mouseX > 432 && mouseX < 432 + 144 && mouseY > 324 && MOney >= 20) {
+    press = true;
+    holdup = true;
+    type = 2;
   }
 }
 void mouseReleased() {
-  
+
   if (press && mouseX > 0 && mouseX < 576 && mouseY < 324 && MOney >= 10) {
     int y = mouseY/36;
     int x = mouseX/36;
-      if (board[y] [x].op()){        
+    if (board[y] [x].op()) {        
       holdup = false;
-      MOney -= 10;
-      //maybe need to have the things that i want appear on screen appear later in the code
-      l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
+      if (type == 0) {
+        MOney -= 50;
+        l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
+        board[y] [x].typer(0);
+      }
+      if (type == 1) {
+        MOney -= 10;
+        l = new LaserShooter ((double) (x * 36 ), (double) (y * 36 ));
+        board[y] [x].typer(1);
+      }
+      if (type == 2) {
+        MOney -= 20;
+        l = new Cannon ((double) (x * 36 ), (double) (y * 36 ));
+        board[y] [x].typer(2);
+      }
       board[y] [x].placer(false);
       press = false;
       t.add(l);
