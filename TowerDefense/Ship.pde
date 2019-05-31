@@ -13,7 +13,7 @@ class Ship {
     nextTile = path.get(0);
     direction = 1;
     x = nextTile.getleft();
-    y = nextTile.gettop() + 18;
+    y = nextTile.gettop() + 36;
   }
   
   public double[] getCoords() {
@@ -30,9 +30,9 @@ class Ship {
     if (health <= 0) {
       s.remove(this);
     }
-    if (x >= nextTile.getleft() + 18 && ((y >= nextTile.gettop() + 18 && direction != 0) || (y <= nextTile.gettop() + 18 && direction == 0))) {
-      x = nextTile.getleft() + 18;
-      y = nextTile.gettop() + 18;
+    if (x >= nextTile.getleft() + 36 && ((y >= nextTile.gettop() + 36 && direction != 0) || (y <= nextTile.gettop() + 18 && direction == 0))) {
+      x = nextTile.getleft() + 36;
+      y = nextTile.gettop() + 36;
       findNextTile(); //Checking if at/past center, then sets the next target
     }
     if (direction == 0) y -= adjustedSpeed;
