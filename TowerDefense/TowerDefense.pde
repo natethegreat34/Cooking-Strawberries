@@ -16,14 +16,11 @@ PImage end;
 PImage roc;
 PImage las;
 PImage can;
-<<<<<<< HEAD
 //Projectiles
 PImage cannonBall;
 PImage laser;
 PImage rocket;
-=======
 PImage forc;
->>>>>>> cabd21d906dd1f4b6d74a4565e8ce69dcddadb21
 int f;
 int mx;
 int my;
