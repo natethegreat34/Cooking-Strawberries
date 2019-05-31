@@ -72,8 +72,8 @@ void setup() {
   s.add(q);
 }
 void remaker() {
-  for (int i = 0; i<= 288; i = i +72) {
-    for (int y = 0; y<= 540; y = y +72) {
+  for (int i = 0; i<= 288 *2; i = i +72) {
+    for (int y = 0; y<= 540 *2; y = y +72) {
       image(grass, y, i);
       fill(0, 100);
       stroke(0);
