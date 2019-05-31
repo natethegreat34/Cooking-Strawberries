@@ -58,4 +58,10 @@ class Tile{
   public void increaseSlow(double slow) {
     slowDown += slow;
   }
+  public boolean checkSlow() {
+    return slowDown != 0;
+  }
+  public double getSlow() {
+    return slowDown;
+  }
 }

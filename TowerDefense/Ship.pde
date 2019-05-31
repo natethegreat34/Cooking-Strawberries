@@ -24,6 +24,9 @@ class Ship {
   }
   
   public void move() {
+    double adjustedSpeed = speed;
+    Tile current = board[(int) x / 36][(int) y / 36];
+    if (current.checkSlow()) adjustedSpeed = speed * (1 - current.getSlow());
     if (health <= 0) {
       s.remove(this);
     }
@@ -32,9 +35,9 @@ class Ship {
       y = nextTile.gettop() + 18;
       findNextTile(); //Checking if at/past center, then sets the next target
     }
-    if (direction == 0) y -= speed;
-    if (direction == 1) x += speed;
-    if (direction == 2) y += speed;
+    if (direction == 0) y -= adjustedSpeed;
+    if (direction == 1) x += adjustedSpeed;
+    if (direction == 2) y += adjustedSpeed;
   }
   
   //When the ship reaches the center of a tile, it finds the next tile and then figures out which direction it needs to go (i.e. north, west, etc.) it travels till it reaches this tile's center and then repeats the process
