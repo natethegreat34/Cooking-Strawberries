@@ -18,6 +18,7 @@ PImage end;
 PImage roc;
 PImage las;
 PImage can;
+PImage forc;
 int f;
 int mx;
 int my;
@@ -33,12 +34,12 @@ boolean press;
 
 void setup() {
   size(1152, 800);
-  
+
   //starting amounts
   castleHealth = 100;
   MOney = 150;
   f = (int)(Math.random()  * 7 + 1);
-  
+
   //load images
   rocket = loadImage("rocket-146104_640.png");
   cball = loadImage("cannonBall.png");
@@ -52,7 +53,8 @@ void setup() {
   roc = loadImage("rocketShooter.png");
   las = loadImage("laserShooter.png");
   can = loadImage("cannon.png");
-  
+  forc = loadImage("ForceField.png");
+
   //resizing
   enemy.resize(48, 48);
   k.resize(48, 48);
@@ -60,9 +62,10 @@ void setup() {
   roc.resize (72, 72);
   las.resize(72, 72);
   can.resize(72, 72);
+  forc.resize(72, 72);
   grass.resize(72, 72);
   dirt.resize(72, 72);
-  
+
   //setting up methods
   remaker();
   tilemaker(f, 0);
@@ -149,6 +152,9 @@ void draw() {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
           image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {
+          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
       }
     }
     for (int x = 0; x < s.size(); x++) {
@@ -164,25 +170,30 @@ void draw() {
     }
     rect(0, 324 * 2, 575 * 2, 74 * 2);
     fill(255, 0, 0);
-    
+
     //rocket
-    rect(144 * 2, 324 * 2, 144 * 2, 74 * 2);
-    fill(0, 255, 0);
-    
+    rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
+    fill(255, 255, 0);
+
     //laser
-    rect(288 * 2, 324 * 2, 144 * 2, 74 * 2);
-    fill(0, 0, 255);
-    
+    rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
+    fill(0, 255, 255);
+
     //cannon
-    rect(432 * 2, 324 * 2, 144 * 2, 74 * 2);
+    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
     fill(255);
     
+    //forcefield
+    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+    fill(0, 0, 255);
+
     text("Health:" + castleHealth, 10 * 2, 345  * 2);
     text("Money ($):" + MOney, 10 * 2, 375  * 2);
     fill(0);
-    text("Rocket Launcher ($50):", 150 * 2, 345 * 2);
-    text("Laser Shooter ($10):", 300  * 2, 345 * 2);
-    text("Cannon ($20):", 454  * 2, 345 * 2);
+    text("Rocket Launcher ($50):", 150 * 2 - 72, 345 * 2);
+    text("Laser Shooter ($10):", 300  * 2 - 144, 345 * 2);
+    text("Cannon ($20):", 454  * 2 - 72 * 3, 345 * 2);
+    text("Force Field ($20):", 605  * 2 - 72 * 4, 345 * 2);
     for (int i = 0; i < t.size(); i ++) {
       if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
         image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
@@ -192,6 +203,9 @@ void draw() {
       }
       if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
         image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
+      if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+        image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
       }
     }
     if (holdup == false) {
@@ -223,6 +237,9 @@ void draw() {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
           image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
+              if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+        image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+      }
       }
       if (counter % 72 == 0) {
         Ship k = new Normal();
@@ -244,13 +261,16 @@ void draw() {
 
     if (holdup) {
       if (type == 0) {
-        image(roc, mouseX - 18, mouseY - 18);
+        image(roc, mouseX - 36, mouseY - 36);
       }
       if (type == 1) {
-        image(las, mouseX - 18, mouseY - 18);
+        image(las, mouseX - 36, mouseY - 36);
       }
       if (type == 2) {
-        image(can, mouseX - 18, mouseY - 18);
+        image(can, mouseX - 36, mouseY - 36);
+      }
+      if (type == 3) {
+        image(forc, mouseX - 36, mouseY - 36);
       }
     }
     if (castleHealth <= 0) {
@@ -262,23 +282,29 @@ void draw() {
 }
 
 void mousePressed() {
-  //rocket     rect(144, 324, 144, 74);
-  if (mouseX > 144 * 2 && mouseX < 288 * 2 && mouseY > 324 * 2 && MOney >= 50) {
+  //rocket         rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
+  if (mouseX > 144 * 2 - 72 && mouseX < 288 * 2 - 72 && mouseY > 324 * 2 && MOney >= 50) {
     press = true;
     holdup = true;
     type = 0;
   }
-  // laser:     rect(288, 324, 144, 74);
-  if (mouseX > 288 * 2 && mouseX < 432 * 2 && mouseY > 324 * 2 && MOney >= 10) {
+  // laser:         rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
+  if (mouseX > 288 * 2 - 144 && mouseX < 432 * 2 - 72 && mouseY > 324 * 2 && MOney >= 10) {
     press = true;
     holdup = true;
     type = 1;
   }
-  //cannon     rect(432, 324, 144, 74);
-  if (mouseX > 432 && mouseX < 576 * 2 && mouseY > 324 * 2 && MOney >= 20) {
+  //cannon        rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
+  if (mouseX > 432 * 2 - 72 * 3 && mouseX < 576 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 2;
+  }
+    //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+  if (mouseX > 576 * 2 - 72 * 4 && mouseX < 620 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
+    press = true;
+    holdup = true;
+    type = 3;
   }
 }
 void mouseReleased() {
@@ -302,6 +328,11 @@ void mouseReleased() {
         MOney -= 20;
         l = new Cannon ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(2);
+      }
+       if (type == 3) {
+        MOney -= 20;
+        l = new ForceFieldGen ((double) (x * 72 ), (double) (y * 72));
+        board[y] [x].typer(3);
       }
       board[y] [x].placer(false);
       press = false;
