@@ -16,6 +16,7 @@ PImage end;
 PImage roc;
 PImage las;
 PImage can;
+PImage x;
 //Projectiles
 PImage cannonBall;
 PImage laser;
@@ -56,6 +57,7 @@ void setup() {
   las = loadImage("laserShooter.png");
   can = loadImage("cannon.png");
   forc = loadImage("ForceField.png");
+  x = loadImage("X.png");
 
   //resizing
   enemy.resize(48, 48);
@@ -67,6 +69,7 @@ void setup() {
   forc.resize(72, 72);
   grass.resize(72, 72);
   dirt.resize(72, 72);
+  x.resize(72, 77 * 2);
 
   //setting up methods
   remaker();
@@ -161,34 +164,36 @@ void draw() {
     }
     for (int x = 0; x < s.size(); x++) {
       if (s.get(x).direction == 0) {
-        image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (enemy, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
       }
       if (s.get(x).direction == 1) {
-        image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (k, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
       }
       if (s.get(x).direction == 2) {
-        image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (v, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
       }
     }
-    rect(0, 324 * 2, 575 * 2, 74 * 2);
+    rect(0, 324 * 2, 576 * 2, 77 * 2);
     fill(255, 0, 0);
 
     //rocket
-    rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
+    rect(144 * 2 - 72, 324 * 2, 72 * 3, 77 * 2);
     fill(255, 255, 0);
 
     //laser
-    rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
+    rect(288 * 2 - 144, 324 * 2, 72 * 3, 77 * 2);
     fill(0, 255, 255);
 
     //cannon
-    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
+    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 77 * 2);
     fill(255);
     
     //forcefield
-    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 77 * 2);
     fill(0, 0, 255);
 
+    // X
+    image(x, 72 * 15 , 324 * 2);
     text("Health:" + castleHealth, 10 * 2, 345  * 2);
     text("Money ($):" + MOney, 10 * 2, 375  * 2);
     fill(0);
@@ -307,6 +312,11 @@ void mousePressed() {
     press = true;
     holdup = true;
     type = 3;
+  }
+  // X
+    if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
+    press = false;
+    holdup = false;
   }
 }
 void mouseReleased() {
