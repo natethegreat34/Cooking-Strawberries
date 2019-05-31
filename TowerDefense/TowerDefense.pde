@@ -8,8 +8,6 @@ ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
 PImage grass;
 PImage dirt;
-PImage cball;
-PImage rocket;
 PImage img;
 PImage enemy;
 PImage k;
@@ -18,6 +16,10 @@ PImage end;
 PImage roc;
 PImage las;
 PImage can;
+//Projectiles
+PImage cannonBall;
+PImage laser;
+PImage rocket;
 int f;
 int mx;
 int my;
@@ -41,7 +43,7 @@ void setup() {
   
   //load images
   rocket = loadImage("rocket-146104_640.png");
-  cball = loadImage("cannonBall.png");
+  cannonBall = loadImage("cannonBall.png");
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");

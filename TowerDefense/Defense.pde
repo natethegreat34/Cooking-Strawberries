@@ -114,7 +114,7 @@ class ForceFieldGen extends Defense {
       super(inX, inY);
       for (int x = -2; x < 3; x ++) {
         for (int y = -2; y < 3; y ++) {
-          board[(int) inY / 72 + y][(int) inX / 72 + x].increaseSlow(0.25);
+          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.25);
         }
       }
     }
