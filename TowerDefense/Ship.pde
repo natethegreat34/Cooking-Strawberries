@@ -73,7 +73,7 @@ class Ship {
 class Normal extends Ship {
   public Normal() {
     super();
-    setSpeed(1);
+    setSpeed(4);
     setHealth(100);
     damage = 5;
   }
@@ -81,7 +81,7 @@ class Normal extends Ship {
 class Quick extends Ship {
   public Quick() {
     super();
-    setSpeed(6);
+    setSpeed(12);
     setHealth(50);
   }
 }
