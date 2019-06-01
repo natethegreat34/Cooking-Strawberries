@@ -12,7 +12,7 @@ class Ship {
     pathIndex = 0;
     nextTile = path.get(0);
     direction = 1;
-    x = nextTile.getleft();
+    x = nextTile.getleft() + 36;
     y = nextTile.gettop() + 36;
   }
   

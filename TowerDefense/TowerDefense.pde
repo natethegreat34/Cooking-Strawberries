@@ -164,13 +164,13 @@ void draw() {
     }
     for (int x = 0; x < s.size(); x++) {
       if (s.get(x).direction == 0) {
-        image (enemy, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
+        image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
       if (s.get(x).direction == 1) {
-        image (k, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
+        image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
       }
       if (s.get(x).direction == 2) {
-        image (v, (float) (s.get(x).getCoords()[0]- 5), (float) (s.get(x).getCoords()[1] - 5) );
+        image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
     }
     rect(0, 324 * 2, 576 * 2, 77 * 2);
@@ -255,13 +255,13 @@ void draw() {
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (s.get(x).direction == 0) {
-          image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
         if (s.get(x).direction == 1) {
-          image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
         if (s.get(x).direction == 2) {
-          image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
       }
     }
