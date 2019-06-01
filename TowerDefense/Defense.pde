@@ -12,13 +12,13 @@ abstract class Defense {
     y = inY;
     t.add(this);
   }
-  
+
   public boolean canShoot() {
     timer --;
     return timer <= 0;
   }
-  
-  
+
+
 
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
@@ -81,7 +81,7 @@ class Cannon extends Defense {
 
 //Laser Shooter
 class LaserShooter extends Defense {
-  public LaserShooter(double inX, double inY){
+  public LaserShooter(double inX, double inY) {
     super(inX, inY);
   }
   public boolean attack() {
@@ -95,10 +95,10 @@ class LaserShooter extends Defense {
 
 //Rocket Launcher
 class RocketLauncher extends Defense {
-  public RocketLauncher(double inX, double inY){
+  public RocketLauncher(double inX, double inY) {
     super(inX, inY);
   }
-  
+
   public boolean attack() {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
@@ -110,18 +110,19 @@ class RocketLauncher extends Defense {
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-    public ForceFieldGen(double inX, double inY) {
-      super(inX, inY);
-      for (int x = -2; x < 3; x ++) {
-        for (int y = -2; y < 3; y ++) {
-
-          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.25);
+  public ForceFieldGen(double inX, double inY) {
+    super(inX, inY);
+    for (int x = -2; x < 3; x ++) {
+      for (int y = -2; y < 3; y ++) {
+        if ( (int) inY / 72 + y < board.length && (int) inX / 72 + x < board[0].length) {
+          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.5);
         }
       }
     }
-    
-    public boolean attack() {
-      return true;
-      //Doesn't need to attack anything
-    }
+  }
+
+  public boolean attack() {
+    return true;
+    //Doesn't need to attack anything
+  }
 }

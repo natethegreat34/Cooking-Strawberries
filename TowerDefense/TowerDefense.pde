@@ -187,13 +187,13 @@ void draw() {
     //cannon
     rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 77 * 2);
     fill(255);
-    
+
     //forcefield
     rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 77 * 2);
     fill(0, 0, 255);
 
     // X
-    image(x, 72 * 15 , 324 * 2);
+    image(x, 72 * 15, 324 * 2);
     text("Health:" + castleHealth, 10 * 2, 345  * 2);
     text("Money ($):" + MOney, 10 * 2, 375  * 2);
     fill(0);
@@ -244,9 +244,9 @@ void draw() {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
           image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
-              if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
-        image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
       }
       if (counter % 72 == 0) {
         Ship k = new Normal();
@@ -307,14 +307,14 @@ void mousePressed() {
     holdup = true;
     type = 2;
   }
-    //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+  //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 576 * 2 - 72 * 4 && mouseX < 620 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 3;
   }
   // X
-    if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
+  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
     press = false;
     holdup = false;
   }
@@ -341,7 +341,7 @@ void mouseReleased() {
         l = new Cannon ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(2);
       }
-       if (type == 3) {
+      if (type == 3) {
         MOney -= 20;
         l = new ForceFieldGen ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(3);
