@@ -126,7 +126,7 @@ class RocketLauncher extends Defense {
     System.out.println(target);
     if (target != null) {
       Projectile shot = new Rocket(target, coords[0], coords[1]); 
-      setTimer(40);
+      setTimer(80);
       return true;
     }
     return false;
