@@ -1,7 +1,7 @@
 abstract class Defense {
   public double x;
   public double y;
-  private int range;
+  private int range = 10;
   private int level;
   private int timer;
 
@@ -52,6 +52,9 @@ abstract class Defense {
     range = inputRange;
     return true;
   }
+  public int getRange(){
+  return range;
+}
 
   public double[] getCoords() {
     double[] coords = new double[2];
@@ -66,7 +69,7 @@ abstract class Defense {
 class Cannon extends Defense {
   public Cannon(double inX, double inY) {
     super(inX, inY);
-    setRange(-1000000000);
+    setRange(5);
     setLevel(1);
   }
 

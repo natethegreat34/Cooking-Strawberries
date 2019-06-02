@@ -6,6 +6,7 @@ ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
+PImage whitecircle;
 PImage grass;
 PImage dirt;
 PImage img;
@@ -46,6 +47,7 @@ void setup() {
   //load images
   rocket = loadImage("rocket-146104_640.png");
   cannonBall = loadImage("cannonBall.png");
+  whitecircle = loadImage("WC.png");
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
@@ -60,6 +62,7 @@ void setup() {
   x = loadImage("X.png");
 
   //resizing
+  whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
   k.resize(48, 48);
   v.resize(48, 48);
@@ -267,6 +270,18 @@ void draw() {
     }
 
     if (holdup) {
+      boolean stop = false;
+      fill(255);
+      tint(255, 100);
+      for (int i = 0; i < path.size() && !stop; i ++) {
+        if (path.get(i).gettop() < mouseY && path.get(i).getbottom() > mouseY && path.get(i).getleft() < mouseX && path.get(i).getright() > mouseX) {
+          tint (255, 0, 0, 100);
+          stop = true;
+        }
+      }
+      stop = false;
+      image(whitecircle, mouseX - (int) (50 * PI), mouseY - (int) (50 * PI));
+      noTint();
       if (type == 0) {
         image(roc, mouseX - 36, mouseY - 36);
       }
