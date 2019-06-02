@@ -5,9 +5,11 @@ abstract class Projectile {
   private int damage;
   private double speed;
   
-  public Projectile(double inX, double inY) {
+  public Projectile(double inX, double inY, int inDamage) {
     x = inX;
     y = inY;
+    damage = inDamage;
+    speed = 5;
     p.add(this);
   }
   
@@ -47,6 +49,7 @@ abstract class Projectile {
     }
     return false; 
   }
+  
 }
 
 
@@ -56,7 +59,7 @@ class CannonBall extends Projectile {
   public boolean alive = true;
   
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY);
+    super(inX, inY, 20);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
@@ -67,7 +70,7 @@ class CannonBall extends Projectile {
 //Laser
 class Laser extends Projectile {
   public Laser(Ship inputTarget, double inX, double inY) {
-    super(inX, inY);
+    super(inX, inY, 10);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
@@ -79,7 +82,7 @@ class Laser extends Projectile {
 //Rocket
 class Rocket extends Projectile {
   public Rocket(Ship inputTarget, double inX, double inY) {
-    super(inX, inY);
+    super(inX, inY, 50);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);

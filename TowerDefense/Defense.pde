@@ -1,7 +1,7 @@
 abstract class Defense {
   public double x;
   public double y;
-  private int range;
+  private int range = 10;
   private int level;
   private int timer;
 
@@ -12,13 +12,13 @@ abstract class Defense {
     y = inY;
     t.add(this);
   }
-  
+
   public boolean canShoot() {
     timer --;
     return timer <= 0;
   }
-  
-  
+
+
 
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
@@ -52,12 +52,19 @@ abstract class Defense {
     range = inputRange;
     return true;
   }
+  public int getRange(){
+  return range;
+}
 
   public double[] getCoords() {
     double[] coords = new double[2];
     coords[0] = x;
     coords[1] = y;
     return coords;
+  }
+  
+  public void setTimer(int time) {
+    timer = time;
   }
 }
 
@@ -66,7 +73,42 @@ abstract class Defense {
 class Cannon extends Defense {
   public Cannon(double inX, double inY) {
     super(inX, inY);
-    setRange(-1000000000);
+    setRange(5);
+    setLevel(1);
+  }
+
+  public boolean attack() {
+    if (! canShoot()) return false;
+    double coords[] = getCoords();
+    Ship target = findNearest(coords[0], coords[1]);
+    Projectile shot = new CannonBall(target, coords[0], coords[1]); 
+    setTimer(15);
+    return true;
+  }
+}
+
+//Laser Shooter
+class LaserShooter extends Defense {
+  public LaserShooter(double inX, double inY) {
+    super(inX, inY);
+    setRange(5);
+    setLevel(1);
+  }
+  public boolean attack() {
+    if (! canShoot()) return  false;
+    double coords[] = getCoords();
+    Ship target = findNearest(coords[0], coords[1]);
+    Projectile shot = new Laser(target, coords[0], coords[1]); 
+    setTimer(15);
+    return true;
+  }
+}
+
+//Rocket Launcher
+class RocketLauncher extends Defense {
+  public RocketLauncher(double inX, double inY) {
+    super(inX, inY);
+    setRange(5);
     setLevel(1);
   }
 
@@ -74,54 +116,28 @@ class Cannon extends Defense {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
-    Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-    return true;
-  }
-}
-
-//Laser Shooter
-class LaserShooter extends Defense {
-  public LaserShooter(double inX, double inY){
-    super(inX, inY);
-  }
-  public boolean attack() {
-    if (! canShoot()) return  false;
-    double coords[] = getCoords();
-    Ship target = findNearest(coords[0], coords[1]);
-    Projectile shot = new Laser(target, coords[0], coords[1]); 
-    return true;
-  }
-}
-
-//Rocket Launcher
-class RocketLauncher extends Defense {
-  public RocketLauncher(double inX, double inY){
-    super(inX, inY);
-  }
-  
-  public boolean attack() {
-    if (! canShoot()) return  false;
-    double coords[] = getCoords();
-    Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new Rocket(target, coords[0], coords[1]); 
+    setTimer(15);
     return true;
   }
 }
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-    public ForceFieldGen(double inX, double inY) {
-      super(inX, inY);
-      for (int x = -1; x < 2; x ++) {
-        for (int y = -1; y < 2; y ++) {
-
+  
+  public ForceFieldGen(double inX, double inY) {
+    super(inX, inY);
+    for (int x = -2; x < 3; x ++) {
+      for (int y = -2; y < 3; y ++) {
+        if ( (int) inY / 72 + y < board.length && (int) inX / 72 + x < board[0].length) {
           board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.5);
         }
       }
     }
-    
-    public boolean attack() {
-      return true;
-      //Doesn't need to attack anything
-    }
+  }
+
+  public boolean attack() {
+    return true;
+    //Doesn't need to attack anything
+  }
 }

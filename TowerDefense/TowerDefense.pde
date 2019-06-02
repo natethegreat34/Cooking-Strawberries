@@ -6,6 +6,7 @@ ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
+PImage whitecircle;
 PImage grass;
 PImage dirt;
 PImage img;
@@ -16,6 +17,7 @@ PImage end;
 PImage roc;
 PImage las;
 PImage can;
+PImage x;
 //Projectiles
 PImage cannonBall;
 PImage laser;
@@ -45,6 +47,7 @@ void setup() {
   //load images
   rocket = loadImage("rocket-146104_640.png");
   cannonBall = loadImage("cannonBall.png");
+  whitecircle = loadImage("WC.png");
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
@@ -56,8 +59,11 @@ void setup() {
   las = loadImage("laserShooter.png");
   can = loadImage("cannon.png");
   forc = loadImage("ForceField.png");
+  x = loadImage("X.png");
+  laser = loadImage("laser.png");
 
   //resizing
+  whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
   k.resize(48, 48);
   v.resize(48, 48);
@@ -67,6 +73,9 @@ void setup() {
   forc.resize(72, 72);
   grass.resize(72, 72);
   dirt.resize(72, 72);
+  x.resize(72, 77 * 2);
+  cannonBall.resize(30, 30);
+  laser.resize(10, 30);
 
   //setting up methods
   remaker();
@@ -161,34 +170,36 @@ void draw() {
     }
     for (int x = 0; x < s.size(); x++) {
       if (s.get(x).direction == 0) {
-        image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
       if (s.get(x).direction == 1) {
-        image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
       }
       if (s.get(x).direction == 2) {
-        image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+        image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
     }
-    rect(0, 324 * 2, 575 * 2, 74 * 2);
+    rect(0, 324 * 2, 576 * 2, 77 * 2);
     fill(255, 0, 0);
 
     //rocket
-    rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
+    rect(144 * 2 - 72, 324 * 2, 72 * 3, 77 * 2);
     fill(255, 255, 0);
 
     //laser
-    rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
+    rect(288 * 2 - 144, 324 * 2, 72 * 3, 77 * 2);
     fill(0, 255, 255);
 
     //cannon
-    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
+    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 77 * 2);
     fill(255);
-    
+
     //forcefield
-    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 77 * 2);
     fill(0, 0, 255);
 
+    // X
+    image(x, 72 * 15, 324 * 2);
     text("Health:" + castleHealth, 10 * 2, 345  * 2);
     text("Money ($):" + MOney, 10 * 2, 375  * 2);
     fill(0);
@@ -239,9 +250,9 @@ void draw() {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
           image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
-              if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
-        image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
       }
       if (counter % 72 == 0) {
         Ship k = new Normal();
@@ -250,18 +261,49 @@ void draw() {
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (s.get(x).direction == 0) {
-          image (enemy, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
         if (s.get(x).direction == 1) {
-          image (k, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
         if (s.get(x).direction == 2) {
-          image (v, (float) (s.get(x).getCoords()[0]- 10), (float) (s.get(x).getCoords()[1] - 10) );
+          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
+      }
+      //Has all defenses attack
+      for (int x = 0; x < t.size(); x ++) {
+        t.get(x).attack();
+      }
+      //Calls projectiles into existence
+      for (int x = 0; x < p.size(); x ++) {
+        if (p.get(x) instanceof CannonBall) {
+          image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+        if (p.get(x) instanceof Laser) {
+          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+        if (p.get(x) instanceof Rocket) {
+          image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+      }
+      for (int x = 0; x < p.size(); x ++) {
+        p.get(x).move();
       }
     }
 
     if (holdup) {
+      boolean stop = false;
+      fill(255);
+      tint(255, 100);
+      for (int i = 0; i < path.size() && !stop; i ++) {
+        if (path.get(i).gettop() < mouseY && path.get(i).getbottom() > mouseY && path.get(i).getleft() < mouseX && path.get(i).getright() > mouseX) {
+          tint (255, 0, 0, 100);
+          stop = true;
+        }
+      }
+      stop = false;
+      image(whitecircle, mouseX - (int) (50 * PI), mouseY - (int) (50 * PI));
+      noTint();
       if (type == 0) {
         image(roc, mouseX - 36, mouseY - 36);
       }
@@ -302,11 +344,16 @@ void mousePressed() {
     holdup = true;
     type = 2;
   }
-    //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+  //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 576 * 2 - 72 * 4 && mouseX < 620 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 3;
+  }
+  // X
+  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
+    press = false;
+    holdup = false;
   }
 }
 void mouseReleased() {
@@ -331,7 +378,7 @@ void mouseReleased() {
         l = new Cannon ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(2);
       }
-       if (type == 3) {
+      if (type == 3) {
         MOney -= 20;
         l = new ForceFieldGen ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(3);
