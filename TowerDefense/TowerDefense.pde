@@ -61,7 +61,12 @@ void setup() {
   can = loadImage("cannon.png");
   forc = loadImage("ForceField.png");
   x = loadImage("X.png");
+<<<<<<< HEAD
   loading = loadImage("morthal_swamp_03_by_baba64-d5qptgt.jpg");
+=======
+  laser = loadImage("laser.png");
+
+>>>>>>> 2ac9dff4426772fd4dba1c9d46af672456b9cf09
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
@@ -74,6 +79,8 @@ void setup() {
   grass.resize(72, 72);
   dirt.resize(72, 72);
   x.resize(72, 77 * 2);
+  cannonBall.resize(30, 30);
+  laser.resize(10, 30);
 
   //setting up methods
   remaker();
@@ -269,6 +276,25 @@ void draw() {
         if (s.get(x).direction == 2) {
           image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
+      }
+      //Has all defenses attack
+      for (int x = 0; x < t.size(); x ++) {
+        t.get(x).attack();
+      }
+      //Calls projectiles into existence
+      for (int x = 0; x < p.size(); x ++) {
+        if (p.get(x) instanceof CannonBall) {
+          image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+        if (p.get(x) instanceof Laser) {
+          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+        if (p.get(x) instanceof Rocket) {
+          image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
+        }
+      }
+      for (int x = 0; x < p.size(); x ++) {
+        p.get(x).move();
       }
     }
 

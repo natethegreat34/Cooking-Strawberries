@@ -62,6 +62,10 @@ abstract class Defense {
     coords[1] = y;
     return coords;
   }
+  
+  public void setTimer(int time) {
+    timer = time;
+  }
 }
 
 
@@ -74,10 +78,11 @@ class Cannon extends Defense {
   }
 
   public boolean attack() {
-    if (! canShoot()) return  false;
+    if (! canShoot()) return false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new CannonBall(target, coords[0], coords[1]); 
+    setTimer(15);
     return true;
   }
 }
@@ -86,12 +91,15 @@ class Cannon extends Defense {
 class LaserShooter extends Defense {
   public LaserShooter(double inX, double inY) {
     super(inX, inY);
+    setRange(5);
+    setLevel(1);
   }
   public boolean attack() {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new Laser(target, coords[0], coords[1]); 
+    setTimer(15);
     return true;
   }
 }
@@ -100,6 +108,8 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
+    setRange(5);
+    setLevel(1);
   }
 
   public boolean attack() {
@@ -107,12 +117,14 @@ class RocketLauncher extends Defense {
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
     Projectile shot = new Rocket(target, coords[0], coords[1]); 
+    setTimer(15);
     return true;
   }
 }
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
+  
   public ForceFieldGen(double inX, double inY) {
     super(inX, inY);
     for (int x = -2; x < 3; x ++) {
