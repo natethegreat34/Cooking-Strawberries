@@ -65,6 +65,7 @@ void setup() {
   loading = loadImage("morthal_swamp_03_by_baba64-d5qptgt.jpg");
 =======
   laser = loadImage("laser.png");
+  rocket = loadImage("rocket-146104_640.png");
 
 >>>>>>> 2ac9dff4426772fd4dba1c9d46af672456b9cf09
   //resizing
@@ -293,6 +294,7 @@ void draw() {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
       }
+      //Makes projectiles move
       for (int x = 0; x < p.size(); x ++) {
         p.get(x).move();
       }

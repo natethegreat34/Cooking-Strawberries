@@ -14,16 +14,21 @@ abstract class Projectile {
   }
   
   public void move() {
-    if (checkExplode()) {
+    if (target == null) {
+      p.remove(this);
+    }
+    else if (checkExplode()) {
       target.lowerHealth(damage);
       p.remove(this);
     }
-    double[] targetCoords = target.getCoords();
-    double changeX = targetCoords[0] - x;
-    double changeY = targetCoords[1] - y;
-    double angle = Math.atan(changeY / changeX);
-    x += speed * Math.cos(angle);
-    y += speed * Math.sin(angle);
+    else {
+      double[] targetCoords = target.getCoords();
+      double changeX = targetCoords[0] - x;
+      double changeY = targetCoords[1] - y;
+      double angle = Math.atan(changeY / changeX);
+      x += speed * Math.cos(angle);
+      y += speed * Math.sin(angle);
+    }
 
   }
 
@@ -55,9 +60,6 @@ abstract class Projectile {
 
 //CannonBall
 class CannonBall extends Projectile {
-  private int damage;
-  public boolean alive = true;
-  
   public CannonBall(Ship inputTarget, double inX, double inY) {
     super(inX, inY, 20);
     target = inputTarget;
@@ -72,8 +74,10 @@ class Laser extends Projectile {
   public Laser(Ship inputTarget, double inX, double inY) {
     super(inX, inY, 10);
     target = inputTarget;
-    double[] targetCoords = target.getCoords();
-    p.add(this);
+    if (target != null) {
+      double[] targetCoords = target.getCoords();
+      p.add(this);
+    }
   }
   
 }
