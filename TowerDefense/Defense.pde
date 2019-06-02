@@ -27,11 +27,11 @@ abstract class Defense {
     for (int a = 0; a < s.size(); a ++) {
       double[] coords = s.get(a).getCoords();
       double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
-      System.out.println("Distance: " + distance + "Range: " + range);
+      //System.out.println("Distance: " + distance + "Range: " + range);
       if (distance < lowestDistance && distance <= range) {
         lowestDistance = distance;
         index = a;
-        System.out.println("TARGET ACQUIRED");
+        //System.out.println("TARGET ACQUIRED");
       }
     }
     if (index == -1) return null;
@@ -123,7 +123,7 @@ class RocketLauncher extends Defense {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
-    System.out.println(target);
+    //System.out.println(target);
     if (target != null) {
       Projectile shot = new Rocket(target, coords[0], coords[1]); 
       setTimer(80);

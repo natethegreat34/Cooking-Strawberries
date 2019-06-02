@@ -26,7 +26,9 @@ abstract class Projectile {
       double changeX = targetCoords[0] - x;
       double changeY = targetCoords[1] - y;
       double angle = Math.atan(changeY / changeX);
-      if (changeY < 0) angle *= -1;
+      System.out.println(angle);
+      if (changeX < 0 && changeY > 0) angle += (PI / 2);
+      if (changeX < 0 && changeY < 0) angle += (PI);
       x += speed * Math.cos(angle);
       y += speed * Math.sin(angle);
     }
