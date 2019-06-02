@@ -61,13 +61,10 @@ void setup() {
   can = loadImage("cannon.png");
   forc = loadImage("ForceField.png");
   x = loadImage("X.png");
-<<<<<<< HEAD
   loading = loadImage("morthal_swamp_03_by_baba64-d5qptgt.jpg");
-=======
   laser = loadImage("laser.png");
   rocket = loadImage("rocket-146104_640.png");
 
->>>>>>> 2ac9dff4426772fd4dba1c9d46af672456b9cf09
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
@@ -288,7 +285,8 @@ void draw() {
           image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
         if (p.get(x) instanceof Laser) {
-          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+                stroke (0,255,0);
+              line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
         if (p.get(x) instanceof Rocket) {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
