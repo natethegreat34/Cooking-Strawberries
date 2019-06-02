@@ -1,7 +1,7 @@
 abstract class Defense {
   public double x;
   public double y;
-  private int range = 10;
+  private int range;
   private int level;
   private int timer;
 
@@ -10,6 +10,7 @@ abstract class Defense {
   public Defense(double inX, double inY) {
     x = inX;
     y = inY;
+    timer = 0;
     t.add(this);
   }
 
@@ -26,11 +27,14 @@ abstract class Defense {
     for (int a = 0; a < s.size(); a ++) {
       double[] coords = s.get(a).getCoords();
       double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
-      if (distance < lowestDistance) {
+      System.out.println("Distance: " + distance + "Range: " + range);
+      if (distance < lowestDistance && distance <= range) {
         lowestDistance = distance;
         index = a;
+        System.out.println("TARGET ACQUIRED");
       }
     }
+    if (index == -1) return null;
     return s.get(index);
   }
 
@@ -73,7 +77,7 @@ abstract class Defense {
 class Cannon extends Defense {
   public Cannon(double inX, double inY) {
     super(inX, inY);
-    setRange(5);
+    setRange(50);
     setLevel(1);
   }
 
@@ -81,9 +85,12 @@ class Cannon extends Defense {
     if (! canShoot()) return false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
-    Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-    setTimer(15);
-    return true;
+    if (target != null) {
+      Projectile shot = new CannonBall(target, coords[0], coords[1]); 
+      setTimer(15);
+      return true;
+    }
+    return false;
   }
 }
 
@@ -91,7 +98,7 @@ class Cannon extends Defense {
 class LaserShooter extends Defense {
   public LaserShooter(double inX, double inY) {
     super(inX, inY);
-    setRange(5);
+    setRange(50);
     setLevel(1);
   }
   public boolean attack() {
@@ -108,7 +115,7 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
-    setRange(5);
+    setRange(50);
     setLevel(1);
   }
 

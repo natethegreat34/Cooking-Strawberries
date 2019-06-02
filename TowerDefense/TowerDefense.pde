@@ -61,6 +61,7 @@ void setup() {
   forc = loadImage("ForceField.png");
   x = loadImage("X.png");
   laser = loadImage("laser.png");
+  rocket = loadImage("rocket-146104_640.png");
 
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
@@ -286,6 +287,7 @@ void draw() {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
       }
+      //Makes projectiles move
       for (int x = 0; x < p.size(); x ++) {
         p.get(x).move();
       }
