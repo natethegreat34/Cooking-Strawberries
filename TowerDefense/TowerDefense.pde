@@ -79,6 +79,7 @@ void setup() {
   x.resize(72, 77 * 2);
   cannonBall.resize(30, 30);
   laser.resize(10, 30);
+  rocket.resize(20, 40);
 
   //setting up methods
   remaker();

@@ -123,9 +123,12 @@ class RocketLauncher extends Defense {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
-    Projectile shot = new Rocket(target, coords[0], coords[1]); 
-    setTimer(15);
-    return true;
+    if (target != null) {
+      Projectile shot = new Rocket(target, coords[0], coords[1]); 
+      setTimer(15);
+      return true;
+    }
+    return false;
   }
 }
 
