@@ -118,7 +118,7 @@ class ForceFieldGen extends Defense {
     for (int x = -2; x < 3; x ++) {
       for (int y = -2; y < 3; y ++) {
         if ( (int) inY / 72 + y < board.length && (int) inX / 72 + x < board[0].length) {
-          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.5);
+          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.125);
         }
       }
     }

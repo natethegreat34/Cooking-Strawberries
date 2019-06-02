@@ -6,6 +6,7 @@ ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
+PImage loading;
 PImage whitecircle;
 PImage grass;
 PImage dirt;
@@ -38,7 +39,7 @@ boolean press;
 
 void setup() {
   size(1152, 800);
-
+  
   //starting amounts
   castleHealth = 100;
   MOney = 150;
@@ -60,7 +61,7 @@ void setup() {
   can = loadImage("cannon.png");
   forc = loadImage("ForceField.png");
   x = loadImage("X.png");
-
+  loading = loadImage("morthal_swamp_03_by_baba64-d5qptgt.jpg");
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
@@ -81,6 +82,8 @@ void setup() {
   //for testing
   Ship q = new Normal();
   s.add(q);
+  loading.resize(width,height);
+  image(loading,0,0);
 }
 void remaker() {
   for (int i = 0; i<= 288 *2; i = i +72) {
