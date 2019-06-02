@@ -123,12 +123,29 @@ class RocketLauncher extends Defense {
     if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
+    System.out.println(target);
     if (target != null) {
       Projectile shot = new Rocket(target, coords[0], coords[1]); 
-      setTimer(15);
+      setTimer(40);
       return true;
     }
     return false;
+  }
+  
+  public Ship findNearest(double x, double y) {
+    double lowestDistance = 100000;
+    int index = -1;
+    for (int a = 0; a < s.size(); a ++) {
+      double[] coords = s.get(a).getCoords();
+      double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
+      if (distance < lowestDistance) {
+        lowestDistance = distance;
+        index = a;
+        //System.out.println("TARGET ACQUIRED");
+      }
+    }
+    if (index == -1) return null;
+    return s.get(index);
   }
 }
 
