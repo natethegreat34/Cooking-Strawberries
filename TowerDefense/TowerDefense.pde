@@ -284,10 +284,12 @@ void draw() {
         if (p.get(x) instanceof CannonBall) {
           image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
+        /*
         if (p.get(x) instanceof Laser) {
                 stroke (0,255,0);
               line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
+        */
         if (p.get(x) instanceof Rocket) {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
@@ -372,7 +374,7 @@ void mouseReleased() {
       holdup = false;
       if (type == 0) {
         MOney -= 50;
-        l = new LaserShooter ((double) (x * 72 ), (double) (y * 72 ));
+        l = new RocketLauncher ((double) (x * 72 ), (double) (y * 72 ));
         board[y] [x].typer(0);
       }
       if (type == 1) {
