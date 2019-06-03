@@ -5,7 +5,7 @@ abstract class Projectile {
   private int damage;
   private double speed;
   
-  public Projectile(double inX, double inY, int inDamage) {
+  public Projectile(double inX, double inY, int inDamage, int speed) {
     x = inX;
     y = inY;
     damage = inDamage;
@@ -50,6 +50,14 @@ abstract class Projectile {
     return y;
   }
   
+  public void setX(double in) {
+    x = in;
+  }
+  
+  public void setY(double in) {
+    y = in;
+  }
+  
   public boolean checkExplode() {
     double[] coords = target.getCoords();
     double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
@@ -64,11 +72,51 @@ abstract class Projectile {
 
 //CannonBall
 class CannonBall extends Projectile {
+  private double Ychange;
+  private double Xchange;
+  
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 20);
+    super(inX, inY, 20, 20);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
+    Xchange = targetCoords[0] - inX;
+    Ychange = targetCoords[1] - inY;
+  }
+  
+  public boolean checkExplode() {
+    double[] coords = target.getCoords();
+    double distance = Math.sqrt(Math.pow((getX() - coords[0]), 2) + Math.pow((getY() - coords[1]), 2));
+    if (distance < 36) {
+      return true;
+    }
+    return false; 
+  }
+  
+  public void move() {
+    if (target == null) {
+      p.remove(this);
+    }
+    else if (checkExplode()) {
+      target.lowerHealth(getdamage());
+      p.remove(this);
+      MOney += 1;
+    }
+    else {
+      setX(getX() + (Xchange / getspeed()));
+      setY(getY() + (Ychange / getspeed()));
+      /*
+      double[] targetCoords = target.getCoords();
+      double changeX = targetCoords[0] - x;
+      double changeY = targetCoords[1] - y;
+      double angle = Math.atan(changeY / changeX);
+      System.out.println(angle);
+      if (changeX < 0 && changeY > 0) angle += (PI / 2);
+      if (changeX < 0 && changeY < 0) angle += (PI);
+      x += speed * Math.cos(angle);
+      y += speed * Math.sin(angle);
+      */
+    }
   }
 }
 
@@ -76,7 +124,7 @@ class CannonBall extends Projectile {
 //Laser
 class Laser extends Projectile {
   public Laser(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 10);
+    super(inX, inY, 20, 5);
     target = inputTarget;
     if (target != null) {
       double[] targetCoords = target.getCoords();
@@ -90,7 +138,7 @@ class Laser extends Projectile {
 //Rocket
 class Rocket extends Projectile {
   public Rocket(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 50);
+    super(inX, inY, 50, 5);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
