@@ -5,11 +5,11 @@ abstract class Projectile {
   private int damage;
   private double speed;
   
-  public Projectile(double inX, double inY, int inDamage, int speed) {
+  public Projectile(double inX, double inY, int inDamage, int inSpeed) {
     x = inX;
     y = inY;
     damage = inDamage;
-    speed = 5;
+    speed = inSpeed;
     p.add(this);
   }
   
@@ -87,7 +87,7 @@ class CannonBall extends Projectile {
   public boolean checkExplode() {
     double[] coords = target.getCoords();
     double distance = Math.sqrt(Math.pow((getX() - coords[0]), 2) + Math.pow((getY() - coords[1]), 2));
-    if (distance < 36) {
+    if (distance < 25) {
       return true;
     }
     return false; 
