@@ -82,16 +82,34 @@ class Cannon extends Defense {
   }
 
   public boolean attack() {
-    if (! canShoot()) return false;
+    if (! canShoot()) return  false;
     double coords[] = getCoords();
     Ship target = findNearest(coords[0], coords[1]);
+    //System.out.println(target);
     if (target != null) {
       Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-      setTimer(15);
+      setTimer(50);
       return true;
     }
     return false;
   }
+  
+  public Ship findNearest(double x, double y) {
+    double lowestDistance = 100000;
+    int index = -1;
+    for (int a = 0; a < s.size(); a ++) {
+      double[] coords = s.get(a).getCoords();
+      double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
+      if (distance < lowestDistance && distance < getRange()) {
+        lowestDistance = distance;
+        index = a;
+        //System.out.println("TARGET ACQUIRED");
+      }
+    }
+    if (index == -1) return null;
+    return s.get(index);
+  }
+    
 }
 
 //Laser Shooter
@@ -115,7 +133,7 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
-    setRange(50);
+    setRange(200);
     setLevel(1);
   }
 
