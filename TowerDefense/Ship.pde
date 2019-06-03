@@ -93,4 +93,9 @@ class Heavy extends Ship {
   }
 }
 class Boss extends Ship {
+  public Boss() {
+    super();
+    setSpeed(1);
+    setHealth(2002);
+  }
 }

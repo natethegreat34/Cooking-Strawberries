@@ -5,6 +5,7 @@ ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
+ArrayList<Ship> queue = new ArrayList();
 PImage loading;
 PImage whitecircle;
 PImage grass;
@@ -75,9 +76,9 @@ void setup() {
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
-  quick.resize(48,48);
-  heavy.resize(48,48);
-  boss.resize(360, 360);
+  quick.resize(48, 48);
+  heavy.resize(48, 48);
+  boss.resize(72, 72);
   k.resize(48, 48);
   v.resize(48, 48);
   roc.resize (72, 72);
@@ -94,14 +95,16 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-
-  //for testing
-  Ship q = new Normal();
-  q.setHealth(100);
-  s.add(q);
-  loading.resize(width, height);
-  image(loading, 0, 0);
-}
+  /*
+  //for testing 
+   Ship q = new Normal();
+   q.setHealth(10);
+   s.add(q);
+   loading.resize(width, height);
+   image(loading, 0, 0); */
+   
+   level = 1;
+} 
 void remaker() {
   for (int i = 0; i<= 288 *2; i = i +72) {
     for (int y = 0; y<= 540 *2; y = y +72) {
@@ -156,12 +159,11 @@ void tilemaker(int row, int col) {
 }
 void draw() {
   if (castleHealth > 0 ) {
-    if (hleft == 0) {
+    if (s.size() == 0 && queue.size() == 0) {
       if (level == 10) {
         end.resize(width, height);
         image(end, 0, 0);
       }
-      level ++;
     }
     for (int e = 0; e < 9; e ++) { 
       for (int y = 0; y < 16; y ++) {
@@ -192,7 +194,7 @@ void draw() {
         }
       }
     }
-    
+
     for (int x = 0; x < s.size(); x++) {
       if (s.get(x) instanceof Normal) {
         if (s.get(x).direction == 0) {
@@ -237,6 +239,7 @@ void draw() {
     // X
     image(x, 72 * 15, 324 * 2);
     text("Health:" + castleHealth, 10 * 2, 345  * 2);
+    text("Level:" + (level - 1), 10 * 2, 360 * 2);
     text("Money ($):" + MOney, 10 * 2, 375  * 2);
     fill(0);
     text("Rocket Launcher ($50):", 150 * 2 - 72, 345 * 2);
@@ -290,51 +293,38 @@ void draw() {
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
+      
+      //Generating the ships
+      if (queue.size() == 0 && counter % 144 == 0 && s.size() == 0) {
+        genQueue(level);
+        level ++;
+      }
+      
+      else if (counter % 36 == 0 && queue.size() != 0) {
+        s.add(queue.remove(0));
+      }
 
-      for (int i = 0; i < Levels.getNumbers(level).size(); i ++) {
-        Ship hope = new Ship();
-        hleft = Levels.getNumbers(level).get(i);
-        int n = Levels.getNumbers(level).get(i);
-        while (n > 0) {
-            if (Levels.getTypes(level).get(i) == 0) {
-              hope = new Normal();
-            }
-            if (Levels.getTypes(level).get(i) == 1) {
-              hope = new Quick();
-            }
-            if (Levels.getTypes(level).get(i) == 2) {
-              hope = new Heavy();
-            }
-              n --;
-          s.add(hope);
-        
+      for (int x = 0; x < s.size(); x++) {
+        s.get(x).move();
+        if (x == s.size());
+        else if (s.get(x) instanceof Normal) {
+          if (s.get(x).direction == 0) {
+            image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
           }
-      }
-  
-     for (int x = 0; x < s.size(); x++) {
-      s.get(x).move();
-      if (x == s.size());
-      else if (s.get(x) instanceof Normal) {
-        if (s.get(x).direction == 0) {
-          image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-        }
-        if (s.get(x).direction == 1) {
-          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
-        }
-        if (s.get(x).direction == 2) {
-          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+          if (s.get(x).direction == 1) {
+            image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+          }
+          if (s.get(x).direction == 2) {
+            image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+          }
+        } else if (s.get(x) instanceof Quick) {
+          image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        } else if (s.get(x) instanceof Heavy) {
+          image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        } else if (s.get(x) instanceof Boss) {
+          image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
         }
       }
-      else if (s.get(x) instanceof Quick) {
-        image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-      }
-      else if (s.get(x) instanceof Heavy) {
-        image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-      } 
-      else if (s.get(x) instanceof Boss) {
-        image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-      }
-    }
       //Has all defenses attack
       for (int x = 0; x < t.size(); x ++) {
         t.get(x).attack();
@@ -467,6 +457,35 @@ void mouseReleased() {
       board[y] [x].placer(false);
       press = false;
       t.add(l);
+    }
+  }
+}
+
+void genQueue(int inLevel) {
+  if (queue.size() != 0) System.out.println("MAJOR ERROR");
+  else {
+    ArrayList<Integer> numbers = Levels.getNumbers(inLevel);
+    ArrayList<Integer> types = Levels.getTypes(inLevel);
+
+    for (int x = 0; x < numbers.size(); x ++) {
+      for (int y = 0; y < numbers.get(x); y ++) {
+        if (types.get(x) == 0) {
+          Ship queuedShip = new Normal();
+          queue.add(queuedShip);
+        }
+        if (types.get(x) == 1) {
+          Ship queuedShip = new Quick();
+          queue.add(queuedShip);
+        }
+        if (types.get(x) == 2) {
+          Ship queuedShip = new Heavy();
+          queue.add(queuedShip);
+        }
+        if (types.get(x) == 3) {
+          Ship queuedShip = new Boss();
+          queue.add(queuedShip);
+        }
+      }
     }
   }
 }
