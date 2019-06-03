@@ -288,9 +288,10 @@ void draw() {
         }
         
         if (p.get(x) instanceof Laser) {
-            line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
-            //stroke (0,255,0);
-            //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
+          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+          //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
+          //stroke (0,255,0);
+          //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
         
         if (p.get(x) instanceof Rocket) {
