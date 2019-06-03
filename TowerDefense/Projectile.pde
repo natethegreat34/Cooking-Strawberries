@@ -125,12 +125,10 @@ class CannonBall extends Projectile {
 //Laser
 class Laser extends Projectile {
   public Laser(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 10, 5);
+    super(inX, inY, 50, 5);
     target = inputTarget;
-    if (target != null) {
-      tC = target.getCoords();
-      p.add(this);
-    }
+    double[] targetCoords = target.getCoords();
+    p.add(this);
   }
   
 }
