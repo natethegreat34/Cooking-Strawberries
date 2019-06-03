@@ -77,7 +77,7 @@ abstract class Defense {
 class Cannon extends Defense {
   public Cannon(double inX, double inY) {
     super(inX, inY);
-    setRange(50);
+    setRange(200);
     setLevel(1);
   }
 
