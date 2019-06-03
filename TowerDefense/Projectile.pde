@@ -6,18 +6,14 @@ abstract class Projectile {
   private double speed;
   private double [] tC;
   
-<<<<<<< HEAD
   public Projectile(double inX, double inY, int inDamage, int inSpeed) {
-=======
-  public Projectile(double inX, double inY, int inDamage) {
->>>>>>> parent of b102b92... Finished cannon attack
     x = inX;
     y = inY;
     damage = inDamage;
     speed = inSpeed;
     p.add(this);
   }
-  public gtC(){
+  public double[] gtC(){
     return tC;
   }
   public void move() {
@@ -56,6 +52,12 @@ abstract class Projectile {
   public double getY() {
     return y;
   }
+  public void setX(double in) {
+    x = in;
+  }
+  public void setY(double in) {
+    y = in;
+  }
   
   public boolean checkExplode() {
     double[] coords = target.getCoords();
@@ -71,12 +73,14 @@ abstract class Projectile {
 
 //CannonBall
 class CannonBall extends Projectile {
+  private double Xchange;
+  private double Ychange;
+  
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 20);
+    super(inX, inY, 20, 50);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
-<<<<<<< HEAD
     Xchange = targetCoords[0] - inX;
     Ychange = targetCoords[1] - inY;
   }
@@ -114,8 +118,6 @@ class CannonBall extends Projectile {
       y += speed * Math.sin(angle);
       */
     }
-=======
->>>>>>> parent of b102b92... Finished cannon attack
   }
 }
 
@@ -123,7 +125,7 @@ class CannonBall extends Projectile {
 //Laser
 class Laser extends Projectile {
   public Laser(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 10);
+    super(inX, inY, 10, 5);
     target = inputTarget;
     if (target != null) {
       tC = target.getCoords();
@@ -137,7 +139,7 @@ class Laser extends Projectile {
 //Rocket
 class Rocket extends Projectile {
   public Rocket(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 50);
+    super(inX, inY, 50, 5);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
