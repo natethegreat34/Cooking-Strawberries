@@ -1,4 +1,3 @@
-
 import java.util.*;
 Tile[][] board = new Tile[9][16];
 
@@ -87,6 +86,7 @@ void setup() {
 
   //for testing
   Ship q = new Normal();
+  q.setHealth(1000000000);
   s.add(q);
   loading.resize(width,height);
   image(loading,0,0);
@@ -260,7 +260,7 @@ void draw() {
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
-      if (counter % 72 == 0) {
+      if (counter % 36 == 0) {
         Ship k = new Normal();
         s.add(k);
       }
@@ -368,6 +368,16 @@ void mousePressed() {
     press = false;
     holdup = false;
   }
+  boolean su = false;
+  for(int i = 0; i < t.size() && !su; i ++){
+        if (mouseX > t.get(i).getCoords()[0] && mouseX < t.get(i).getCoords()[0] + 72 && mouseY > t.get(i).getCoords()[1] && mouseY < t.get(i).getCoords()[1] + 72){
+          fill (255);
+                tint(255, 100);
+                image(whitecircle, (float) (t.get(i).getCoords()[0] - (int) (50 * PI) + 36), (float) (t.get(i).getCoords()[1] - (int) (50 * PI) + 36));
+                noTint();
+                su = true;
+        }
+    }
 }
 void mouseReleased() {
 
