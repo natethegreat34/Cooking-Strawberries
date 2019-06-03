@@ -260,10 +260,12 @@ void draw() {
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
+      /*
       if (counter % 36 == 0) {
         Ship k = new Normal();
         s.add(k);
       }
+      */
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (x == s.size());
