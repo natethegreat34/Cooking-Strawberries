@@ -45,7 +45,7 @@ void setup() {
   size(1152, 800);
 
   //starting amounts
-  castleHealth = 10000;
+  castleHealth = 100;
   MOney = 150;
   f = (int)(Math.random()  * 7 + 1);
 
@@ -96,7 +96,9 @@ void setup() {
   tilemaker(f, 0);
 
   //for testing
-
+  Ship q = new Normal();
+  q.setHealth(100);
+  s.add(q);
   loading.resize(width, height);
   image(loading, 0, 0);
 }
@@ -294,7 +296,6 @@ void draw() {
         hleft = Levels.getNumbers(level).get(i);
         int n = Levels.getNumbers(level).get(i);
         while (n > 0) {
-          if (counter % 36 == 0) {
             if (Levels.getTypes(level).get(i) == 0) {
               hope = new Normal();
             }
@@ -304,10 +305,10 @@ void draw() {
             if (Levels.getTypes(level).get(i) == 2) {
               hope = new Heavy();
             }
-          }
+              n --;
           s.add(hope);
-          n --;
-        }
+        
+          }
       }
   
      for (int x = 0; x < s.size(); x++) {
