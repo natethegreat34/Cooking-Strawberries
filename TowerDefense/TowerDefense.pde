@@ -289,8 +289,8 @@ void draw() {
         }
       }
 
-      Ship hope = new Ship();
       for (int i = 0; i < Levels.getNumbers(level).size(); i ++) {
+        Ship hope = new Ship();
         hleft = Levels.getNumbers(level).get(i);
         int n = Levels.getNumbers(level).get(i);
         while (n > 0) {
