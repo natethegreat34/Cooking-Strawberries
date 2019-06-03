@@ -20,6 +20,7 @@ abstract class Projectile {
     else if (checkExplode()) {
       target.lowerHealth(damage);
       p.remove(this);
+      MOney += 1;
     }
     else {
       double[] targetCoords = target.getCoords();

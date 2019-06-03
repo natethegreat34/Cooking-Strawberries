@@ -266,13 +266,14 @@ void draw() {
       }
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
-        if (s.get(x).direction == 0) {
+        if (x == s.size());
+        else if (s.get(x).direction == 0) {
           image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
-        if (s.get(x).direction == 1) {
+        else if (s.get(x).direction == 1) {
           image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
-        if (s.get(x).direction == 2) {
+        else if (s.get(x).direction == 2) {
           image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
       }

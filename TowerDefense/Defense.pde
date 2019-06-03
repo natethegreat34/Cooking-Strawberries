@@ -138,7 +138,7 @@ class RocketLauncher extends Defense {
     for (int a = 0; a < s.size(); a ++) {
       double[] coords = s.get(a).getCoords();
       double distance = Math.sqrt(Math.pow((x - coords[0]), 2) + Math.pow((y - coords[1]), 2));
-      if (distance < lowestDistance) {
+      if (distance < lowestDistance && distance < getRange()) {
         lowestDistance = distance;
         index = a;
         //System.out.println("TARGET ACQUIRED");
