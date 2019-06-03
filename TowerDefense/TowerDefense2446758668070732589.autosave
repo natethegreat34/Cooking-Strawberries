@@ -79,7 +79,6 @@ void setup() {
   x.resize(72, 77 * 2);
   cannonBall.resize(30, 30);
   laser.resize(10, 30);
-  rocket.resize(20, 40);
 
   //setting up methods
   remaker();
@@ -266,14 +265,13 @@ void draw() {
       }
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
-        if (x == s.size());
-        else if (s.get(x).direction == 0) {
+        if (s.get(x).direction == 0) {
           image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
-        else if (s.get(x).direction == 1) {
+        if (s.get(x).direction == 1) {
           image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
-        else if (s.get(x).direction == 2) {
+        if (s.get(x).direction == 2) {
           image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
       }
@@ -286,13 +284,12 @@ void draw() {
         if (p.get(x) instanceof CannonBall) {
           image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
-        
+        /*
         if (p.get(x) instanceof Laser) {
-            line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
-            //stroke (0,255,0);
-            //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
+                stroke (0,255,0);
+              line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
-        
+        */
         if (p.get(x) instanceof Rocket) {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
