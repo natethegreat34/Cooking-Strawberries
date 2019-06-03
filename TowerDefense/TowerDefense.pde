@@ -23,6 +23,7 @@ PImage cannonBall;
 PImage laser;
 PImage rocket;
 PImage forc;
+int level;
 int f;
 int mx;
 int my;
@@ -260,15 +261,29 @@ void draw() {
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
-<<<<<<< HEAD
-=======
-      /*
->>>>>>> 3971dd88305e6b8d58c46a70956b11a99c8fb2ce
+//getNumbers.get(i)
+//getTyes.get(i)
+//go through each level
+
       if (counter % 36 == 0) {
-        Ship k = new Normal();
-        s.add(k);
+        for(int i = 0; i < getNumbers(level).size() && getNumbers.get(i) > 0; i ++){
+          int n = getNumbers.get(i);
+          while (n > 0){
+            if(getTypes.get(i) == 0){
+              Ship k = new Normal();
+            }
+            if(getTypes.get(i) == 1){
+              Ship k = new Quick();
+            }
+            if(getTypes.get(i) == 0){
+              Ship k = new Heavy();
+            }
+              s.add(k);
+              n --;
+          }
+        }
       }
-      */
+
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (x == s.size());
