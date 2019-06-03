@@ -11,6 +11,9 @@ PImage grass;
 PImage dirt;
 PImage img;
 PImage enemy;
+PImage quick;
+PImage heavy;
+PImage boss;
 PImage k;
 PImage v;
 PImage end;
@@ -54,6 +57,9 @@ void setup() {
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
   enemy= loadImage("roundysh.png");
+  quick = loadImage("quick.png");
+  heavy = loadImage("heavy.png");
+  boss = loadImage("boss.png");
   k = loadImage("Right.png");
   v = loadImage("Down.png");
   end = loadImage("gallery_9873_7_17106.png");
@@ -69,6 +75,9 @@ void setup() {
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
+  quick.resize(48,48);
+  heavy.resize(48,48);
+  boss.resize(360, 360);
   k.resize(48, 48);
   v.resize(48, 48);
   roc.resize (72, 72);
@@ -183,15 +192,27 @@ void draw() {
         }
       }
     }
+    
     for (int x = 0; x < s.size(); x++) {
-      if (s.get(x).direction == 0) {
-        image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+      if (s.get(x) instanceof Normal) {
+        if (s.get(x).direction == 0) {
+          image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
       }
-      if (s.get(x).direction == 1) {
-        image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+      if (s.get(x) instanceof Quick) {
+        image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
-      if (s.get(x).direction == 2) {
-        image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+      if (s.get(x) instanceof Heavy) {
+        image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+      } 
+      if (s.get(x) instanceof Boss) {
+        image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
       }
     }
     rect(0, 324 * 2, 576 * 2, 77 * 2);
@@ -291,17 +312,30 @@ void draw() {
         }
       }
   
-      for (int x = 0; x < s.size(); x++) {
-        s.get(x).move();
-        if (x == s.size());
-        else if (s.get(x).direction == 0) {
-          image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
-        } else if (s.get(x).direction == 1) {
-          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
-        } else if (s.get(x).direction == 2) {
-          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
+     for (int x = 0; x < s.size(); x++) {
+      s.get(x).move();
+      if (x == s.size());
+      else if (s.get(x) instanceof Normal) {
+        if (s.get(x).direction == 0) {
+          image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
         }
       }
+      else if (s.get(x) instanceof Quick) {
+        image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+      }
+      else if (s.get(x) instanceof Heavy) {
+        image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+      } 
+      else if (s.get(x) instanceof Boss) {
+        image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+      }
+    }
       //Has all defenses attack
       for (int x = 0; x < t.size(); x ++) {
         t.get(x).attack();
