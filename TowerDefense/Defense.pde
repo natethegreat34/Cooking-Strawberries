@@ -15,6 +15,11 @@ abstract class Defense {
   }
 
   public boolean canShoot() {
+    if(findNearest(x,y) != null){
+    if(sqrt ((float)(Math.pow((findNearest(x,y).getCoords()[0] - x - 72 ),2)) + (float)(Math.pow((findNearest(x,y).getCoords()[1] - y - 72),2)))  > range){
+      return false;
+    }
+    }
     timer --;
     return timer <= 0;
   }
@@ -56,9 +61,9 @@ abstract class Defense {
     range = inputRange;
     return true;
   }
-  public int getRange(){
-  return range;
-}
+  public int getRange() {
+    return range;
+  }
 
   public double[] getCoords() {
     double[] coords = new double[2];
@@ -66,7 +71,7 @@ abstract class Defense {
     coords[1] = y;
     return coords;
   }
-  
+
   public void setTimer(int time) {
     timer = time;
   }
@@ -93,7 +98,7 @@ class Cannon extends Defense {
     }
     return false;
   }
-  
+
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -109,7 +114,6 @@ class Cannon extends Defense {
     if (index == -1) return null;
     return s.get(index);
   }
-    
 }
 
 //Laser Shooter
@@ -130,7 +134,7 @@ class LaserShooter extends Defense {
     }
     return false;
   }
-  
+
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -152,7 +156,8 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
-    setRange(200);
+    setRange((int)(50 * PI));
+    setTimer(0);
     setLevel(1);
   }
 
@@ -168,7 +173,7 @@ class RocketLauncher extends Defense {
     }
     return false;
   }
-  
+
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -188,12 +193,12 @@ class RocketLauncher extends Defense {
 
 //Force Field Generator, creates seperate item force field
 class ForceFieldGen extends Defense {
-  
+
   public ForceFieldGen(double inX, double inY) {
     super(inX, inY);
     for (int x = -2; x < 3; x ++) {
       for (int y = -2; y < 3; y ++) {
-        if ( (int) inY / 72 + y < board.length && (int) inX / 72 + x < board[0].length) {
+        if ( (int) inY / 72 + y < board.length && (int) inY / 72 + y > 0 && (int) inX / 72 + x > 0 &&(int) inX / 72 + x < board[0].length) {
           board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.125);
         }
       }
