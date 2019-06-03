@@ -24,6 +24,7 @@ PImage laser;
 PImage rocket;
 PImage forc;
 int level;
+int hleft;
 int f;
 int mx;
 int my;
@@ -39,7 +40,7 @@ boolean press;
 
 void setup() {
   size(1152, 800);
-  
+
   //starting amounts
   castleHealth = 100;
   MOney = 150;
@@ -87,10 +88,10 @@ void setup() {
 
   //for testing
   Ship q = new Normal();
-  q.setHealth(1000000000);
+  q.setHealth(100);
   s.add(q);
-  loading.resize(width,height);
-  image(loading,0,0);
+  loading.resize(width, height);
+  image(loading, 0, 0);
 }
 void remaker() {
   for (int i = 0; i<= 288 *2; i = i +72) {
@@ -146,6 +147,13 @@ void tilemaker(int row, int col) {
 }
 void draw() {
   if (castleHealth > 0 ) {
+    if (hleft == 0) {
+      if (level == 10) {
+        end.resize(width, height);
+        image(end, 0, 0);
+      }
+      level ++;
+    }
     for (int e = 0; e < 9; e ++) { 
       for (int y = 0; y < 16; y ++) {
         if (board[e][y].getColor() == false) {
@@ -261,25 +269,24 @@ void draw() {
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
-//getNumbers.get(i)
-//getTyes.get(i)
-//go through each level
 
       if (counter % 36 == 0) {
-        for(int i = 0; i < getNumbers(level).size() && getNumbers.get(i) > 0; i ++){
-          int n = getNumbers.get(i);
-          while (n > 0){
-            if(getTypes.get(i) == 0){
-              Ship k = new Normal();
+        Ship k = new Normal();
+        for (int i = 0; i < Levels.getNumbers(level).size(); i ++) {
+          hleft = Levels.getNumbers(level).get(i);
+          int n = Levels.getNumbers(level).get(i);
+          while (n > 0) {
+            if (Levels.getTypes(level).get(i) == 0) {
+              k = new Normal();
             }
-            if(getTypes.get(i) == 1){
-              Ship k = new Quick();
+            if (Levels.getTypes(level).get(i) == 1) {
+              k = new Quick();
             }
-            if(getTypes.get(i) == 0){
-              Ship k = new Heavy();
+            if (Levels.getTypes(level).get(i) == 0) {
+              k = new Heavy();
             }
-              s.add(k);
-              n --;
+            s.add(k);
+            n --;
           }
         }
       }
@@ -289,11 +296,9 @@ void draw() {
         if (x == s.size());
         else if (s.get(x).direction == 0) {
           image (enemy, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
-        }
-        else if (s.get(x).direction == 1) {
+        } else if (s.get(x).direction == 1) {
           image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
-        }
-        else if (s.get(x).direction == 2) {
+        } else if (s.get(x).direction == 2) {
           image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1] - 23) );
         }
       }
@@ -306,14 +311,14 @@ void draw() {
         if (p.get(x) instanceof CannonBall) {
           image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
-        
+
         if (p.get(x) instanceof Laser) {
           image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
           //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
           //stroke (0,255,0);
           //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
-        
+
         if (p.get(x) instanceof Rocket) {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
@@ -389,15 +394,15 @@ void mousePressed() {
     holdup = false;
   }
   boolean su = false;
-  for(int i = 0; i < t.size() && !su; i ++){
-        if (mouseX > t.get(i).getCoords()[0] && mouseX < t.get(i).getCoords()[0] + 72 && mouseY > t.get(i).getCoords()[1] && mouseY < t.get(i).getCoords()[1] + 72){
-          fill (255);
-                tint(255, 100);
-                image(whitecircle, (float) (t.get(i).getCoords()[0] - (int) (50 * PI) + 36), (float) (t.get(i).getCoords()[1] - (int) (50 * PI) + 36));
-                noTint();
-                su = true;
-        }
+  for (int i = 0; i < t.size() && !su; i ++) {
+    if (mouseX > t.get(i).getCoords()[0] && mouseX < t.get(i).getCoords()[0] + 72 && mouseY > t.get(i).getCoords()[1] && mouseY < t.get(i).getCoords()[1] + 72) {
+      fill (255);
+      tint(255, 100);
+      image(whitecircle, (float) (t.get(i).getCoords()[0] - (int) (50 * PI) + 36), (float) (t.get(i).getCoords()[1] - (int) (50 * PI) + 36));
+      noTint();
+      su = true;
     }
+  }
 }
 void mouseReleased() {
 
