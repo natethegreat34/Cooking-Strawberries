@@ -12,11 +12,17 @@ PImage grass;
 PImage dirt;
 PImage img;
 PImage enemy;
-PImage quick;
-PImage heavy;
-PImage boss;
 PImage k;
 PImage v;
+PImage qup;
+PImage qright;
+PImage qdown;
+PImage hup;
+PImage hright;
+PImage hdown;
+PImage bdown;
+PImage bright;
+PImage bup;
 PImage end;
 PImage roc;
 PImage las;
@@ -58,11 +64,18 @@ void setup() {
   dirt = loadImage("Seamless ground sand texture (4).jpg");
   img = loadImage("BFjwi.png");
   enemy= loadImage("roundysh.png");
-  quick = loadImage("quick.png");
-  heavy = loadImage("heavy.png");
-  boss = loadImage("boss.png");
-  k = loadImage("Right.png");
-  v = loadImage("Down.png");
+    k = loadImage("Right.png");
+      v = loadImage("Down.png");
+  qup = loadImage("quick^.png");
+    qright = loadImage("quick>.png");
+      qdown = loadImage("quickv.png");
+  hup = loadImage("heavy^.png");
+    hright = loadImage("heavy>.png");
+      hdown = loadImage("heavyv.png");
+  bup = loadImage("boss^.png");
+    bright = loadImage("boss>.png");
+      bdown = loadImage("bossv.png");
+
   end = loadImage("gallery_9873_7_17106.png");
   roc = loadImage("rocketShooter.png");
   las = loadImage("laserShooter.png");
@@ -76,9 +89,15 @@ void setup() {
   //resizing
   whitecircle.resize(int(100 * PI), int(100 * PI));
   enemy.resize(48, 48);
-  quick.resize(48, 48);
-  heavy.resize(48, 48);
-  boss.resize(72, 72);
+  qup.resize(48, 48);
+  qright.resize(48,48);
+  qdown.resize(48,48);
+  hup.resize(48, 48);
+  hright.resize(48,48);
+  hdown.resize(48,48);
+  bup.resize(72, 72);
+  bright.resize(72, 72);
+  bdown.resize(72, 72);
   k.resize(48, 48);
   v.resize(48, 48);
   roc.resize (72, 72);
@@ -208,13 +227,37 @@ void draw() {
         }
       }
       if (s.get(x) instanceof Quick) {
-        image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        if (s.get(x).direction == 0) {
+          image (qup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (qright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (qdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
       }
       if (s.get(x) instanceof Heavy) {
-        image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-      } 
+        if (s.get(x).direction == 0) {
+          image (hup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (hright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (hdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+      }
       if (s.get(x) instanceof Boss) {
-        image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        if (s.get(x).direction == 0) {
+          image (bup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (bright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (bdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
       }
     }
     rect(0, 324 * 2, 576 * 2, 77 * 2);
@@ -307,24 +350,51 @@ void draw() {
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (x == s.size());
-        else if (s.get(x) instanceof Normal) {
-          if (s.get(x).direction == 0) {
-            image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-          }
-          if (s.get(x).direction == 1) {
-            image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
-          }
-          if (s.get(x).direction == 2) {
-            image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
-          }
-        } else if (s.get(x) instanceof Quick) {
-          image (quick, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-        } else if (s.get(x) instanceof Heavy) {
-          image (heavy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
-        } else if (s.get(x) instanceof Boss) {
-          image (boss, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+   if (s.get(x) instanceof Normal) {
+        if (s.get(x).direction == 0) {
+          image (enemy, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (k, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (v, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
         }
       }
+      if (s.get(x) instanceof Quick) {
+        if (s.get(x).direction == 0) {
+          image (qup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (qright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (qdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+      }
+      if (s.get(x) instanceof Heavy) {
+        if (s.get(x).direction == 0) {
+          image (hup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (hright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (hdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+      }
+      if (s.get(x) instanceof Boss) {
+        if (s.get(x).direction == 0) {
+          image (bup, (float) (s.get(x).getCoords()[0] - 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+        if (s.get(x).direction == 1) {
+          image (bright, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1])- 23 );
+        }
+        if (s.get(x).direction == 2) {
+          image (bdown, (float) (s.get(x).getCoords()[0]- 23), (float) (s.get(x).getCoords()[1]) - 23);
+        }
+      }
+    }
       //Has all defenses attack
       for (int x = 0; x < t.size(); x ++) {
         t.get(x).attack();
