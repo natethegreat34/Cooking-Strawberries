@@ -2,11 +2,13 @@
 
 # Directions
 	1) Press the play button
-	2) Using the money you gain by killing enemies select the type of defense you want by 
+	2) The game will start automatically and the next level will begin after a buffer, 
+	after all enemies of the current level have been defeated.
+	3) Using the money you gain by killing enemies select the type of defense you want by 
 	clicking the box with its name. Then click on a green tile where you want to place it.
 	If you decide you don't want that defense either get rid of it entirely by placing in 
 	the box labeled "X" or select another defense.
-	3) Keep doing step 2) until you beat all 10 levels. 
+	4) Keep doing step 2) until you beat all 10 levels. 
 	
 # DEVELOPMENT LOG
 
@@ -87,4 +89,27 @@
 ###### May 31st: 
 	-Nathan:
 	-Timothy:
+	
+###### June 1st: 
+	-Nathan: Added a loading screen. Fixed the bug of ships moving upward on the board. Coded 
+	so that a white circle is shown around the defense and turns red if the mouse is over an 
+	invalid placemet.
+	
+	-Timothy:
+	
+###### June 2nd: 
+	-Nathan:
+	
+	-Timothy:
+	
+###### June 3rd: 
+	-Nathan:
+	
+	-Timothy:
+	
+###### June 4th: 
+	-Nathan:
+	
+	-Timothy:
+
 
