@@ -74,7 +74,7 @@ class Normal extends Ship {
   public Normal() {
     super();
     setSpeed(4);
-    setHealth(10);
+    setHealth(100);
     damage = 5;
   }
 }
