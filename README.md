@@ -1,5 +1,14 @@
+# Directions
+	1) Press the play button
+	2) Using the money you gain by killing enemies select the type of defense you want by 
+	clicking the box with its name. Then click on a green tile where you want to place it.
+	If you decide you don't want that defense either get rid of it entirely by placing in 
+	the box labeled "X" or select another defense.
+	3) Keep doing step 2) until you beat all 10 levels. 
+	
 # DEVELOPMENT LOG
 ### TIMOTHY STANSBERRY and NATHAN COOK
+
 
 ###### May 17th:
 	-Nathan: Studied up on how to play tower defense.
