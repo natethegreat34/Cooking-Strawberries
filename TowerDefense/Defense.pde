@@ -82,7 +82,7 @@ abstract class Defense {
 class Cannon extends Defense {
   public Cannon(double inX, double inY) {
     super(inX, inY);
-    setRange(200);
+    setRange(252);
     setLevel(1);
   }
 
@@ -120,7 +120,7 @@ class Cannon extends Defense {
 class LaserShooter extends Defense {
   public LaserShooter(double inX, double inY) {
     super(inX, inY);
-    setRange(200);
+    setRange(180);
     setLevel(1);
   }
   public boolean attack() {
@@ -156,7 +156,7 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
-    setRange((int)(50 * PI));
+    setRange((int)(108));
     setTimer(0);
     setLevel(1);
   }

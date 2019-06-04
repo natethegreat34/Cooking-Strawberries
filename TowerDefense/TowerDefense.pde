@@ -404,9 +404,10 @@ void draw() {
         }
 
         if (p.get(x) instanceof Laser) {
-          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+          //image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
+          line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
+          stroke (0,255,0);
           //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
-          //stroke (0,255,0);
           //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
 
