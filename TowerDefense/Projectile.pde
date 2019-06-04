@@ -93,6 +93,7 @@ class CannonBall extends Projectile {
     Xchange = targetCoords[0] - inX;
     Ychange = targetCoords[1] - inY;
     angle = Math.atan(Ychange / Xchange);
+    if (Xchange < 0 && Ychange == 0) angle = PI;
     if (Xchange < 0 && Ychange > 0) angle += (PI);
     if (Xchange < 0 && Ychange < 0) angle += (PI);
   }

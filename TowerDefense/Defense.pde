@@ -92,8 +92,8 @@ class Cannon extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     //System.out.println(target);
     if (target != null) {
-      Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-      setTimer(50);
+      Projectile shot = new CannonBall(target, coords[0] + 36, coords[1] + 36); 
+      setTimer(30);
       return true;
     }
     return false;
@@ -129,7 +129,7 @@ class LaserShooter extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     if (target != null) {
       Projectile shot = new Laser(target, coords[0], coords[1]); 
-      setTimer(80);
+      setTimer(50);
       return true;
     }
     return false;
@@ -167,7 +167,7 @@ class RocketLauncher extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     //System.out.println(target);
     if (target != null) {
-      Projectile shot = new Rocket(target, coords[0], coords[1]); 
+      Projectile shot = new Rocket(target, coords[0] + 36, coords[1] + 36); 
       setTimer(80);
       return true;
     }
