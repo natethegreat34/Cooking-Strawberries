@@ -394,7 +394,7 @@ void draw() {
       //Calls projectiles into existence
       for (int x = 0; x < p.size(); x ++) {
         if (p.get(x) instanceof CannonBall) {
-          image(cannonBall, (float) p.get(x).getX(), (float) p.get(x).getY());
+          image(cannonBall, (float) p.get(x).getX() - 15, (float) p.get(x).getY() - 15);
         }
 
         if (p.get(x) instanceof Laser) {

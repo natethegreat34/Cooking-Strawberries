@@ -86,7 +86,7 @@ class CannonBall extends Projectile {
   private double Ychange;
 
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 50, 10);
+    super(inX, inY, 25, 10);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
@@ -176,7 +176,7 @@ class Laser extends Projectile {
 //Rocket
 class Rocket extends Projectile {
   public Rocket(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 100, 5);
+    super(inX, inY, 50, 5);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
