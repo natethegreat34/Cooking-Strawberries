@@ -92,8 +92,8 @@ class Cannon extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     //System.out.println(target);
     if (target != null) {
-      Projectile shot = new CannonBall(target, coords[0], coords[1]); 
-      setTimer(50);
+      Projectile shot = new CannonBall(target, coords[0] + 36, coords[1] + 36); 
+      setTimer(30);
       return true;
     }
     return false;
@@ -129,7 +129,7 @@ class LaserShooter extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     if (target != null) {
       Projectile shot = new Laser(target, coords[0], coords[1]); 
-      setTimer(80);
+      setTimer(50);
       return true;
     }
     return false;
@@ -167,7 +167,7 @@ class RocketLauncher extends Defense {
     Ship target = findNearest(coords[0], coords[1]);
     //System.out.println(target);
     if (target != null) {
-      Projectile shot = new Rocket(target, coords[0], coords[1]); 
+      Projectile shot = new Rocket(target, coords[0] + 36, coords[1] + 36); 
       setTimer(80);
       return true;
     }
@@ -196,10 +196,10 @@ class ForceFieldGen extends Defense {
 
   public ForceFieldGen(double inX, double inY) {
     super(inX, inY);
-    for (int x = -2; x < 3; x ++) {
-      for (int y = -2; y < 3; y ++) {
+    for (int x = -1; x < 2; x ++) {
+      for (int y = -1; y < 2; y ++) {
         if ( (int) inY / 72 + y < board.length && (int) inY / 72 + y > 0 && (int) inX / 72 + x > 0 &&(int) inX / 72 + x < board[0].length) {
-          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.125);
+          board[((int) inY / 72) + y][((int) inX / 72) + x].increaseSlow(0.25);
         }
       }
     }
@@ -209,4 +209,5 @@ class ForceFieldGen extends Defense {
     return true;
     //Doesn't need to attack anything
   }
+  
 }

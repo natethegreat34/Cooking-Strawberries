@@ -83,22 +83,22 @@ class Quick extends Ship {
     super();
     setSpeed(12);
     setHealth(50);
-    damage = 5;
+    damage = 10;
   }
 }
 class Heavy extends Ship {
   public Heavy() {
     super();
     setSpeed(1);
-    setHealth(2002);
-    damage = 10;
+    setHealth(1000);
+    damage = 15;
   }
 }
 class Boss extends Ship {
   public Boss() {
     super();
-    setSpeed(1);
-    setHealth(2002);
-    damage = 20;
+    setSpeed(3);
+    setHealth(2500);
+    damage = 100;
   }
 }
