@@ -75,7 +75,6 @@ void setup() {
   bup = loadImage("boss^.png");
   bright = loadImage("boss>.png");
   bdown = loadImage("bossv.png");
-
   end = loadImage("gallery_9873_7_17106.png");
   roc = loadImage("rocketShooter.png");
   las = loadImage("laserShooter.png");
@@ -114,15 +113,7 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-  /*
-  //for testing 
-   Ship q = new Normal();
-   q.setHealth(10);
-   s.add(q);
-   loading.resize(width, height);
-   image(loading, 0, 0); */
-
-  level = 1;
+  level = 10;
 } 
 void remaker() {
   for (int i = 0; i<= 288 *2; i = i +72) {
@@ -253,10 +244,10 @@ void draw() {
           image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
         }
         if (s.get(x).direction == 1) {
-          image (bright, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1])- 36);
+          image (bright, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
         }
         if (s.get(x).direction == 2) {
-          image (bdown, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1]) - 36);
+          image (bdown, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
         }
       }
     }
@@ -358,8 +349,7 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (v, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Quick) {
+        } else if (s.get(x) instanceof Quick) {
           if (s.get(x).direction == 0) {
             image (qup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -369,8 +359,7 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (qdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Heavy) {
+        } else if (s.get(x) instanceof Heavy) {
           if (s.get(x).direction == 0) {
             image (hup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -380,16 +369,15 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (hdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Boss) {
+        } else if (s.get(x) instanceof Boss) {
           if (s.get(x).direction == 0) {
-            image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
+            image (bup, (float) (s.get(x).getCoords()[0]  - 36), (float) (s.get(x).getCoords()[1]) - 36);
           }
           if (s.get(x).direction == 1) {
-            image (bright, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1])- 36);
+            image (bright, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
           }
           if (s.get(x).direction == 2) {
-            image (bdown, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1]) - 36);
+            image (bdown, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
           }
         }
       }
@@ -404,11 +392,7 @@ void draw() {
         }
 
         if (p.get(x) instanceof Laser) {
-          //image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
-          line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
-          stroke (0,255,0);
-          //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
-          //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
+          image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
 
         if (p.get(x) instanceof Rocket) {
@@ -429,32 +413,31 @@ void draw() {
         if (path.get(i).gettop() < mouseY && path.get(i).getbottom() > mouseY && path.get(i).getleft() < mouseX && path.get(i).getright() > mouseX) {
           tint (255, 0, 0, 100);
           stop = true;
-          
         }
       }
-    stop = false;
-      if (type == 0) {
-      whitecircle.resize(216,216);    
-      image(whitecircle, mouseX - 108, mouseY - 108);
-      noTint();
+      stop = false;
+      if (type == 0) {      
+        whitecircle.resize(216, 216);
+        image(whitecircle, mouseX - 108, mouseY - 108);
+        noTint();
         image(roc, mouseX - 36, mouseY - 36);
       }
       if (type == 1) {
-       whitecircle.resize(360,360);    
-      image(whitecircle, mouseX - 180, mouseY - 180);
-      noTint();
+        whitecircle.resize(360, 360);
+        image(whitecircle, mouseX - 180, mouseY - 180);
+        noTint();
         image(las, mouseX - 36, mouseY - 36);
       }
       if (type == 2) {
-               whitecircle.resize(504,504);    
-      image(whitecircle, mouseX - 252, mouseY - 252);
-      noTint();
+        whitecircle.resize(504, 504);
+        image(whitecircle, mouseX - 252, mouseY - 252);
+        noTint();
         image(can, mouseX - 36, mouseY - 36);
       }
       if (type == 3) {
-               whitecircle.resize(216,216);    
-      image(whitecircle, mouseX - 108, mouseY - 108);
-      noTint();
+        whitecircle.resize(216, 216);
+        image(whitecircle, mouseX - 108, mouseY - 108);
+        noTint();
         image(forc, mouseX - 36, mouseY - 36);
       }
     }
@@ -495,16 +478,6 @@ void mousePressed() {
   if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
     press = false;
     holdup = false;
-  }
-  boolean su = false;
-  for (int i = 0; i < t.size() && !su; i ++) {
-    if (mouseX > t.get(i).getCoords()[0] && mouseX < t.get(i).getCoords()[0] + 72 && mouseY > t.get(i).getCoords()[1] && mouseY < t.get(i).getCoords()[1] + 72) {
-      fill (255);
-      tint(255, 100);
-      image(whitecircle, (float) (t.get(i).getCoords()[0] - (int) (50 * PI) + 36), (float) (t.get(i).getCoords()[1] - (int) (50 * PI) + 36));
-      noTint();
-      su = true;
-    }
   }
 }
 void mouseReleased() {
