@@ -1,3 +1,5 @@
+### Nathan Cook and Timothy Stansberry
+
 # Directions
 	1) Press the play button
 	2) Using the money you gain by killing enemies select the type of defense you want by 
@@ -7,7 +9,7 @@
 	3) Keep doing step 2) until you beat all 10 levels. 
 	
 # DEVELOPMENT LOG
-### TIMOTHY STANSBERRY and NATHAN COOK
+
 
 
 ###### May 17th:
