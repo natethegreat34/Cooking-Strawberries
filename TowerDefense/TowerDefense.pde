@@ -11,15 +11,19 @@ PImage whitecircle;
 PImage grass;
 PImage dirt;
 PImage img;
+//normal ship
 PImage enemy;
 PImage k;
 PImage v;
+//quick ship
 PImage qup;
 PImage qright;
 PImage qdown;
+//heavy ship
 PImage hup;
 PImage hright;
 PImage hdown;
+//boss ship
 PImage bdown;
 PImage bright;
 PImage bup;
@@ -115,7 +119,7 @@ void setup() {
   remaker();
   tilemaker(f, 0);
 
-
+image(loading, 0,0);
   level = 1;
 } 
 void remaker() {
