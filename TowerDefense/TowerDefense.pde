@@ -53,7 +53,7 @@ void setup() {
 
   //starting amounts
   castleHealth = 100;
-  MOney = 150;
+  MOney = 100;
   f = (int)(Math.random()  * 7 + 1);
 
   //load images

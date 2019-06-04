@@ -86,7 +86,7 @@ class CannonBall extends Projectile {
   private double Ychange;
 
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 30, 10);
+    super(inX, inY, 50, 10);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
@@ -130,16 +130,17 @@ class Laser extends Projectile {
   private double Ychange;
 
   public Laser(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 20, 25);
+    super(inX, inY, 25, 25);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
     Xchange = targetCoords[0] - (inX + 36);
     Ychange = targetCoords[1] - (inY + 36);
     angle = Math.atan(Ychange / Xchange);
+    if (Xchange < 0 && Ychange == 0) angle = PI;
     if (Xchange < 0 && Ychange > 0) angle += (PI);
     if (Xchange < 0 && Ychange < 0) angle += (PI);
-    //System.out.println(angle * (180 / PI));
+    //System.out.println("XChange:" + Xchange + " YChange:" + Ychange + "Angle:" + angle + "\n");
   }
 
   public void move() {
@@ -174,7 +175,7 @@ class Laser extends Projectile {
 //Rocket
 class Rocket extends Projectile {
   public Rocket(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 50, 5);
+    super(inX, inY, 100, 5);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
