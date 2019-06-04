@@ -16,9 +16,13 @@ static class Levels {
     }
     if (level == 4) {
       output.add(10);
+      output.add(10);
 
     }
     if (level == 5) {
+      output.add(10);
+      output.add(10);
+      output.add(10);
       output.add(10);
 
     }

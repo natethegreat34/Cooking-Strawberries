@@ -114,13 +114,7 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-  /*
-  //for testing 
-   Ship q = new Normal();
-   q.setHealth(10);
-   s.add(q);
-   loading.resize(width, height);
-   image(loading, 0, 0); */
+
 
   level = 1;
 } 
