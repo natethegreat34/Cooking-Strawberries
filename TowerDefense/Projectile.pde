@@ -7,6 +7,8 @@ abstract class Projectile {
   private double [] tC;
   private double originalX;
   private double originalY;
+  private double originalTargetX;
+  private double originalTargetY;
 
   public Projectile(double inX, double inY, int inDamage, int inSpeed) {
     x = inX;
@@ -132,8 +134,8 @@ class Laser extends Projectile {
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
-    Xchange = targetCoords[0] - inX;
-    Ychange = targetCoords[1] - inY;
+    Xchange = targetCoords[0] - (inX + 36);
+    Ychange = targetCoords[1] - (inY + 36);
     angle = Math.atan(Ychange / Xchange);
     if (Xchange < 0 && Ychange > 0) angle += (PI);
     if (Xchange < 0 && Ychange < 0) angle += (PI);
