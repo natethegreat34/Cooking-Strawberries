@@ -428,16 +428,17 @@ void draw() {
         if (path.get(i).gettop() < mouseY && path.get(i).getbottom() > mouseY && path.get(i).getleft() < mouseX && path.get(i).getright() > mouseX) {
           tint (255, 0, 0, 100);
           stop = true;
+          
         }
       }
-      stop = false;
+     
       image(whitecircle, mouseX - (int) (50 * PI), mouseY - (int) (50 * PI));
-      noTint();
+      noTint(); stop = false;
       if (type == 0) {
-        image(roc, mouseX - 36, mouseY - 36);
+        image(roc, mouseX - 36,     noTint();
       }
       if (type == 1) {
-        image(las, mouseX - 36, mouseY - 36);
+        image(las, mouseX - 36,     noTint();
       }
       if (type == 2) {
         image(can, mouseX - 36, mouseY - 36);
