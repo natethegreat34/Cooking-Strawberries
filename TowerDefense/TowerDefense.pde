@@ -254,6 +254,7 @@ void draw() {
         }
       }
     }
+
     rect(0, 324 * 2, 576 * 2, 77 * 2);
     fill(255, 0, 0);
 
@@ -326,7 +327,7 @@ void draw() {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
           image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {   
           image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
@@ -352,8 +353,7 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (v, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Quick) {
+        } else if (s.get(x) instanceof Quick) {
           if (s.get(x).direction == 0) {
             image (qup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -363,8 +363,7 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (qdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Heavy) {
+        } else if (s.get(x) instanceof Heavy) {
           if (s.get(x).direction == 0) {
             image (hup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -374,8 +373,7 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (hdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        }
-        else if (s.get(x) instanceof Boss) {
+        } else if (s.get(x) instanceof Boss) {
           if (s.get(x).direction == 0) {
             image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
           }
@@ -400,7 +398,7 @@ void draw() {
         if (p.get(x) instanceof Laser) {
           //image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
           line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
-          stroke (0,255,0);
+          stroke (0, 255, 0);
           //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
           //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
@@ -416,39 +414,35 @@ void draw() {
     }
 
     if (holdup) {
-      boolean stop = false;
       fill(255);
       tint(255, 100);
-      for (int i = 0; i < path.size() && !stop; i ++) {
-        if (path.get(i).gettop() < mouseY && path.get(i).getbottom() > mouseY && path.get(i).getleft() < mouseX && path.get(i).getright() > mouseX) {
+      if (mouseY/72 < board.length && mouseX/72 < board [0].length) {
+        if (board [mouseY/72] [mouseX/72].op() == false) { 
           tint (255, 0, 0, 100);
-          stop = true;
-          
         }
       }
-    stop = false;
       if (type == 0) {
-      whitecircle.resize(216,216);    
-      image(whitecircle, mouseX - 108, mouseY - 108);
-      noTint();
+        whitecircle.resize(216, 216);    
+        image(whitecircle, mouseX - 108, mouseY - 108);
+        noTint();
         image(roc, mouseX - 36, mouseY - 36);
       }
       if (type == 1) {
-       whitecircle.resize(360,360);    
-      image(whitecircle, mouseX - 180, mouseY - 180);
-      noTint();
+        whitecircle.resize(360, 360);    
+        image(whitecircle, mouseX - 180, mouseY - 180);
+        noTint();
         image(las, mouseX - 36, mouseY - 36);
       }
       if (type == 2) {
-               whitecircle.resize(504,504);    
-      image(whitecircle, mouseX - 252, mouseY - 252);
-      noTint();
+        whitecircle.resize(504, 504);    
+        image(whitecircle, mouseX - 252, mouseY - 252);
+        noTint();
         image(can, mouseX - 36, mouseY - 36);
       }
       if (type == 3) {
-               whitecircle.resize(216,216);    
-      image(whitecircle, mouseX - 108, mouseY - 108);
-      noTint();
+        whitecircle.resize(216, 216);    
+        image(whitecircle, mouseX - 108, mouseY - 108);
+        noTint();
         image(forc, mouseX - 36, mouseY - 36);
       }
     }
@@ -502,6 +496,7 @@ void mouseReleased() {
         MOney -= 50;
         l = new RocketLauncher ((double) (x * 72 ), (double) (y * 72 ));
         board[y] [x].typer(0);
+        board[y] [x].placer(false);
       }
       if (type == 1) {
         MOney -= 10;
