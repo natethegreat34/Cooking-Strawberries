@@ -73,16 +73,20 @@ abstract class Projectile {
 
 //CannonBall
 class CannonBall extends Projectile {
+  private double angle;
   private double Xchange;
   private double Ychange;
   
   public CannonBall(Ship inputTarget, double inX, double inY) {
-    super(inX, inY, 20, 50);
+    super(inX, inY, 20, 10);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
     p.add(this);
     Xchange = targetCoords[0] - inX;
     Ychange = targetCoords[1] - inY;
+    angle = Math.atan(Ychange / Xchange);
+    if (Xchange < 0 && Ychange > 0) angle += (PI);
+    if (Xchange < 0 && Ychange < 0) angle += (PI);
   }
   
   public boolean checkExplode() {
@@ -104,19 +108,10 @@ class CannonBall extends Projectile {
       MOney += 1;
     }
     else {
-      setX(getX() + (Xchange / getspeed()));
-      setY(getY() + (Ychange / getspeed()));
-      /*
-      double[] targetCoords = target.getCoords();
-      double changeX = targetCoords[0] - x;
-      double changeY = targetCoords[1] - y;
-      double angle = Math.atan(changeY / changeX);
-      System.out.println(angle);
-      if (changeX < 0 && changeY > 0) angle += (PI / 2);
-      if (changeX < 0 && changeY < 0) angle += (PI);
-      x += speed * Math.cos(angle);
-      y += speed * Math.sin(angle);
-      */
+      //setX(getX() + (Xchange / getspeed()));
+      //setY(getY() + (Ychange / getspeed()));
+      setX(getX() + getspeed() * Math.cos(angle));
+      setY(getY() + getspeed() * Math.sin(angle));
     }
   }
 }
