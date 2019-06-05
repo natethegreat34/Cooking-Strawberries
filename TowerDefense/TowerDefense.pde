@@ -125,7 +125,7 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-  level = 10;
+  level = 1;
 
   //loading screen
   anewstart.resize(width, height);
