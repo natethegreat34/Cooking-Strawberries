@@ -192,7 +192,7 @@ void tilemaker(int row, int col) {
 
 //puts everything in motion
 void draw() {
-  //if the caslte is still alive
+  //if the castle is still alive
   if (castleHealth > 0 ) {
     //if there are no more ships to spawn for the level and all the ships have died
     if (s.size() == 0 && queue.size() == 0) {
