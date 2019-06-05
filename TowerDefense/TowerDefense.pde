@@ -372,6 +372,7 @@ void draw() {
         if (queue.size() == 0 && counter % 144 == 0 && s.size() == 0) {
           genQueue(level);
           level ++;
+          MOney += 10;
         } else if (counter % 36 == 0 && queue.size() != 0) {
           s.add(queue.remove(0));
         }

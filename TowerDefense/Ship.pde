@@ -8,6 +8,7 @@ class Ship {
   private int pathIndex;
   public int direction; //0, 1, or 2 (N, E, or S)
   
+  //Generic ship constructor, implemented in all other constructors
   public Ship() {
     pathIndex = 0;
     nextTile = path.get(0);
@@ -16,6 +17,7 @@ class Ship {
     y = nextTile.gettop() + 36;
   }
   
+  //Returns an array of the (x,y) 
   public double[] getCoords() {
     double[] output = new double[2];
     output[0] = x;

@@ -111,7 +111,7 @@ class CannonBall extends Projectile {
     return false;
   }
 
-  //Cannonball-specific
+  //Cannonball-specific move function, keeps it moving in a linear path either exploding on its target or going off the edge of the screen
   public void move() {
     if (target == null) {
       p.remove(this);
@@ -134,6 +134,7 @@ class Laser extends Projectile {
   private double Xchange;
   private double Ychange;
 
+  //Laser-specific constructor, finds the angle between  itself and the target based on the x and y differences
   public Laser(Ship inputTarget, double inX, double inY) {
     super(inX, inY, 25, 25);
     target = inputTarget;
@@ -147,6 +148,7 @@ class Laser extends Projectile {
     //System.out.println("XChange:" + Xchange + " YChange:" + Ychange + "Angle:" + angle + "\n");
   }
 
+  //Similar to  cannon move, but this is actually an invisible object that has a line trailing it, and doesn't die when it hits its target
   public void move() {
     findOtherTarget();
     if (getX() > 1152 || getX() < 0 || getY() > 800 || getY() < 0) {
@@ -161,6 +163,7 @@ class Laser extends Projectile {
     setY(getY() + getspeed() * Math.sin(angle));
   }
   
+  //Lets the laser hit multiple targets in one shot
   public void findOtherTarget() {
     for (int x = 0; x < s.size(); x ++) {
       double[] coords = s.get(x).getCoords();
@@ -176,12 +179,14 @@ class Laser extends Projectile {
 
 //Rocket
 class Rocket extends Projectile {
+  //Rocket-specific constructor
   public Rocket(Ship inputTarget, double inX, double inY) {
     super(inX, inY, 100, 5);
     target = inputTarget;
     double[] targetCoords = target.getCoords();
   }
   
+  //Rocket move, essentially allows the rocket to track its target using the same math as in cannon/laser but repeatedly
   public void move() {
     if (target == null) {
       p.remove(this);
