@@ -434,8 +434,8 @@ void draw() {
           }
 
           if (p.get(x) instanceof Laser) {
-            line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
             stroke (0, 255, 0);
+            line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
           }
 
           if (p.get(x) instanceof Rocket) {
