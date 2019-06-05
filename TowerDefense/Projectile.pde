@@ -101,7 +101,7 @@ class CannonBall extends Projectile {
     if (Xchange < 0 && Ychange < 0) angle += (PI);
   }
 
-  //
+  //Cannonball-specific method for checking whether it should damage the  target or not
   public boolean checkExplode() {
     double[] coords = target.getCoords();
     double distance = Math.sqrt(Math.pow((getX() - coords[0]), 2) + Math.pow((getY() - coords[1]), 2));
@@ -111,13 +111,13 @@ class CannonBall extends Projectile {
     return false;
   }
 
+  //Cannonball-specific
   public void move() {
     if (target == null) {
       p.remove(this);
     } else if (checkExplode()) {
       target.lowerHealth(getdamage());
       p.remove(this);
-      MOney += 1;
     } else {
       //setX(getX() + (Xchange / getspeed()));
       //setY(getY() + (Ychange / getspeed()));
@@ -153,7 +153,6 @@ class Laser extends Projectile {
       p.remove(this);
     } else if (checkExplode()) {
       target.lowerHealth(getdamage());
-      MOney += 1;
     }
     
     //setX(getX() + (Xchange / getspeed()));
@@ -168,7 +167,6 @@ class Laser extends Projectile {
       double distance = Math.sqrt(Math.pow((getX() - coords[0]), 2) + Math.pow((getY() - coords[1]), 2));
       if (distance < 25) {
         s.get(x).lowerHealth(getdamage());
-        MOney += 1;
       }
     }
   }
@@ -190,7 +188,6 @@ class Rocket extends Projectile {
     } else if (checkExplode()) {
       target.lowerHealth(getdamage());
       p.remove(this);
-      MOney += 1;
     } else {
       double[] targetCoords = target.getCoords();
       double changeX = targetCoords[0] - getX();

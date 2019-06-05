@@ -30,6 +30,7 @@ class Ship {
     if (adjustedSpeed == 0) adjustedSpeed = 0.5;
     if (health <= 0) {
       s.remove(this);
+      MOney += 1;
     }
     if (x >= nextTile.getleft() + 36 && ((y >= nextTile.gettop() + 36 && direction != 0) || (y <= nextTile.gettop() + 36 && direction == 0))) {
       x = nextTile.getleft() + 36;
