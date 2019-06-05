@@ -98,18 +98,16 @@
 	-Timothy:
 	
 ###### June 2nd: 
-	-Nathan:
+	-Nathan: Experimenting with the laser visual, though did not go as planned.
 	
 	-Timothy:
 	
 ###### June 3rd: 
-	-Nathan:
-	
-	-Timothy:
+	-Nathan and Timothy: Coded together taking turns of who was typing.  Worked on creating different 
+	levels with increasing difficulty and the last level having a boss.
 	
 ###### June 4th: 
-	-Nathan:
-	
-	-Timothy:
+	-Nathan and Timothy: Fixed any last bugs in the project and experimented with the game mechanics so 
+	the defences/ships weren't over powered.
 
 
