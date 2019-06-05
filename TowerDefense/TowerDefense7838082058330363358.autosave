@@ -58,7 +58,6 @@ boolean place;
 boolean ended;
 Defense l;
 boolean press;
-boolean demo;
 
 void setup() {
   size(1152, 800);
@@ -125,7 +124,7 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-  level = 10;
+  level = 1;
 
   //loading screen
   anewstart.resize(width, height);
@@ -196,21 +195,15 @@ void tilemaker(int row, int col) {
 
 //puts everything in motion
 void draw() {
-  if (keyPressed) {
-    if (key == 'd' || key == 'D') {
-      demo = true;
-      level = -1;
-      MOney = 10000;
-      castleHealth = 1000;
-    }
-  }
   //if the castle is still alive
   if (castleHealth > 0 ) {
     //if there are no more ships to spawn for the level and all the ships have died
-    if (s.size() == 0 && queue.size() == 0 && (level > 10 || (demo && level == 0))) {
-      image(anewstart, 0, 0);
-      //noLoop();
-    } else {
+    if (s.size() == 0 && queue.size() == 0) {
+      if (level > 10) {
+        image(anewstart, 0, 0);
+        noLoop();
+      }
+    }
       //re draws the board
       for (int e = 0; e < 9; e ++) { 
         for (int y = 0; y < 16; y ++) {
@@ -379,7 +372,6 @@ void draw() {
         if (queue.size() == 0 && counter % 144 == 0 && s.size() == 0) {
           genQueue(level);
           level ++;
-          MOney += 10;
         } else if (counter % 36 == 0 && queue.size() != 0) {
           s.add(queue.remove(0));
         }
@@ -442,7 +434,7 @@ void draw() {
           }
 
           if (p.get(x) instanceof Laser) {
-            stroke (0, 255, 0);
+                        stroke (0, 255, 0);
             line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
           }
 
@@ -502,37 +494,36 @@ void draw() {
       }
     }
   }
-}
 
 void mousePressed() {
   //when the player wants to buy a defense
 
   //rocket's box: rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
-  if (mouseX > 72 * 3 && mouseX < 72 * 6 && mouseY > 324 * 2 && MOney >= 50) {
+  if (mouseX > 144 * 2 - 72 && mouseX < 288 * 2 - 72 && mouseY > 324 * 2 && MOney >= 50) {
     press = true;
     holdup = true;
     type = 0;
   }
   // laser's box: rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
-  if (mouseX > 72 * 6 && mouseX < 72 * 9 && mouseY > 324 * 2 && MOney >= 10) {
+  if (mouseX > 288 * 2 - 144 && mouseX < 432 * 2 - 72 && mouseY > 324 * 2 && MOney >= 10) {
     press = true;
     holdup = true;
     type = 1;
   }
   //cannon's box: rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
-  if (mouseX > 72 * 9 && mouseX < 72 * 12 && mouseY > 324 * 2 && MOney >= 20) {
+  if (mouseX > 432 * 2 - 72 * 3 && mouseX < 576 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 2;
   }
   //forcefield's box: rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
-  if (mouseX > 72 * 12 && mouseX < 72 * 15 && mouseY > 324 * 2 && MOney >= 20) {
+  if (mouseX > 576 * 2 - 72 * 4 && mouseX < 620 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 3;
   }
-  // X's box: (x, 72 * 15, 324 * 2);
-  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2) { 
+  // X's box: 
+  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
     press = false;
     holdup = false;
   }
