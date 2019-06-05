@@ -18,6 +18,7 @@
 	If you decide you don't want that defense either get rid of it entirely by placing in 
 	the box labeled "X" or select another defense.
 	4) Keep doing step 2) until you beat all 10 levels. 
+	5) Whatever you do, DO NOT press "D", or all your progress will be lost and you will be taken into "demo" mode.
 	
 # DEVELOPMENT LOG
 ###### May 17th:
