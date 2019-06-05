@@ -17,7 +17,7 @@ class Ship {
     y = nextTile.gettop() + 36;
   }
   
-  //Returns an array of the (x,y) 
+  //Returns an array of the (x,y) coordinates of the ship
   public double[] getCoords() {
     double[] output = new double[2];
     output[0] = x;
@@ -25,11 +25,13 @@ class Ship {
     return output;
   }
   
+  //Algorithm for how the ships move. Follows the path determined at the beginning of the game
   public void move() {
     double adjustedSpeed = speed;
     Tile current = board[(int) y / 72][(int) x / 72];
     if (current.checkSlow()) adjustedSpeed = speed * (1 - current.getSlow());
     if (adjustedSpeed == 0) adjustedSpeed = 0.5;
+    //If dead, remove the picture and add money
     if (health <= 0) {
       s.remove(this);
       MOney += 1;
@@ -45,7 +47,6 @@ class Ship {
   }
   
   //When the ship reaches the center of a tile, it finds the next tile and then figures out which direction it needs to go (i.e. north, west, etc.) it travels till it reaches this tile's center and then repeats the process
-  
   private void findNextTile() {
     pathIndex += 1;
     if (pathIndex == path.size()) {
@@ -61,19 +62,23 @@ class Ship {
     }
   }
   
+  //Setter method for speed
   public void setSpeed(double inputSpeed) {
     speed = inputSpeed;
   }
   
+  //Lowers health by a certain amount
   public void lowerHealth(int damage) {
     health -= damage;
   }
   
+  //Setter method for health (used in constructors)
   public void setHealth(int inputHealth) {
     health = inputHealth;
   }
 }
 
+//Classic, normal grunt
 class Normal extends Ship {
   public Normal() {
     super();
@@ -82,6 +87,8 @@ class Normal extends Ship {
     damage = 5;
   }
 }
+
+//Speedy, possibly speedy enough to get past your cannons
 class Quick extends Ship {
   public Quick() {
     super();
@@ -90,6 +97,8 @@ class Quick extends Ship {
     damage = 10;
   }
 }
+
+//Might take a while, but it can  weather all those puny cannonballs
 class Heavy extends Ship {
   public Heavy() {
     super();
@@ -98,6 +107,8 @@ class Heavy extends Ship {
     damage = 15;
   }
 }
+
+//Good game
 class Boss extends Ship {
   public Boss() {
     super();

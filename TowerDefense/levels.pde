@@ -1,4 +1,6 @@
+//These two methods store everything we need for the levels, dictating what ships should be spawned and when
 static class Levels {
+  //Returns a list of numbers, specifying the amount of ships that should be spawned each level
   public static ArrayList<Integer> getNumbers(int level) {
     ArrayList<Integer> output = new ArrayList<Integer>();
     if (level == 1) {
@@ -61,6 +63,7 @@ static class Levels {
     return output;
   }
   
+  //Returns a list of types, corresponding with the numbers to represent which types of ships should be spawned
   public static ArrayList<Integer> getTypes(int level) {
     ArrayList<Integer> output = new ArrayList<Integer>();
     if (level == 1) {
