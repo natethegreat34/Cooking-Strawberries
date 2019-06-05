@@ -7,8 +7,9 @@ ArrayList <Defense> t = new ArrayList();
 ArrayList<Ship> queue = new ArrayList();
 //loading screen
 PImage loading;
-//Game Over screen
+//Game Over and winning screen 
 PImage end;
+PImage anewstart;
 // displays range
 PImage whitecircle;
 // tile colors
@@ -91,6 +92,7 @@ void setup() {
   forc = loadImage("ForceField.png");
   x = loadImage("X.png");
   loading = loadImage("morthal_swamp_03_by_baba64-d5qptgt.jpg");
+  anewstart = loadImage("A-Winner-is-You.jpg");
   laser = loadImage("laser.png");
   rocket = loadImage("rocket-146104_640.png");
 
@@ -125,6 +127,7 @@ void setup() {
   level = 1;
 
   //loading screen
+  anewstart.resize(width, height);
   loading.resize(width, height);
   image(loading, 0, 0);
 } 
@@ -196,188 +199,46 @@ void draw() {
   if (castleHealth > 0 ) {
     //if there are no more ships to spawn for the level and all the ships have died
     if (s.size() == 0 && queue.size() == 0) {
-      if (level == 10) {
-        end.resize(width, height);
-        image(end, 0, 0);
+      if (level > 10) {
+        image(anewstart, 0, 0);
+        noLoop();
       }
     }
-    //re draws the board
-    for (int e = 0; e < 9; e ++) { 
-      for (int y = 0; y < 16; y ++) {
-        if (board[e][y].getColor() == false) {
-          fill(0, 100);
-          stroke(255);
-          image(dirt, y * 72, e*72);
-          rect(y * 72, e*72, 72, 72);
-        } else {
-          fill(0, 100);
-          stroke(0);
-          image(grass, y * 72, e *72);
-          rect(y * 72, e*72, 72, 72);
-        }
-      }
-      // re draws the defenses onto the board
-      for (int i = 0; i < t.size(); i ++) {
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
-          image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
-          image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
-          image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {
-          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-      }
-    }
-
-    //draws the enemy ships based on their type and direction, also centers them
-    for (int x = 0; x < s.size(); x++) {
-      if (s.get(x) instanceof Normal) {
-        if (s.get(x).direction == 0) {
-          image (enemy, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-        if (s.get(x).direction == 1) {
-          image (k, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
-        }
-        if (s.get(x).direction == 2) {
-          image (v, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-      }
-      if (s.get(x) instanceof Quick) {
-        if (s.get(x).direction == 0) {
-          image (qup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-        if (s.get(x).direction == 1) {
-          image (qright, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
-        }
-        if (s.get(x).direction == 2) {
-          image (qdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-      }
-      if (s.get(x) instanceof Heavy) {
-        if (s.get(x).direction == 0) {
-          image (hup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-        if (s.get(x).direction == 1) {
-          image (hright, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
-        }
-        if (s.get(x).direction == 2) {
-          image (hdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
-        }
-      }
-      if (s.get(x) instanceof Boss) {
-        if (s.get(x).direction == 0) {
-          image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
-        }
-        if (s.get(x).direction == 1) {
-          image (bright, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1])- 36);
-        }
-        if (s.get(x).direction == 2) {
-          image (bdown, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1]) - 36);
-        }
-      }
-    }
-
-    // draws the boxes that appear at the bottom of the screen
-
-    // box for money, health, and level
-    rect(0, 324 * 2, 576 * 2, 77 * 2);
-    fill(255, 0, 0);
-
-    //rocket
-    rect(144 * 2 - 72, 324 * 2, 72 * 3, 77 * 2);
-    fill(255, 255, 0);
-
-    //laser
-    rect(288 * 2 - 144, 324 * 2, 72 * 3, 77 * 2);
-    fill(0, 255, 255);
-
-    //cannon
-    rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 77 * 2);
-    fill(255);
-
-    //forcefield
-    rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 77 * 2);
-    fill(0, 0, 255);
-
-    // X
-    image(x, 72 * 15, 324 * 2);
-    text("Health:" + castleHealth, 10 * 2, 345  * 2);
-    text("Level:" + (level - 1), 10 * 2, 360 * 2);
-    text("Money ($):" + MOney, 10 * 2, 375  * 2);
-    fill(0);
-    text("Rocket Launcher ($50):", 150 * 2 - 72, 345 * 2);
-    text("Laser Shooter ($10):", 300  * 2 - 144, 345 * 2);
-    text("Cannon ($20):", 454  * 2 - 72 * 3, 345 * 2);
-    text("Force Field ($20):", 605  * 2 - 72 * 4, 345 * 2);
-    //don't really need, but makes sure nothing goes over the defenses
-    for (int i = 0; i < t.size(); i ++) {
-      if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
-        image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
-      if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
-        image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
-      if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
-        image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
-      if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
-        image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-      }
-    }
-
-    //if the game isn't paused
-    if (holdup == false) {
-      counter ++;
-      dirt.resize(72, 72);
-      // redraw the board
-      for (int i = 0; i < 9; i ++) { 
+      //re draws the board
+      for (int e = 0; e < 9; e ++) { 
         for (int y = 0; y < 16; y ++) {
-          if (board[i][y].getColor() == false) {
+          if (board[e][y].getColor() == false) {
             fill(0, 100);
             stroke(255);
-            image(dirt, y * 72, i*72);
-            rect(y * 72, i*72, 72, 72);
+            image(dirt, y * 72, e*72);
+            rect(y * 72, e*72, 72, 72);
           } else {
             fill(0, 100);
             stroke(0);
-            image(grass, y * 72, i * 72);
-            rect(y * 72, i* 72, 72, 72);
+            image(grass, y * 72, e *72);
+            rect(y * 72, e*72, 72, 72);
+          }
+        }
+        // re draws the defenses onto the board
+        for (int i = 0; i < t.size(); i ++) {
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
+            image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
+            image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
+            image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {
+            image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
           }
         }
       }
-      //redraw the defences
-      for (int i = 0; i < t.size(); i ++) {
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
-          image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
-          image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
-          image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {   
-          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
-        }
-      }
 
-      //Generating the ships
-      if (queue.size() == 0 && counter % 144 == 0 && s.size() == 0) {
-        genQueue(level);
-        level ++;
-      } else if (counter % 36 == 0 && queue.size() != 0) {
-        s.add(queue.remove(0));
-      }
-
-      // redraw the ships after they move
+      //draws the enemy ships based on their type and direction, also centers them
       for (int x = 0; x < s.size(); x++) {
-        s.get(x).move();
-        if (x == s.size());
-        else if (s.get(x) instanceof Normal) {
+        if (s.get(x) instanceof Normal) {
           if (s.get(x).direction == 0) {
             image (enemy, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -387,7 +248,8 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (v, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        } else if (s.get(x) instanceof Quick) {
+        }
+        if (s.get(x) instanceof Quick) {
           if (s.get(x).direction == 0) {
             image (qup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -397,7 +259,8 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (qdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        } else if (s.get(x) instanceof Heavy) {
+        }
+        if (s.get(x) instanceof Heavy) {
           if (s.get(x).direction == 0) {
             image (hup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
@@ -407,7 +270,8 @@ void draw() {
           if (s.get(x).direction == 2) {
             image (hdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
           }
-        } else if (s.get(x) instanceof Boss) {
+        }
+        if (s.get(x) instanceof Boss) {
           if (s.get(x).direction == 0) {
             image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
           }
@@ -420,77 +284,216 @@ void draw() {
         }
       }
 
-      //Has all defenses attack
-      for (int x = 0; x < t.size(); x ++) {
-        t.get(x).attack();
-      }
-      //Calls projectiles into existence
-      for (int x = 0; x < p.size(); x ++) {
-        if (p.get(x) instanceof CannonBall) {
-          image(cannonBall, (float) p.get(x).getX() - 15, (float) p.get(x).getY() - 15);
-        }
+      // draws the boxes that appear at the bottom of the screen
 
-        if (p.get(x) instanceof Laser) {
-          line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
-          stroke (0, 255, 0);
-        }
+      // box for money, health, and level
+      rect(0, 324 * 2, 576 * 2, 77 * 2);
+      fill(255, 0, 0);
 
-        if (p.get(x) instanceof Rocket) {
-          image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
-        }
-      }
+      //rocket
+      rect(144 * 2 - 72, 324 * 2, 72 * 3, 77 * 2);
+      fill(255, 255, 0);
 
-      //Makes projectiles move
-      for (int x = 0; x < p.size(); x ++) {
-        p.get(x).move();
-      }
-    }
+      //laser
+      rect(288 * 2 - 144, 324 * 2, 72 * 3, 77 * 2);
+      fill(0, 255, 255);
 
-    //if game is paused
-    if (holdup) {
-      //makes the circle white or red to show range and where a defense can be placed
+      //cannon
+      rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 77 * 2);
       fill(255);
-      tint(255, 100);
-      if (mouseY/72 < board.length && mouseX/72 < board [0].length) {
-        if (board [mouseY/72] [mouseX/72].op() == false) { 
-          tint (255, 0, 0, 100);
+
+      //forcefield
+      rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 77 * 2);
+      fill(0, 0, 255);
+
+      // X
+      image(x, 72 * 15, 324 * 2);
+      text("Health:" + castleHealth, 10 * 2, 345  * 2);
+      text("Level:" + (level - 1), 10 * 2, 360 * 2);
+      text("Money ($):" + MOney, 10 * 2, 375  * 2);
+      fill(0);
+      text("Rocket Launcher ($50):", 150 * 2 - 72, 345 * 2);
+      text("Laser Shooter ($10):", 300  * 2 - 144, 345 * 2);
+      text("Cannon ($20):", 454  * 2 - 72 * 3, 345 * 2);
+      text("Force Field ($20):", 605  * 2 - 72 * 4, 345 * 2);
+      //don't really need, but makes sure nothing goes over the defenses
+      for (int i = 0; i < t.size(); i ++) {
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
+          image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
+          image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
+          image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+        }
+        if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {           
+          image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
         }
       }
-      // range differs based on defense
-      if (type == 0) {
-        whitecircle.resize(250, 250);    
-        image(whitecircle, mouseX - 125, mouseY - 125);
-        noTint();
-        image(roc, mouseX - 36, mouseY - 36);
-      }
-      if (type == 1) {
-        whitecircle.resize(360, 360);    
-        image(whitecircle, mouseX - 180, mouseY - 180);
-        noTint();
-        image(las, mouseX - 36, mouseY - 36);
-      }
-      if (type == 2) {
-        whitecircle.resize(504, 504);    
-        image(whitecircle, mouseX - 252, mouseY - 252);
-        noTint();
-        image(can, mouseX - 36, mouseY - 36);
-      }
-      if (type == 3) {
-        whitecircle.resize(216, 216);    
-        image(whitecircle, mouseX - 108, mouseY - 108);
-        noTint();
-        image(forc, mouseX - 36, mouseY - 36);
-      }
-    }
 
-    //if the castle dies
-    if (castleHealth <= 0) {
-      noLoop();
-      end.resize(width, height);
-      image(end, 0, 0);
+      //if the game isn't paused
+      if (holdup == false) {
+        counter ++;
+        dirt.resize(72, 72);
+        // redraw the board
+        for (int i = 0; i < 9; i ++) { 
+          for (int y = 0; y < 16; y ++) {
+            if (board[i][y].getColor() == false) {
+              fill(0, 100);
+              stroke(255);
+              image(dirt, y * 72, i*72);
+              rect(y * 72, i*72, 72, 72);
+            } else {
+              fill(0, 100);
+              stroke(0);
+              image(grass, y * 72, i * 72);
+              rect(y * 72, i* 72, 72, 72);
+            }
+          }
+        }
+        //redraw the defences
+        for (int i = 0; i < t.size(); i ++) {
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
+            image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int) t.get(i).getCoords()[1]/72] [(int) t.get(i).getCoords()[0]/72].type == 1) {
+            image(las, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 2) {
+            image(can, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+          if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 3) {   
+            image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
+          }
+        }
+
+        //Generating the ships
+        if (queue.size() == 0 && counter % 144 == 0 && s.size() == 0) {
+          genQueue(level);
+          level ++;
+        } else if (counter % 36 == 0 && queue.size() != 0) {
+          s.add(queue.remove(0));
+        }
+
+        // redraw the ships after they move
+        for (int x = 0; x < s.size(); x++) {
+          s.get(x).move();
+          if (x == s.size());
+          else if (s.get(x) instanceof Normal) {
+            if (s.get(x).direction == 0) {
+              image (enemy, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+            if (s.get(x).direction == 1) {
+              image (k, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
+            }
+            if (s.get(x).direction == 2) {
+              image (v, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+          } else if (s.get(x) instanceof Quick) {
+            if (s.get(x).direction == 0) {
+              image (qup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+            if (s.get(x).direction == 1) {
+              image (qright, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
+            }
+            if (s.get(x).direction == 2) {
+              image (qdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+          } else if (s.get(x) instanceof Heavy) {
+            if (s.get(x).direction == 0) {
+              image (hup, (float) (s.get(x).getCoords()[0] - 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+            if (s.get(x).direction == 1) {
+              image (hright, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1])- 24 );
+            }
+            if (s.get(x).direction == 2) {
+              image (hdown, (float) (s.get(x).getCoords()[0]- 24), (float) (s.get(x).getCoords()[1]) - 24);
+            }
+          } else if (s.get(x) instanceof Boss) {
+            if (s.get(x).direction == 0) {
+              image (bup, (float) (s.get(x).getCoords()[0] - 36), (float) (s.get(x).getCoords()[1]) - 36);
+            }
+            if (s.get(x).direction == 1) {
+              image (bright, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1])- 36);
+            }
+            if (s.get(x).direction == 2) {
+              image (bdown, (float) (s.get(x).getCoords()[0]- 36), (float) (s.get(x).getCoords()[1]) - 36);
+            }
+          }
+        }
+
+        //Has all defenses attack
+        for (int x = 0; x < t.size(); x ++) {
+          t.get(x).attack();
+        }
+        //Calls projectiles into existence
+        for (int x = 0; x < p.size(); x ++) {
+          if (p.get(x) instanceof CannonBall) {
+            image(cannonBall, (float) p.get(x).getX() - 15, (float) p.get(x).getY() - 15);
+          }
+
+          if (p.get(x) instanceof Laser) {
+            line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
+            stroke (0, 255, 0);
+          }
+
+          if (p.get(x) instanceof Rocket) {
+            image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
+          }
+        }
+
+        //Makes projectiles move
+        for (int x = 0; x < p.size(); x ++) {
+          p.get(x).move();
+        }
+      }
+
+      //if game is paused
+      if (holdup) {
+        //makes the circle white or red to show range and where a defense can be placed
+        fill(255);
+        tint(255, 100);
+        if (mouseY/72 < board.length && mouseX/72 < board [0].length) {
+          if (board [mouseY/72] [mouseX/72].op() == false) { 
+            tint (255, 0, 0, 100);
+          }
+        }
+        // range differs based on defense
+        if (type == 0) {
+          whitecircle.resize(250, 250);    
+          image(whitecircle, mouseX - 125, mouseY - 125);
+          noTint();
+          image(roc, mouseX - 36, mouseY - 36);
+        }
+        if (type == 1) {
+          whitecircle.resize(360, 360);    
+          image(whitecircle, mouseX - 180, mouseY - 180);
+          noTint();
+          image(las, mouseX - 36, mouseY - 36);
+        }
+        if (type == 2) {
+          whitecircle.resize(504, 504);    
+          image(whitecircle, mouseX - 252, mouseY - 252);
+          noTint();
+          image(can, mouseX - 36, mouseY - 36);
+        }
+        if (type == 3) {
+          whitecircle.resize(216, 216);    
+          image(whitecircle, mouseX - 108, mouseY - 108);
+          noTint();
+          image(forc, mouseX - 36, mouseY - 36);
+        }
+      }
+
+      //if the castle dies
+      if (castleHealth <= 0) {
+        noLoop();
+        end.resize(width, height);
+        image(end, 0, 0);
+      }
     }
   }
-}
 
 void mousePressed() {
   //when the player wants to buy a defense
