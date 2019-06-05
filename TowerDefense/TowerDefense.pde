@@ -202,18 +202,15 @@ void draw() {
       level = -1;
       MOney = 10000;
       castleHealth = 1000;
-      
     }
   }
   //if the castle is still alive
   if (castleHealth > 0 ) {
     //if there are no more ships to spawn for the level and all the ships have died
-    if (s.size() == 0 && queue.size() == 0) {
-      if (level > 10 || (demo && level == 0)) {
-        image(anewstart, 0, 0);
-        noLoop();
-      }
-    }
+    if (s.size() == 0 && queue.size() == 0 && (level > 10 || (demo && level == 0))) {
+      image(anewstart, 0, 0);
+      //noLoop();
+    } else {
       //re draws the board
       for (int e = 0; e < 9; e ++) { 
         for (int y = 0; y < 16; y ++) {
@@ -505,6 +502,7 @@ void draw() {
       }
     }
   }
+}
 
 void mousePressed() {
   //when the player wants to buy a defense
