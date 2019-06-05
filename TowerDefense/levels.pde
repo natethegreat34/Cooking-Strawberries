@@ -60,6 +60,12 @@ static class Levels {
       output.add(20);
       output.add(1);
     }
+    if (level == -1) {
+      output.add(5);
+      output.add(5);
+      output.add(5);
+      output.add(5);
+    }
     return output;
   }
   
@@ -119,6 +125,12 @@ static class Levels {
 
     }
     if (level == 10) {
+      output.add(0);
+      output.add(1);
+      output.add(2);
+      output.add(3);
+    }
+    if (level == -1) {
       output.add(0);
       output.add(1);
       output.add(2);

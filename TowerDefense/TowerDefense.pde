@@ -58,6 +58,7 @@ boolean place;
 boolean ended;
 Defense l;
 boolean press;
+boolean demo;
 
 void setup() {
   size(1152, 800);
@@ -195,11 +196,20 @@ void tilemaker(int row, int col) {
 
 //puts everything in motion
 void draw() {
+  if (keyPressed) {
+    if (key == 'd' || key == 'D') {
+      demo = true;
+      level = -1;
+      MOney = 10000;
+      castleHealth = 1000;
+      
+    }
+  }
   //if the castle is still alive
   if (castleHealth > 0 ) {
     //if there are no more ships to spawn for the level and all the ships have died
     if (s.size() == 0 && queue.size() == 0) {
-      if (level > 10) {
+      if (level > 10 || (demo && level == 0)) {
         image(anewstart, 0, 0);
         noLoop();
       }
@@ -523,8 +533,8 @@ void mousePressed() {
     holdup = true;
     type = 3;
   }
-  // X's box: 
-  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
+  // X's box: (x, 72 * 15, 324 * 2);
+  if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2) { 
     press = false;
     holdup = false;
   }
