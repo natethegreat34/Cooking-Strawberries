@@ -194,10 +194,11 @@ class Rocket extends Projectile {
       double changeY = targetCoords[1] - getY();
       double angle = Math.atan(changeY / changeX);
       //System.out.println(angle);
+      if (changeX < 0 && changeY == 0) angle = PI;
       if (changeX < 0 && changeY > 0) angle += (PI / 2);
       if (changeX < 0 && changeY < 0) angle += (PI);
-      setX(getspeed() * Math.cos(angle));
-      setY(getspeed() * Math.sin(angle));
+      setX(getX() + getspeed() * Math.cos(angle));
+      setY(getY() + getspeed() * Math.sin(angle));
     }
   }
 }
