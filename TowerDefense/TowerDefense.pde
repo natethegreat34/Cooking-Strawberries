@@ -1,6 +1,5 @@
 import java.util.*;
 Tile[][] board = new Tile[9][16];
-
 ArrayList <Tile> path = new ArrayList();
 ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
@@ -123,10 +122,14 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-//loading screen
-image(loading, 0,0);
   level = 1;
+
+  //loading screen
+  loading.resize(width, height);
+  image(loading, 0, 0);
 } 
+
+//sets up board modeled after a 2d-array of Tiles
 void remaker() {
   for (int i = 0; i<= 288 *2; i = i +72) {
     for (int y = 0; y<= 540 *2; y = y +72) {
@@ -146,21 +149,27 @@ void remaker() {
   board[f][0].placer(false);
   path.add(a);
 }
+
+//randomly generates a path for enemy ships to follow
 void tilemaker(int row, int col) {
   boolean done = false;
   while (!done) {
     int l = (int) (Math.random() * 3);
+    //if the edge of the board is reached, stop
     if (col >= 15) {
       done = true;
-    } else if (l == 0 && row > 1 && row < board.length - 1 && board[row - 1][col].getColor()) {
+    } 
+    //if l is 0, the path will turn up, if there is room
+    else if (l == 0 && row > 1 && row < board.length - 1 && board[row - 1][col].getColor()) {
       row = row - 1;
       if (col > 0 && (board[row][col-1].getColor() || board[row + 1][col].getColor() || board[row + 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row + 1][col].getColor() || board[row + 1][col+1].getColor())) {
         board[row][col].setcolor(false);
         board[row][col].placer(false);
-        path.add( board[row][col]);
+        path.add(board[row][col]);
       } else {
         row = row + 1;
       }
+      //if l is 1, the path will turn down, if there is room
     } else if (l == 1 && row >= 1 && row + 1 < board.length - 1 && board[row + 1][col].getColor()) {
       row = row + 1;
       if (col > 0 && (board[row][col-1].getColor() || board[row - 1][col].getColor() || board[row - 1][col-1].getColor()) && (board[row][col+1].getColor() || board[row - 1][col].getColor() || board[row - 1][col+1].getColor())) {
@@ -171,7 +180,8 @@ void tilemaker(int row, int col) {
       } else {
         row = row - 1;
       }
-    } else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
+    }//if l is 2, the path will go right 
+    else if (l == 2 && col >= 0 && col + 1 < board[row].length && board[row][col + 1].getColor()) {
       col = col + 1;
       board[row][col].setcolor(false);
       board[row][col].placer(false);
@@ -179,14 +189,19 @@ void tilemaker(int row, int col) {
     }
   }
 }
+
+//puts everything in motion
 void draw() {
+  //if the caslte is still alive
   if (castleHealth > 0 ) {
+    //if there are no more ships to spawn for the level and all the ships have died
     if (s.size() == 0 && queue.size() == 0) {
       if (level == 10) {
         end.resize(width, height);
         image(end, 0, 0);
       }
     }
+    //re draws the board
     for (int e = 0; e < 9; e ++) { 
       for (int y = 0; y < 16; y ++) {
         if (board[e][y].getColor() == false) {
@@ -201,6 +216,7 @@ void draw() {
           rect(y * 72, e*72, 72, 72);
         }
       }
+      // re draws the defenses onto the board
       for (int i = 0; i < t.size(); i ++) {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
           image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
@@ -217,6 +233,7 @@ void draw() {
       }
     }
 
+    //draws the enemy ships based on their type and direction, also centers them
     for (int x = 0; x < s.size(); x++) {
       if (s.get(x) instanceof Normal) {
         if (s.get(x).direction == 0) {
@@ -264,6 +281,9 @@ void draw() {
       }
     }
 
+    // draws the boxes that appear at the bottom of the screen
+
+    // box for money, health, and level
     rect(0, 324 * 2, 576 * 2, 77 * 2);
     fill(255, 0, 0);
 
@@ -293,6 +313,7 @@ void draw() {
     text("Laser Shooter ($10):", 300  * 2 - 144, 345 * 2);
     text("Cannon ($20):", 454  * 2 - 72 * 3, 345 * 2);
     text("Force Field ($20):", 605  * 2 - 72 * 4, 345 * 2);
+    //don't really need, but makes sure nothing goes over the defenses
     for (int i = 0; i < t.size(); i ++) {
       if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
         image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
@@ -307,10 +328,12 @@ void draw() {
         image(forc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
       }
     }
+
+    //if the game isn't paused
     if (holdup == false) {
       counter ++;
       dirt.resize(72, 72);
-
+      // redraw the board
       for (int i = 0; i < 9; i ++) { 
         for (int y = 0; y < 16; y ++) {
           if (board[i][y].getColor() == false) {
@@ -326,6 +349,7 @@ void draw() {
           }
         }
       }
+      //redraw the defences
       for (int i = 0; i < t.size(); i ++) {
         if (board [(int)t.get(i).getCoords()[1]/72] [(int)t.get(i).getCoords()[0]/72].type == 0) {
           image(roc, (float) t.get(i).getCoords()[0], (float) t.get(i).getCoords()[1]);
@@ -349,6 +373,7 @@ void draw() {
         s.add(queue.remove(0));
       }
 
+      // redraw the ships after they move
       for (int x = 0; x < s.size(); x++) {
         s.get(x).move();
         if (x == s.size());
@@ -394,6 +419,7 @@ void draw() {
           }
         }
       }
+
       //Has all defenses attack
       for (int x = 0; x < t.size(); x ++) {
         t.get(x).attack();
@@ -405,24 +431,24 @@ void draw() {
         }
 
         if (p.get(x) instanceof Laser) {
-          //image(laser, (float) p.get(x).getX(), (float) p.get(x).getY());
           line((float) p.get(x).getOriginalX() + 36, (float) p.get(x).getOriginalY() + 36, (float) p.get(x).getX(), (float) p.get(x).getY());
           stroke (0, 255, 0);
-          //line((float) p.get(x).getX(), (float) p.get(x).getY(), (float) p.get(x).getY(), (float) p.get(x).getY());
-          //line((float)p.get(x).getX(), (float)p.get(x).getY(), (float)targetCoords[0], (float)targetCoords[1]);
         }
 
         if (p.get(x) instanceof Rocket) {
           image(rocket, (float) p.get(x).getX(), (float) p.get(x).getY());
         }
       }
+
       //Makes projectiles move
       for (int x = 0; x < p.size(); x ++) {
         p.get(x).move();
       }
     }
 
+    //if game is paused
     if (holdup) {
+      //makes the circle white or red to show range and where a defense can be placed
       fill(255);
       tint(255, 100);
       if (mouseY/72 < board.length && mouseX/72 < board [0].length) {
@@ -430,9 +456,10 @@ void draw() {
           tint (255, 0, 0, 100);
         }
       }
+      // range differs based on defense
       if (type == 0) {
-        whitecircle.resize(216, 216);    
-        image(whitecircle, mouseX - 108, mouseY - 108);
+        whitecircle.resize(250, 250);    
+        image(whitecircle, mouseX - 125, mouseY - 125);
         noTint();
         image(roc, mouseX - 36, mouseY - 36);
       }
@@ -455,6 +482,8 @@ void draw() {
         image(forc, mouseX - 36, mouseY - 36);
       }
     }
+
+    //if the castle dies
     if (castleHealth <= 0) {
       noLoop();
       end.resize(width, height);
@@ -464,37 +493,40 @@ void draw() {
 }
 
 void mousePressed() {
-  //rocket         rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
+  //when the player wants to buy a defense
+
+  //rocket's box: rect(144 * 2 - 72, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 144 * 2 - 72 && mouseX < 288 * 2 - 72 && mouseY > 324 * 2 && MOney >= 50) {
     press = true;
     holdup = true;
     type = 0;
   }
-  // laser:         rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
+  // laser's box: rect(288 * 2 - 144, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 288 * 2 - 144 && mouseX < 432 * 2 - 72 && mouseY > 324 * 2 && MOney >= 10) {
     press = true;
     holdup = true;
     type = 1;
   }
-  //cannon        rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
+  //cannon's box: rect(432 * 2 - 72 * 3, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 432 * 2 - 72 * 3 && mouseX < 576 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 2;
   }
-  //forcefield           rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
+  //forcefield's box: rect(576 * 2 - 72 * 4, 324 * 2, 72 * 3, 74 * 2);
   if (mouseX > 576 * 2 - 72 * 4 && mouseX < 620 * 2 - 72 && mouseY > 324 * 2 && MOney >= 20) {
     press = true;
     holdup = true;
     type = 3;
   }
-  // X
+  // X's box: 
   if (mouseX > 72 * 15 && mouseX < 72 * 16 && mouseY > 324 * 2 && MOney >= 20) {
     press = false;
     holdup = false;
   }
 }
 void mouseReleased() {
+  //when the player decides on the tile to place the defense
 
   if (press && mouseX > 0 && mouseX < 576* 2 && mouseY < 324 * 2 && MOney >= 10) {
     int y = mouseY/72;
@@ -522,6 +554,7 @@ void mouseReleased() {
         l = new ForceFieldGen ((double) (x * 72 ), (double) (y * 72));
         board[y] [x].typer(3);
       }
+      //the tile is now not open
       board[y] [x].placer(false);
       press = false;
       t.add(l);
@@ -530,6 +563,7 @@ void mouseReleased() {
 }
 
 void genQueue(int inLevel) {
+  //gets the ships ready to be called into the level 
   if (queue.size() != 0) System.out.println("MAJOR ERROR");
   else {
     ArrayList<Integer> numbers = Levels.getNumbers(inLevel);
