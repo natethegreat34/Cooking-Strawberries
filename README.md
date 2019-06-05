@@ -2,7 +2,7 @@
 # Description
 	This game is a tower defense game.  It contains four types of enemy ships: normal, quick,
 	heavy, and boss.  The normal ships are nothing special, quick ships are extra fast, heavy 
-	ships have extra health, and the boss ship has slightly extra speed and extra health.  In 
+	ships have extra health (and are rather slow as a result), and the boss ship has slightly extra speed and extra health.  In 
 	order to defend the off screen castle, the player is provided four defense options: rocket 
 	launcher, laser shooter, cannon, and forcefield.  The rockets launcher shoots a tracking missle 
 	at a ship, the laser shooter shoots a laser that can hit more than one ship, the cannon shoots 
@@ -94,19 +94,19 @@
 	
 ###### May 31st: 
 	-Nathan:
-	-Timothy:
+	-Timothy: Worked in class to adjust the sizes of everything, in order to make the interface itself bigger. Also fixed errors with forcefields.
 	
 ###### June 1st: 
 	-Nathan: Added a loading screen. Fixed the bug of ships moving upward on the board. Coded 
 	so that a white circle is shown around the defense and turns red if the mouse is over an 
 	invalid placemet.
 	
-	-Timothy:
+	-Timothy: Wrote code allowing the display the projectile movements I coded earlier. Though it is buggy, its a good place to start. Also added in code that allowed the defenses to only target ships within their range.
 	
 ###### June 2nd: 
 	-Nathan: Experimenting with the laser visual, though did not go as planned.
 	
-	-Timothy:
+	-Timothy: Worked on individual projectile movements, instead of having them all just act as a "seeking missile". Coded cannonballs to fire in a straight line and explode on impact, and tried to get lasers to act as a straight line, but failed.
 	
 ###### June 3rd: 
 	-Nathan and Timothy: Coded together taking turns of who was typing.  Worked on creating different 
