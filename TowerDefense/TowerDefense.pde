@@ -6,46 +6,53 @@ ArrayList <Ship> s = new ArrayList();
 ArrayList<Projectile> p = new ArrayList();
 ArrayList <Defense> t = new ArrayList();
 ArrayList<Ship> queue = new ArrayList();
+//loading screen
 PImage loading;
+//Game Over screen
+PImage end;
+// displays range
 PImage whitecircle;
+// tile colors
 PImage grass;
 PImage dirt;
-PImage img;
-//normal ship
+//normal ship (^,>,v)
 PImage enemy;
 PImage k;
 PImage v;
-//quick ship
+//quick ship (^,>,v)
 PImage qup;
 PImage qright;
 PImage qdown;
-//heavy ship
+//heavy ship (^,>,v)
 PImage hup;
 PImage hright;
 PImage hdown;
-//boss ship
-PImage bdown;
-PImage bright;
+//boss ship (^,>,v)'
 PImage bup;
-PImage end;
+PImage bright;
+PImage bdown;
+// Defense 
 PImage roc;
 PImage las;
 PImage can;
+// For the X box
 PImage x;
 //Projectiles
 PImage cannonBall;
 PImage laser;
 PImage rocket;
 PImage forc;
+// current level
 int level;
 int hleft;
+// randomly selected number for random path
 int f;
-int mx;
-int my;
 int counter;
 int castleHealth;
 int MOney;
+// type of defense
 int type;
+// is the game paused
 boolean holdup;
 boolean place;
 boolean ended;
@@ -66,7 +73,6 @@ void setup() {
   whitecircle = loadImage("WC.png");
   grass = loadImage("grass14.png");
   dirt = loadImage("Seamless ground sand texture (4).jpg");
-  img = loadImage("BFjwi.png");
   enemy= loadImage("roundysh.png");
   k = loadImage("Right.png");
   v = loadImage("Down.png");
@@ -79,7 +85,6 @@ void setup() {
   bup = loadImage("boss^.png");
   bright = loadImage("boss>.png");
   bdown = loadImage("bossv.png");
-
   end = loadImage("gallery_9873_7_17106.png");
   roc = loadImage("rocketShooter.png");
   las = loadImage("laserShooter.png");
@@ -118,7 +123,7 @@ void setup() {
   //setting up methods
   remaker();
   tilemaker(f, 0);
-
+//loading screen
 image(loading, 0,0);
   level = 1;
 } 
