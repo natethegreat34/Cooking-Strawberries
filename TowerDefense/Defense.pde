@@ -6,7 +6,8 @@ abstract class Defense {
   private int timer;
 
   abstract boolean attack();
-
+  
+  //Constructor for  general defenses, sets up private variables
   public Defense(double inX, double inY) {
     x = inX;
     y = inY;
@@ -14,18 +15,18 @@ abstract class Defense {
     t.add(this);
   }
 
+  //Checks whether or not a defense can shoot based on ships in its area and its buffer time
   public boolean canShoot() {
     if(findNearest(x,y) != null){
-    if(sqrt ((float)(Math.pow((findNearest(x,y).getCoords()[0] - x - 72 ),2)) + (float)(Math.pow((findNearest(x,y).getCoords()[1] - y - 72),2)))  > range){
-      return false;
-    }
+      if(sqrt ((float)(Math.pow((findNearest(x,y).getCoords()[0] - x - 72 ),2)) + (float)(Math.pow((findNearest(x,y).getCoords()[1] - y - 72),2)))  > range){
+        return false;
+      }
     }
     timer --;
     return timer <= 0;
   }
 
-
-
+  //Finds the closest ship to a defense within its range, and returns it 
   public Ship findNearest(double x, double y) {
     double lowestDistance = 100000;
     int index = -1;
@@ -156,7 +157,7 @@ class LaserShooter extends Defense {
 class RocketLauncher extends Defense {
   public RocketLauncher(double inX, double inY) {
     super(inX, inY);
-    setRange((int)(108));
+    setRange((int)(125));
     setTimer(0);
     setLevel(1);
   }

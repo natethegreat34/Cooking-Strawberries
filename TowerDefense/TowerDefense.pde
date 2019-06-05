@@ -119,6 +119,7 @@ void setup() {
   remaker();
   tilemaker(f, 0);
 
+loading.resize(width, height);
 image(loading, 0,0);
   level = 1;
 } 
@@ -426,8 +427,8 @@ void draw() {
         }
       }
       if (type == 0) {
-        whitecircle.resize(216, 216);    
-        image(whitecircle, mouseX - 108, mouseY - 108);
+        whitecircle.resize(250, 250);    
+        image(whitecircle, mouseX - 125, mouseY - 125);
         noTint();
         image(roc, mouseX - 36, mouseY - 36);
       }

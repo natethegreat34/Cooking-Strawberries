@@ -27,6 +27,7 @@ class Ship {
     double adjustedSpeed = speed;
     Tile current = board[(int) y / 72][(int) x / 72];
     if (current.checkSlow()) adjustedSpeed = speed * (1 - current.getSlow());
+    if (adjustedSpeed == 0) adjustedSpeed = 0.5;
     if (health <= 0) {
       s.remove(this);
     }
