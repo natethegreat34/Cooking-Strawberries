@@ -113,17 +113,29 @@ class CannonBall extends Projectile {
 
   //Cannonball-specific move function, keeps it moving in a linear path either exploding on its target or going off the edge of the screen
   public void move() {
-    if (target == null) {
-      p.remove(this);
-    } else if (checkExplode()) {
+    if (checkExplode()) {
       target.lowerHealth(getdamage());
       p.remove(this);
-    } else {
+    } else if (findOtherTarget());
+    else {
       //setX(getX() + (Xchange / getspeed()));
       //setY(getY() + (Ychange / getspeed()));
       setX(getX() + getspeed() * Math.cos(angle));
       setY(getY() + getspeed() * Math.sin(angle));
     }
+  }
+  
+  public boolean findOtherTarget() {
+    for (int x = 0; x < s.size(); x ++) {
+      double[] coords = s.get(x).getCoords();
+      double distance = Math.sqrt(Math.pow((getX() - coords[0]), 2) + Math.pow((getY() - coords[1]), 2));
+      if (distance < 25) {
+        s.get(x).lowerHealth(getdamage());
+        s.remove(this);
+        return true;
+      }
+    }
+    return false;
   }
 }
 
